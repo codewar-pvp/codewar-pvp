@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Form} from 'semantic-ui-react'
-import {postCode} from '../../store/codeReducer'
+import {Form, TextArea, Button, Header} from 'semantic-ui-react'
+import {postCode} from '../../store/'
 
 /**
  * COMPONENT
@@ -17,14 +17,24 @@ class userInput extends React.Component {
   }
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <Form.TextArea
-          label="About"
+      <Form>
+        <Header as="h2" icon="plug" content="Question Content will be here" />
+        <TextArea
           placeholder="Please write your code..."
+          rows={20}
           value={this.state.code}
+          autoHeight
           onChange={this.handleChange}
+          style={{margin: '10px', width: '98%'}}
         />
-        <Form.Button>Run</Form.Button>
+        <Button
+          onClick={this.handleSubmit}
+          attached="bottom"
+          positive
+          style={{width: '200px', margin: '10px'}}
+        >
+          Run
+        </Button>
       </Form>
     )
   }
