@@ -24,9 +24,8 @@ export const gotResult = result => ({
 export const postCode = text => {
   return async dispatch => {
     try {
-      const res = await axios.post('/api/code', text)
-      console.log(res)
-      const action = gotResult(res.data)
+      const res = await axios.post('/api/code', {input: text})
+      const action = gotResult(res.data.output)
       dispatch(action)
     } catch (error) {
       console.warn('not correct')

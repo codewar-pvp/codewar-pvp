@@ -1,6 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Form, TextArea, Button, Header} from 'semantic-ui-react'
+import {
+  Form,
+  TextArea,
+  Button,
+  Header,
+  Icon,
+  Message,
+  Container
+} from 'semantic-ui-react'
 import {postCode} from '../../store/'
 
 /**
@@ -17,25 +25,37 @@ class userInput extends React.Component {
   }
   render() {
     return (
-      <Form>
-        <Header as="h2" icon="plug" content="Question Content will be here" />
-        <TextArea
-          placeholder="Please write your code..."
-          rows={20}
-          value={this.state.code}
-          autoHeight
-          onChange={this.handleChange}
-          style={{margin: '10px', width: '98%'}}
-        />
-        <Button
-          onClick={this.handleSubmit}
-          attached="bottom"
-          positive
-          style={{width: '200px', margin: '10px'}}
-        >
-          Run
-        </Button>
-      </Form>
+      <Container>
+        <Form>
+          <Header as="h4">
+            <Icon name="question circle" size="small" />
+            Question Content will be here
+          </Header>
+          <TextArea
+            placeholder="Please write your code..."
+            rows={20}
+            value={this.state.code}
+            autoHeight
+            onChange={this.handleChange}
+          />
+          <Button
+            onClick={this.handleSubmit}
+            attached="bottom"
+            positive
+            style={{width: '200px', margin: '10px 0 10px 0'}}
+          >
+            Run
+          </Button>
+        </Form>
+        {this.props.result !== '' ? (
+          <Message attached="bottom" color="olive">
+            <Icon name="user secret" />
+            Result: {this.props.result}
+          </Message>
+        ) : (
+          <div />
+        )}
+      </Container>
     )
   }
 }

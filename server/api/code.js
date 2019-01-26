@@ -13,7 +13,6 @@ router.post('/', async (req, res, next) => {
                 ${req.body.input}
             }
             )()`)
-
     res.json({
       output: result
     })
