@@ -13,48 +13,49 @@ import {NavLink} from 'react-router-dom'
 const questions = [
   {
     id: 1,
-    title: 'question1',
+    title: 'Two Sum',
     description: 'asdhjfkashdjkfhjkansjdkfnkjanskd',
     level: 'Hard',
     rating: 3,
     author: 'Scott',
-    category: 'array, control flow'
+    category: 'ARRAY, CONTROL FLOW'
   },
   {
     id: 2,
-    title: 'question2',
-    description: 'asdhjfkashdjkfhjkansjdkfnkjanskd',
+    title: 'Binary Watch',
+    description:
+      'A binary watch has 4 LEDs on the top which represent the hours (0-11)...',
     level: 'Medium',
     rating: 1,
     author: 'Jason',
-    category: 'array, fundamentals'
+    category: 'ARRAY, FUNDAMENTALS'
   },
   {
     id: 3,
-    title: 'question3',
+    title: 'Poor Pigs',
     description: 'asdhjfkashdjkfhjkansjdkfnkjanskd',
     level: 'Medium',
     rating: 5,
     author: 'Stuart',
-    category: 'array, numbers'
+    category: 'ARRAY, NUMBERS'
   },
   {
     id: 4,
-    title: 'question4',
+    title: 'Binary Search',
     description: 'asdhjfkashdjkfhjkansjdkfnkjanskd',
     level: 'Easy',
     rating: 4,
     author: 'Scott',
-    category: 'array, data structure'
+    category: 'ARRAY,DATA STRUCTURE'
   },
   {
     id: 5,
-    title: 'question5',
+    title: 'Happy Number',
     description: 'asdhjfkashdjkfhjkansjdkfnkjanskd',
     level: 'Easy',
     rating: 2,
     author: 'Shan',
-    category: 'array, algorithm'
+    category: 'ARRAY, ALGORITHMS'
   }
 ]
 class AllQuestionPage extends React.Component {
@@ -68,18 +69,24 @@ class AllQuestionPage extends React.Component {
                 <List.Icon
                   name="rocket"
                   size="large"
-                  verticalAlign="middle"
-                  color="olive"
+                  verticalAlign="top"
+                  color="yellow"
                 />
                 <List.Content>
-                  <Grid>
+                  <Grid style={{marginBottom: '10px'}}>
                     <Grid.Column floated="left" width={6}>
                       <List.Header as="a">
-                        <NavLink to={`/questions/${question.id}`}>
+                        <NavLink
+                          to={`/questions/${question.id}`}
+                          style={{color: 'white'}}
+                        >
                           {question.title}
                         </NavLink>
                       </List.Header>
-                      <List.Description as="a">
+                      <List.Description
+                        as="a"
+                        style={{color: 'wheat', padding: '5px 0 5px 0'}}
+                      >
                         {question.description}
                       </List.Description>
 
