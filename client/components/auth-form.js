@@ -2,34 +2,66 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import {NavLink} from 'react-router-dom'
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment,
+  Icon
+} from 'semantic-ui-react'
 
 /**
  * COMPONENT
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
-
+  console.log(displayName)
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
+    <div className="login-form">
+      <style>{`
+      body > div,
+      body > div > div,
+      body > div > div > div.login-form {
+        height: 100%;
+      }
+    `}</style>
+      <Grid textAlign="center" style={{height: '100%'}} verticalAlign="middle">
+        <Grid.Column style={{maxWidth: 450}}>
+          <Header as="h2" color="teal" textAlign="center">
+            <Icon name="compass outline" loading /> {displayName} your account
+          </Header>
+          <Form size="large" onSubmit={handleSubmit} name={name}>
+            <Segment stacked>
+              <Form.Input
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="E-mail address"
+                name="email"
+              />
+              <Form.Input
+                fluid
+                icon="lock"
+                iconPosition="left"
+                placeholder="Password"
+                type="password"
+                name="password"
+              />
+              <Button color="teal" fluid size="large" type="submit">
+                {displayName}
+              </Button>
+              {error && error.response && <div> {error.response.data} </div>}
+            </Segment>
+          </Form>
+          <Message>
+            New to us? <NavLink to="/signup">Sign Up</NavLink>
+          </Message>
+        </Grid.Column>
+      </Grid>
     </div>
   )
 }

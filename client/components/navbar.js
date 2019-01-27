@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link, NavLink, withRouter} from 'react-router-dom'
+import {NavLink, withRouter} from 'react-router-dom'
 import {logout} from '../store'
-import {Menu, Segment, Grid} from 'semantic-ui-react'
+import {Menu, Segment} from 'semantic-ui-react'
 
 class Navbar extends React.Component {
   state = {activeItem: ''}
@@ -22,10 +22,6 @@ class Navbar extends React.Component {
       // <Grid>
       <Segment inverted>
         <Menu inverted pointing secondary>
-          {/* <Menu.Header
-          as='h4'
-          content='Code War PVP'
-        /> */}
           <h4 id="pageHeader">
             <NavLink to="/questions">Code War PVP</NavLink>
           </h4>
@@ -41,14 +37,24 @@ class Navbar extends React.Component {
             icon="home"
           />
           {isLoggedIn ? (
-            <Menu.Item
-              as={NavLink}
-              to="/home"
-              content="Logout"
-              onClick={this.handleItemClick}
-              name="logout"
-              active={activeItem === 'logout'}
-            />
+            <Menu.Menu position="right">
+              <Menu.Item
+                as="h4"
+                content={`Welcome back ${this.props.email}!`}
+                onClick={this.handleItemClick}
+                name="user"
+                icon="user circle"
+              />
+              <Menu.Item
+                as={NavLink}
+                to="/questions"
+                content="Logout"
+                onClick={this.handleItemClick}
+                name="logout"
+                icon="log out"
+                active={activeItem === 'logout'}
+              />
+            </Menu.Menu>
           ) : (
             <Menu.Menu position="right">
               <Menu.Item
@@ -83,7 +89,8 @@ class Navbar extends React.Component {
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    email: state.user.email
   }
 }
 

@@ -22,7 +22,7 @@ nav a {
 
 form div {
   margin: 1em;
-  display: inline-block;
+  display: block;
 }
 
 #pageHeader a {
@@ -45,4 +45,8 @@ div .ui.inverted.segment {
 }
 div .ui.fitted.divider {
   color: gold;
+}
+
+div .ui.fluid.left.icon.input {
+  margin-left: 0;
 }
