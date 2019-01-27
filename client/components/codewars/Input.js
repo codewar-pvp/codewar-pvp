@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import history from '../../history'
 import {
   Form,
   TextArea,
@@ -7,7 +8,9 @@ import {
   Header,
   Icon,
   Message,
-  Container
+  Container,
+  Item,
+  Grid
 } from 'semantic-ui-react'
 import {postCode} from '../../store/'
 
@@ -24,13 +27,22 @@ class userInput extends React.Component {
     this.props.testCode(this.state.code)
   }
   render() {
-    return (
+    const id = this.props.match.params.id
+    const question = this.props.questions.filter(item => item.id == id)[0]
+    return question ? (
       <Container>
+        <Item style={{marginBottom: '10px'}}>
+          <Item.Content>
+            <Item.Header as="h4">
+              <Icon name="question circle" size="small" />
+              {question.title}
+            </Item.Header>
+            <Item.Description>
+              <p>{question.description}</p>
+            </Item.Description>
+          </Item.Content>
+        </Item>
         <Form>
-          <Header as="h4">
-            <Icon name="question circle" size="small" />
-            Question Content will be here
-          </Header>
           <TextArea
             placeholder="Please write your code..."
             rows={20}
@@ -38,14 +50,42 @@ class userInput extends React.Component {
             autoHeight
             onChange={this.handleChange}
           />
-          <Button
-            onClick={this.handleSubmit}
-            attached="bottom"
-            positive
-            style={{width: '200px', margin: '10px 0 10px 0'}}
-          >
-            Run
-          </Button>
+          <Grid style={{marginBottom: '10px'}}>
+            <Grid.Row columns={2}>
+              <Grid.Column
+                floated="left"
+                width={6}
+                style={{marginLeft: '0', paddingLeft: '0'}}
+              >
+                <Button
+                  onClick={this.handleSubmit}
+                  positive
+                  style={{width: '200px', margin: '10px 0 10px 0'}}
+                >
+                  Run
+                </Button>
+              </Grid.Column>
+              <Grid.Column
+                floated="right"
+                width={6}
+                style={{marginRight: '0', paddingRight: '0'}}
+              >
+                <Button
+                  onClick={() => history.push('/questions')}
+                  attached="bottom"
+                  floated="right"
+                  negative
+                  style={{
+                    width: '200px',
+                    margin: '10px 0 10px 0',
+                    textAlign: 'center'
+                  }}
+                >
+                  Back to All Questions
+                </Button>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Form>
         {this.props.result !== '' ? (
           <Message attached="bottom" color="olive">
@@ -56,13 +96,14 @@ class userInput extends React.Component {
           <div />
         )}
       </Container>
-    )
+    ) : null
   }
 }
 
 const mapStateToProps = state => ({
   code: state.codeReducer.code,
-  result: state.codeReducer.result
+  result: state.codeReducer.result,
+  questions: state.questionReducer.questions
 })
 const mapDispatch = dispatch => ({
   testCode: code => dispatch(postCode(code))

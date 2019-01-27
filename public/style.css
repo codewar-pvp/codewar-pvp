@@ -24,3 +24,25 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+#pageHeader a {
+  color: #00d8ff;
+  font-size: 1.5em;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  vertical-align: bottom;
+}
+#pageHeader {
+  padding-top: 1%;
+  margin-right: 5%;
+  margin-bottom: 0;
+}
+
+div .ui.inverted.segment {
+  padding-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+div .ui.fitted.divider {
+  color: gold;
+}
