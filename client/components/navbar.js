@@ -1,44 +1,83 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link, NavLink} from 'react-router-dom'
+import {Link, NavLink, withRouter} from 'react-router-dom'
 import {logout} from '../store'
+import {Menu, Segment, Grid} from 'semantic-ui-react'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>
-      <NavLink
-        to="/questions"
-        style={{
-          color: '#00d8ff',
-          fontsize: '1.5em',
-          fontweight: 'bold'
-        }}
-      >
-        Code War PVP
-      </NavLink>
-    </h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
-)
+class Navbar extends React.Component {
+  state = {activeItem: ''}
+  handleItemClick = (e, {name}) => {
+    this.setState({activeItem: name})
+    if (name === 'logout') {
+      this.props.handleClick()
+    }
+  }
 
+  render() {
+    const {isLoggedIn} = this.props
+    const {activeItem} = this.state
+    console.log(this.state.activeItem)
+    return (
+      // <Grid>
+      <Segment inverted>
+        <Menu inverted pointing secondary>
+          {/* <Menu.Header
+          as='h4'
+          content='Code War PVP'
+        /> */}
+          <h4 id="pageHeader">
+            <NavLink to="/questions">Code War PVP</NavLink>
+          </h4>
+
+          <Menu.Item
+            as={NavLink}
+            to="/questions"
+            content="Home"
+            name="home"
+            onClick={this.handleItemClick}
+            active={activeItem === 'home'}
+            position="left"
+            icon="home"
+          />
+          {isLoggedIn ? (
+            <Menu.Item
+              as={NavLink}
+              to="/home"
+              content="Logout"
+              onClick={this.handleItemClick}
+              name="logout"
+              active={activeItem === 'logout'}
+            />
+          ) : (
+            <Menu.Menu position="right">
+              <Menu.Item
+                as={NavLink}
+                to="/login"
+                content="Login"
+                name="login"
+                onClick={this.handleItemClick}
+                active={activeItem === 'login'}
+                position="right"
+                icon="user"
+              />
+              <Menu.Item
+                as={NavLink}
+                to="/signup"
+                content="Sign Up"
+                name="signup"
+                onClick={this.handleItemClick}
+                active={activeItem === 'signup'}
+                position="right"
+                icon="signup"
+              />
+            </Menu.Menu>
+          )}
+        </Menu>
+      </Segment>
+    )
+  }
+}
 /**
  * CONTAINER
  */
@@ -56,7 +95,7 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(Navbar)
+export default withRouter(connect(mapState, mapDispatch)(Navbar))
 
 /**
  * PROP TYPES
