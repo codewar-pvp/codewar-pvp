@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {List, Container, Grid} from 'semantic-ui-react'
-import {postCode} from '../../store/'
+import {postCode, fetchAllQuestions} from '../../store/'
 import QuestionLabel from './QuestionLabel'
 import QuestionRating from './QuestionRating'
 import {NavLink} from 'react-router-dom'
@@ -10,56 +10,9 @@ import {NavLink} from 'react-router-dom'
  * COMPONENT
  */
 
-const questions = [
-  {
-    id: 1,
-    title: 'Two Sum',
-    description: 'asdhjfkashdjkfhjkansjdkfnkjanskd',
-    level: 'Hard',
-    rating: 3,
-    author: 'Scott',
-    category: 'ARRAY, CONTROL FLOW'
-  },
-  {
-    id: 2,
-    title: 'Binary Watch',
-    description:
-      'A binary watch has 4 LEDs on the top which represent the hours (0-11)...',
-    level: 'Medium',
-    rating: 1,
-    author: 'Jason',
-    category: 'ARRAY, FUNDAMENTALS'
-  },
-  {
-    id: 3,
-    title: 'Poor Pigs',
-    description: 'asdhjfkashdjkfhjkansjdkfnkjanskd',
-    level: 'Medium',
-    rating: 5,
-    author: 'Stuart',
-    category: 'ARRAY, NUMBERS'
-  },
-  {
-    id: 4,
-    title: 'Binary Search',
-    description: 'asdhjfkashdjkfhjkansjdkfnkjanskd',
-    level: 'Easy',
-    rating: 4,
-    author: 'Scott',
-    category: 'ARRAY,DATA STRUCTURE'
-  },
-  {
-    id: 5,
-    title: 'Happy Number',
-    description: 'asdhjfkashdjkfhjkansjdkfnkjanskd',
-    level: 'Easy',
-    rating: 2,
-    author: 'Shan',
-    category: 'ARRAY, ALGORITHMS'
-  }
-]
 class AllQuestionPage extends React.Component {
   render() {
+    const {questions} = this.props
     return questions ? (
       <Container>
         <List divided relaxed>
@@ -135,10 +88,12 @@ class AllQuestionPage extends React.Component {
 
 const mapStateToProps = state => ({
   code: state.codeReducer.code,
-  result: state.codeReducer.result
+  result: state.codeReducer.result,
+  questions: state.questionReducer.questions
 })
 const mapDispatch = dispatch => ({
-  testCode: code => dispatch(postCode(code))
+  testCode: code => dispatch(postCode(code)),
+  fetchAllQuestions: () => dispatch(fetchAllQuestions())
 })
 
 export default connect(mapStateToProps, mapDispatch)(AllQuestionPage)
