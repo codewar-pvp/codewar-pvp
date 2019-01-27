@@ -2,9 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome} from './components'
+import {Login, Signup, UserHome, Input, AllQuestionPage} from './components'
 import {me} from './store'
-import Input from './components/codewars/Input'
 
 /**
  * COMPONENT
@@ -22,6 +21,8 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route exact path="/questions" component={AllQuestionPage} />
+        <Route path="/questions/:id" component={Input} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
