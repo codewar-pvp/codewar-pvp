@@ -1,12 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>BOILERMAKER</h1>
+    <h1>
+      <NavLink
+        to="/questions"
+        style={{
+          color: '#00d8ff',
+          fontsize: '1.5em',
+          fontweight: 'bold'
+        }}
+      >
+        Code War PVP
+      </NavLink>
+    </h1>
     <nav>
       {isLoggedIn ? (
         <div>

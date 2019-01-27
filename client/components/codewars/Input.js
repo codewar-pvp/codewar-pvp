@@ -1,7 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Form} from 'semantic-ui-react'
-import {postCode} from '../../store/codeReducer'
+import {
+  Form,
+  TextArea,
+  Button,
+  Header,
+  Icon,
+  Message,
+  Container
+} from 'semantic-ui-react'
+import {postCode} from '../../store/'
 
 /**
  * COMPONENT
@@ -17,15 +25,37 @@ class userInput extends React.Component {
   }
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <Form.TextArea
-          label="About"
-          placeholder="Please write your code..."
-          value={this.state.code}
-          onChange={this.handleChange}
-        />
-        <Form.Button>Run</Form.Button>
-      </Form>
+      <Container>
+        <Form>
+          <Header as="h4">
+            <Icon name="question circle" size="small" />
+            Question Content will be here
+          </Header>
+          <TextArea
+            placeholder="Please write your code..."
+            rows={20}
+            value={this.state.code}
+            autoHeight
+            onChange={this.handleChange}
+          />
+          <Button
+            onClick={this.handleSubmit}
+            attached="bottom"
+            positive
+            style={{width: '200px', margin: '10px 0 10px 0'}}
+          >
+            Run
+          </Button>
+        </Form>
+        {this.props.result !== '' ? (
+          <Message attached="bottom" color="olive">
+            <Icon name="user secret" />
+            Result: {this.props.result}
+          </Message>
+        ) : (
+          <div />
+        )}
+      </Container>
     )
   }
 }

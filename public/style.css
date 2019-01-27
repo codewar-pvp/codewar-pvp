@@ -1,18 +1,23 @@
 body {
   font-family: sans-serif;
+  background-color: black !important;
+  color: aliceblue !important;
 }
 
 a {
   text-decoration: none;
+  color: gold;
 }
 
 label {
   display: block;
+  color: aliceblue !important;
 }
 
 nav a {
   display: inline-block;
   margin: 1em;
+  color: gold;
 }
 
 form div {
