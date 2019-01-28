@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Question} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -12,7 +12,57 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'})
   ])
 
+  const questions = await Promise.all([
+    Question.create({
+      id: 1,
+      title: 'Two Sum Extreme',
+      description: 'This is the description of two sum',
+      level: 'Hard',
+      rating: 3,
+      author: 'Scott',
+      category: 'ARRAY, CONTROL FLOW'
+    }),
+    Question.create({
+      id: 2,
+      title: 'Binary Watch',
+      description:
+        'A binary watch has 4 LEDs on the top which represent the hours (0-11)...',
+      level: 'Medium',
+      rating: 1,
+      author: 'Jason',
+      category: 'ARRAY, FUNDAMENTALS'
+    }),
+    Question.create({
+      id: 3,
+      title: 'Happy Pigs',
+      description: 'Fun coding problem',
+      level: 'Medium',
+      rating: 5,
+      author: 'Stuart',
+      category: 'ARRAY, NUMBERS'
+    }),
+    Question.create({
+      id: 4,
+      title: 'Binary Search',
+      description: 'This is binary search description',
+      level: 'Easy',
+      rating: 4,
+      author: 'Scott',
+      category: 'ARRAY,DATA STRUCTURE'
+    }),
+    Question.create({
+      id: 5,
+      title: 'Happy Number',
+      description: 'The number should be happy',
+      level: 'Easy',
+      rating: 2,
+      author: 'Shan',
+      category: 'ARRAY, ALGORITHMS'
+    })
+  ])
+
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${questions.length} questions`)
   console.log(`seeded successfully`)
 }
 
