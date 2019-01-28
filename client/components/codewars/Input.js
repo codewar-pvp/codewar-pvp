@@ -17,18 +17,40 @@ import {postCode} from '../../store/'
  * COMPONENT
  */
 class userInput extends React.Component {
-  state = {code: ''}
-
+  constructor(props) {
+    super()
+    this.state = {code: ''}
+  }
   handleChange = e => {
     this.setState({code: e.target.value})
   }
   handleSubmit = () => {
     this.props.testCode(this.state.code)
   }
+
+  componentDidMount() {
+    if (
+      !this.state.code &&
+      this.props.question &&
+      this.props.question.funcHeader
+    ) {
+      this.setState({code: this.props.question.funcHeader})
+    }
+  }
+  componentDidUpdate(prevProp) {
+    if (
+      prevProp !== this.props &&
+      !this.state.code &&
+      this.props.question &&
+      this.props.question.funcHeader
+    ) {
+      this.setState({code: this.props.question.funcHeader})
+    }
+  }
+
   render() {
-    const id = this.props.match.params.id
-    const question = this.props.questions.filter(item => item.id == id)[0]
-    return question ? (
+    const {question} = this.props
+    return this.props.question && this.props.question.funcHeader ? (
       <Container>
         <Item style={{marginBottom: '10px'}}>
           <Item.Content>

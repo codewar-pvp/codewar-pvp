@@ -16,12 +16,15 @@ async function seed() {
     Question.create({
       id: 1,
       title: 'Two Sum Extreme',
-      description: 'This is the description of two sum',
+      description:
+        ' Given an array of integers, find two numbers such that they add up to a specific target number.The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.You may assume that each input would have exactly one solution. Input: numbers={2, 7, 11, 15}, target=9 Output: index1=1, index2=2',
       level: 'Hard',
       rating: 3,
       author: 'Scott',
       category: 'ARRAY, CONTROL FLOW',
-      testSpecs: 'Test specs will go here'
+      testSpecs:
+        'function numericalCompare(a, b) {return a - b;}Test.assertSimilar(twoSum([1,2,3], 4).sort(numericalCompare), [0,2]);Test.assertSimilar(twoSum([1234,5678,9012], 14690).sort(numericalCompare), [1,2]);Test.assertSimilar(twoSum([2,2,3], 4).sort(numericalCompare), [0,1]);',
+      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }'
     }),
     Question.create({
       id: 2,
@@ -32,7 +35,8 @@ async function seed() {
       rating: 1,
       author: 'Jason',
       category: 'ARRAY, FUNDAMENTALS',
-      testSpecs: 'Test specs will go here'
+      testSpecs: 'Test specs will go here',
+      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }'
     }),
     Question.create({
       id: 3,
@@ -42,7 +46,8 @@ async function seed() {
       rating: 5,
       author: 'Stuart',
       category: 'ARRAY, NUMBERS',
-      testSpecs: 'Test specs will go here'
+      testSpecs: 'Test specs will go here',
+      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }'
     }),
     Question.create({
       id: 4,
@@ -52,7 +57,8 @@ async function seed() {
       rating: 4,
       author: 'Scott',
       category: 'ARRAY,DATA STRUCTURE',
-      testSpecs: 'Test specs will go here'
+      testSpecs: 'Test specs will go here',
+      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }'
     }),
     Question.create({
       id: 5,
@@ -62,7 +68,8 @@ async function seed() {
       rating: 2,
       author: 'Shan',
       category: 'ARRAY, ALGORITHMS',
-      testSpecs: 'Test specs will go here'
+      testSpecs: 'Test specs will go here',
+      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }'
     })
   ])
 
