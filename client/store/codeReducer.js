@@ -10,7 +10,7 @@ const GOT_RESULT = 'GOT_RESULT'
 /**
  * INITIAL STATE
  */
-const initialState = {code: '', result: ''}
+const initialState = {code: '', result: null}
 
 /**
  * ACTION CREATORS

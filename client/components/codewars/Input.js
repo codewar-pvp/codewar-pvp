@@ -86,10 +86,10 @@ class userInput extends React.Component {
             </Grid.Row>
           </Grid>
         </Form>
-        {this.props.result !== '' ? (
+        {this.props.result ? (
           <Message attached="bottom" color="olive">
             <Icon name="user secret" />
-            Result: {this.props.result}
+            Result: {JSON.stringify(this.props.result)}
           </Message>
         ) : (
           <div />
