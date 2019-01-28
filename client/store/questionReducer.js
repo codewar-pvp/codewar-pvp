@@ -79,9 +79,9 @@ export const selectedQuestion = question => ({
 export const fetchAllQuestions = () => {
   return async dispatch => {
     try {
-      //   const res = await axios.get('/api/question')
-      //   dispatch(gotQuestions(res.data))
-      dispatch(gotQuestions(data))
+      const res = await axios.get('/api/questions')
+      dispatch(gotQuestions(res.data))
+      // dispatch(gotQuestions(data))
     } catch (error) {
       console.warn('No Question Available')
     }
