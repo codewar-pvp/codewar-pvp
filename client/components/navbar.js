@@ -17,7 +17,6 @@ class Navbar extends React.Component {
   render() {
     const {isLoggedIn} = this.props
     const {activeItem} = this.state
-    console.log(this.state.activeItem)
     return (
       // <Grid>
       <Segment inverted>

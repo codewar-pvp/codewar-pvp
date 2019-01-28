@@ -20,7 +20,8 @@ async function seed() {
       level: 'Hard',
       rating: 3,
       author: 'Scott',
-      category: 'ARRAY, CONTROL FLOW'
+      category: 'ARRAY, CONTROL FLOW',
+      testSpecs: 'Test specs will go here'
     }),
     Question.create({
       id: 2,
@@ -30,7 +31,8 @@ async function seed() {
       level: 'Medium',
       rating: 1,
       author: 'Jason',
-      category: 'ARRAY, FUNDAMENTALS'
+      category: 'ARRAY, FUNDAMENTALS',
+      testSpecs: 'Test specs will go here'
     }),
     Question.create({
       id: 3,
@@ -39,7 +41,8 @@ async function seed() {
       level: 'Medium',
       rating: 5,
       author: 'Stuart',
-      category: 'ARRAY, NUMBERS'
+      category: 'ARRAY, NUMBERS',
+      testSpecs: 'Test specs will go here'
     }),
     Question.create({
       id: 4,
@@ -48,7 +51,8 @@ async function seed() {
       level: 'Easy',
       rating: 4,
       author: 'Scott',
-      category: 'ARRAY,DATA STRUCTURE'
+      category: 'ARRAY,DATA STRUCTURE',
+      testSpecs: 'Test specs will go here'
     }),
     Question.create({
       id: 5,
@@ -57,7 +61,8 @@ async function seed() {
       level: 'Easy',
       rating: 2,
       author: 'Shan',
-      category: 'ARRAY, ALGORITHMS'
+      category: 'ARRAY, ALGORITHMS',
+      testSpecs: 'Test specs will go here'
     })
   ])
 

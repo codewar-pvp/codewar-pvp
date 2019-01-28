@@ -22,6 +22,10 @@ const Question = db.define('question', {
   },
   category: {
     type: Sequelize.STRING
+  },
+  testSpecs: {
+    type: Sequelize.TEXT,
+    allowNull: false
   }
 })
 
