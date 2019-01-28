@@ -10,7 +10,7 @@ const GOT_RESULT = 'GOT_RESULT'
 /**
  * INITIAL STATE
  */
-const initialState = {code: '', result: ''}
+const initialState = {code: '', result: null}
 
 /**
  * ACTION CREATORS
@@ -25,6 +25,7 @@ export const postCode = text => {
   return async dispatch => {
     try {
       const res = await axios.post('/api/code', {input: text})
+      console.log(res.data)
       const action = gotResult(res.data.output)
       dispatch(action)
     } catch (error) {
@@ -36,6 +37,7 @@ export const postCode = text => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_RESULT:
+      console.log(action.result)
       return {...state, result: action.result}
     default:
       return state

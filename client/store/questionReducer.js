@@ -1,55 +1,6 @@
 import axios from 'axios'
 import history from '../history'
 
-const data = [
-  {
-    id: 1,
-    title: 'Two Sum',
-    description: 'asdhjfkashdjkfhjkansjdkfnkjanskd',
-    level: 'Hard',
-    rating: 3,
-    author: 'Scott',
-    category: 'ARRAY, CONTROL FLOW'
-  },
-  {
-    id: 2,
-    title: 'Binary Watch',
-    description:
-      'A binary watch has 4 LEDs on the top which represent the hours (0-11)...',
-    level: 'Medium',
-    rating: 1,
-    author: 'Jason',
-    category: 'ARRAY, FUNDAMENTALS'
-  },
-  {
-    id: 3,
-    title: 'Poor Pigs',
-    description: 'asdhjfkashdjkfhjkansjdkfnkjanskd',
-    level: 'Medium',
-    rating: 5,
-    author: 'Stuart',
-    category: 'ARRAY, NUMBERS'
-  },
-  {
-    id: 4,
-    title: 'Binary Search',
-    description: 'asdhjfkashdjkfhjkansjdkfnkjanskd',
-    level: 'Easy',
-    rating: 4,
-    author: 'Scott',
-    category: 'ARRAY,DATA STRUCTURE'
-  },
-  {
-    id: 5,
-    title: 'Happy Number',
-    description: 'asdhjfkashdjkfhjkansjdkfnkjanskd',
-    level: 'Easy',
-    rating: 2,
-    author: 'Shan',
-    category: 'ARRAY, ALGORITHMS'
-  }
-]
-
 /**
  * ACTION TYPES
  */
