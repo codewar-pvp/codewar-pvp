@@ -3,13 +3,26 @@
 const db = require('../server/db')
 const {User, Question} = require('../server/db/models')
 
+let UserFriends = db.model('user_friend')
+
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
+    User.create({email: 'stuart@email.com', password: '123'}),
+    User.create({email: 'shan@email.com', password: '123'}),
+    User.create({email: 'scott@email.com', password: '123'}),
+    User.create({email: 'json@email.com', password: '123'}),
     User.create({email: 'murphy@email.com', password: '123'})
+  ])
+
+  const friends = await Promise.all([
+    UserFriends.create({userId: 1, friendId: 3}),
+    UserFriends.create({userId: 2, friendId: 3}),
+    UserFriends.create({userId: 1, friendId: 2}),
+    UserFriends.create({userId: 2, friendId: 5}),
+    UserFriends.create({userId: 2, friendId: 4})
   ])
 
   const questions = await Promise.all([
@@ -74,6 +87,7 @@ async function seed() {
   ])
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${friends.length} friends`)
   console.log(`seeded ${questions.length} questions`)
   console.log(`seeded successfully`)
 }
