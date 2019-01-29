@@ -31,7 +31,7 @@ class AllQuestionPage extends React.Component {
                       <List.Header as="a">
                         <NavLink
                           to={`/questions/${question.id}`}
-                          style={{color: 'white'}}
+                          style={{color: 'gold'}}
                         >
                           {question.title}
                         </NavLink>
@@ -40,7 +40,7 @@ class AllQuestionPage extends React.Component {
                         as="a"
                         style={{color: 'wheat', padding: '5px 0 5px 0'}}
                       >
-                        {question.description}
+                        {question.description.slice(0, 100) + '...'}
                       </List.Description>
 
                       <List.Item>

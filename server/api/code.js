@@ -8,11 +8,7 @@ const vm = new VM({
 
 router.post('/', async (req, res, next) => {
   try {
-    const result = vm.run(`(
-            function () {
-                ${req.body.input}
-            }
-            )()`)
+    const result = vm.run(`(${req.body.input})()`)
     res.json({
       output: result
     })

@@ -50,3 +50,16 @@ div .ui.fitted.divider {
 div .ui.fluid.left.icon.input {
   margin-left: 0;
 }
+
+.ace_editor,
+.ace_editor * {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Droid Sans Mono', 'Consolas',
+    monospace !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}
+
+#codeEditor {
+  width: 90%;
+}
