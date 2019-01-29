@@ -23,7 +23,16 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route exact path="/questions" component={AllQuestionPage} />
-        <Route path="/questions/:id" component={Input} />
+        <Route
+          path="/questions/:id"
+          render={props => {
+            const id = props.match.params.id
+            const question = this.props.questions.filter(
+              item => item.id == id
+            )[0]
+            return <Input {...props} question={question} />
+          }}
+        />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -44,7 +53,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    questions: state.questionReducer.questions
   }
 }
 

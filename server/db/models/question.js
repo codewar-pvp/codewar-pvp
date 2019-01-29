@@ -26,6 +26,9 @@ const Question = db.define('question', {
   testSpecs: {
     type: Sequelize.TEXT,
     allowNull: false
+  },
+  funcHeader: {
+    type: Sequelize.TEXT
   }
 })
 
