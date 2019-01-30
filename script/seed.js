@@ -100,23 +100,20 @@ async function seed() {
   const tests = await Promise.all([
     Test.create({
       input: '[1, 2, 3]',
-      inputType: 'array',
       output: '3',
-      outputType: 'integer',
+      outputType: 'array',
       questionId: 6
     }),
     Test.create({
       input: '[7, 2, 3, 99, 3]',
-      inputType: 'array',
       output: '99',
-      outputType: 'integer',
+      outputType: 'array',
       questionId: 6
     }),
     Test.create({
       input: '[10, 23, 342, 87]',
-      inputType: 'array',
       output: '342',
-      outputType: 'integer',
+      outputType: 'array',
       questionId: 6
     })
   ])
@@ -154,3 +151,13 @@ if (module === require.main) {
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed
+
+function largestNum(array) {
+  let largest = 0
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] > largest) {
+      largest = array[i]
+    }
+  }
+  return largest
+}

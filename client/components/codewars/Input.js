@@ -20,7 +20,7 @@ class userInput extends React.Component {
     this.setState({code: newValue})
   }
   handleSubmit = () => {
-    this.props.testCode(this.state.code)
+    this.props.testCode({code: this.state.code, question: this.props.question})
   }
 
   componentDidMount() {
