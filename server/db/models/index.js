@@ -1,7 +1,7 @@
 const User = require('./user')
 const Question = require('./question')
+const Test = require('./test')
 const db = require('../db')
-
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -18,9 +18,10 @@ const db = require('../db')
  */
 
 User.belongsToMany(User, {as: 'friends', through: 'user_friend'})
-
+Question.hasMany(Test)
 
 module.exports = {
   User,
-  Question
+  Question,
+  Test
 }

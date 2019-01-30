@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Question} = require('../server/db/models')
+const {User, Question, Test} = require('../server/db/models')
 
 let UserFriends = db.model('user_friend')
 
@@ -83,12 +83,48 @@ async function seed() {
       category: 'ARRAY, ALGORITHMS',
       testSpecs: 'Test specs will go here',
       funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }'
+    }),
+    Question.create({
+      id: 6,
+      title: 'Return Largest Number',
+      description: 'Takes in an array of integers and returns the largest one',
+      level: 'Easy',
+      rating: 1,
+      author: 'Jason',
+      category: 'ARRAY, ALGORITHMS',
+      testSpecs: 'Test specs will go here',
+      funcHeader: 'function largestNum(array) { \n //code goes here \n }'
+    })
+  ])
+
+  const tests = await Promise.all([
+    Test.create({
+      input: '[1, 2, 3]',
+      inputType: 'array',
+      output: '3',
+      outputType: 'integer',
+      questionId: 6
+    }),
+    Test.create({
+      input: '[7, 2, 3, 99, 3]',
+      inputType: 'array',
+      output: '99',
+      outputType: 'integer',
+      questionId: 6
+    }),
+    Test.create({
+      input: '[10, 23, 342, 87]',
+      inputType: 'array',
+      output: '342',
+      outputType: 'integer',
+      questionId: 6
     })
   ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${friends.length} friends`)
   console.log(`seeded ${questions.length} questions`)
+  console.log(`seeded ${tests.length} tests`)
   console.log(`seeded successfully`)
 }
 
