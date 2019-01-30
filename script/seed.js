@@ -22,7 +22,12 @@ async function seed() {
     UserFriends.create({userId: 2, friendId: 3}),
     UserFriends.create({userId: 1, friendId: 2}),
     UserFriends.create({userId: 2, friendId: 5}),
-    UserFriends.create({userId: 2, friendId: 4})
+    UserFriends.create({userId: 2, friendId: 4}),
+    UserFriends.create({userId: 3, friendId: 1}),
+    UserFriends.create({userId: 3, friendId: 2}),
+    UserFriends.create({userId: 2, friendId: 1}),
+    UserFriends.create({userId: 5, friendId: 2}),
+    UserFriends.create({userId: 4, friendId: 2})
   ])
 
   const questions = await Promise.all([
