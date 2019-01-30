@@ -1,10 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {List, Container, Grid} from 'semantic-ui-react'
+import {List, Container, Grid, Button, Popup} from 'semantic-ui-react'
 import {postCode, fetchAllQuestions} from '../../store/'
 import QuestionLabel from './QuestionLabel'
 import QuestionRating from './QuestionRating'
 import {NavLink} from 'react-router-dom'
+import FriendPopup from './FriendPopup'
 
 /**
  * COMPONENT
@@ -61,16 +62,27 @@ class AllQuestionPage extends React.Component {
                         </Grid>
                       </List.Item>
                     </Grid.Column>
+
                     <Grid.Column
                       floated="left"
-                      width={6}
+                      width={1}
                       verticalAlign="middle"
                     >
                       <QuestionRating rating={question.rating} />
                     </Grid.Column>
+
+                    <Grid.Column
+                      floated="middle"
+                      width={1}
+                      verticalAlign="middle"
+                    >
+                      <FriendPopup />
+
+                    </Grid.Column>
+
                     <Grid.Column
                       floated="right"
-                      width={4}
+                      width={1}
                       verticalAlign="middle"
                     >
                       <QuestionLabel level={question.level} />
