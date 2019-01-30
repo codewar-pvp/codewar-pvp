@@ -2,7 +2,14 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, Input, AllQuestionPage} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  Input,
+  AllQuestionPage,
+  Multiply
+} from './components'
 import {me, fetchAllQuestions} from './store'
 
 /**
@@ -31,6 +38,16 @@ class Routes extends Component {
               item => item.id == id
             )[0]
             return <Input {...props} question={question} />
+          }}
+        />
+        <Route
+          path="/challenges/:id"
+          render={props => {
+            const id = props.match.params.id
+            const question = this.props.questions.filter(
+              item => item.id == id
+            )[0]
+            return <Multiply {...props} question={question} />
           }}
         />
         {isLoggedIn && (

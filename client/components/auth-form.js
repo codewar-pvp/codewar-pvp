@@ -19,7 +19,6 @@ import {
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
-  console.log(displayName)
   return (
     <div className="login-form">
       <style>{`
