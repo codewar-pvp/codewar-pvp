@@ -6,17 +6,12 @@ const Test = db.define('test', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  inputType: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
   output: {
     type: Sequelize.STRING,
     allowNull: false
   },
   outputType: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   }
 })
 

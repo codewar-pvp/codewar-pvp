@@ -24,7 +24,8 @@ const removeUser = () => ({type: REMOVE_USER})
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    res.data.user.friends = res.data.friends
+    dispatch(getUser(res.data.user || defaultUser))
   } catch (err) {
     console.error(err)
   }
