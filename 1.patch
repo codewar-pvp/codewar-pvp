@@ -1,0 +1,264 @@
+diff --git a/client/components/Question.spec.js b/client/components/Question.spec.js
+new file mode 100644
+index 0000000..c6addeb
+--- /dev/null
++++ b/client/components/Question.spec.js
+@@ -0,0 +1,41 @@
++import {expect} from 'chai'
++
++// This part from User to click button to run code.
++function largestNum(array) {
++  let largest = 0
++  for (let i = 0; i < array.length; i++) {
++    if (array[i] > largest) {
++      largest = array[i]
++    }
++  }
++  return largest
++}
++
++// This part from DB test table
++const input = [[], [1, 2, 3], [10, 23, 342, 87], [7, 2, 3, 99, 3]]
++const output = [0, 3, 342, 7]
++const expectedOutputType = 'number'
++const questionTitle = 'Two Sum'
++
++const str = JSON.stringify([['test', [0, 1, 3], 1]])
++console.log(JSON.parse(str))
++// This part run in VM code
++const userOutput = input.map(item => largestNum(item))
++
++describe(`${questionTitle} question`, () => {
++  try {
++    userOutput.forEach((item, idx) => {
++      it(`The input for the question: ${JSON.stringify(
++        input[idx]
++      )}, output expected to be a ${expectedOutputType}.`, () => {
++        expect(item).to.be.a(expectedOutputType)
++      })
++
++      it(`Expected output: ${output[idx]}, instead got: ${item}`, () => {
++        expect(item).to.eql(output[idx])
++      })
++    })
++  } catch (error) {
++    console.log('did not pass the test!')
++  }
++})
+diff --git a/client/components/auth-form.js b/client/components/auth-form.js
+index 174faba..24bff5f 100644
+--- a/client/components/auth-form.js
++++ b/client/components/auth-form.js
+@@ -35,14 +35,17 @@ const AuthForm = props => {
+           </Header>
+           <Form size="large" onSubmit={handleSubmit} name={name}>
+             <Segment stacked>
+-              {name === 'signup' ?
+-              <Form.Input
+-                fluid
+-                icon="user"
+-                iconPosition="left"
+-                placeholder="user name"
+-                name="userName"
+-              /> : ''}
++              {name === 'signup' ? (
++                <Form.Input
++                  fluid
++                  icon="user"
++                  iconPosition="left"
++                  placeholder="user name"
++                  name="userName"
++                />
++              ) : (
++                ''
++              )}
+               <Form.Input
+                 fluid
+                 icon="user"
+@@ -109,7 +112,6 @@ const mapDispatch = dispatch => {
+       } else {
+         dispatch(signup(userName, email, password, formName))
+       }
+-
+     }
+   }
+ }
+diff --git a/client/components/codewars/AllQuestionPage.js b/client/components/codewars/AllQuestionPage.js
+index 3ed2fbc..1e27075 100644
+--- a/client/components/codewars/AllQuestionPage.js
++++ b/client/components/codewars/AllQuestionPage.js
+@@ -76,8 +76,7 @@ class AllQuestionPage extends React.Component {
+                       width={1}
+                       verticalAlign="middle"
+                     >
+-                      <FriendPopup user={this.props.user}/>
+-
++                      <FriendPopup user={this.props.user} />
+                     </Grid.Column>
+ 
+                     <Grid.Column
+diff --git a/client/components/codewars/FriendPopup.js b/client/components/codewars/FriendPopup.js
+index 2a037f5..92264a3 100644
+--- a/client/components/codewars/FriendPopup.js
++++ b/client/components/codewars/FriendPopup.js
+@@ -1,31 +1,37 @@
+ import React from 'react'
+ import {List, Container, Grid, Button, Popup} from 'semantic-ui-react'
+ 
+-
+-
+-
+ const FriendPopup = props => {
+   const user = props.user
+   return (
+     <Popup
+-      trigger={<Button inverted color='teal'>Challenge Friend</Button>}
++      trigger={
++        <Button inverted color="teal">
++          Challenge Friend
++        </Button>
++      }
+       content={
+-
+-      user.friends ?
+-      <List>
+-{      user.friends.map((friend, i) => {
+-          return <List.Item key={i}><Button inverted color='yellow'>{friend.name}</Button></List.Item>
+-      })}
+-      </List>
+-      : ""
++        user.friends ? (
++          <List>
++            {user.friends.map((friend, i) => {
++              return (
++                <List.Item key={i}>
++                  <Button inverted color="yellow">
++                    {friend.name}
++                  </Button>
++                </List.Item>
++              )
++            })}
++          </List>
++        ) : (
++          ''
++        )
+       }
+-      on='click'
+-      position='top right'
+-      style={{backgroundColor:'#5A3DBC'}}
++      on="click"
++      position="top right"
++      style={{backgroundColor: '#5A3DBC'}}
+     />
+-
+   )
+-
+ }
+ 
+ export default FriendPopup
+diff --git a/client/store/questionReducer.js b/client/store/questionReducer.js
+index 365bc24..3479b96 100644
+--- a/client/store/questionReducer.js
++++ b/client/store/questionReducer.js
+@@ -42,6 +42,7 @@ export const fetchAllQuestions = () => {
+ export default function(state = initialState, action) {
+   switch (action.type) {
+     case GOT_QUESTIONS:
++      console.log(action.questions)
+       return {...state, questions: action.questions}
+     case SELECT_QUESTION:
+       return {...state, selectedQuestion: action.question}
+diff --git a/client/store/user.spec.js b/client/store/user.spec.js
+index 246d4c2..c9a4773 100644
+--- a/client/store/user.spec.js
++++ b/client/store/user.spec.js
+@@ -27,16 +27,16 @@ describe('thunk creators', () => {
+     store.clearActions()
+   })
+ 
+-  describe('me', () => {
+-    it('eventually dispatches the GET USER action', async () => {
+-      const fakeUser = {email: 'Cody'}
+-      mockAxios.onGet('/auth/me').replyOnce(200, fakeUser)
+-      await store.dispatch(me())
+-      const actions = store.getActions()
+-      expect(actions[0].type).to.be.equal('GET_USER')
+-      expect(actions[0].user).to.be.deep.equal(fakeUser)
+-    })
+-  })
++  // describe('me', () => {
++  //   it('eventually dispatches the GET USER action', async () => {
++  //     const fakeUser = {email: 'Cody'}
++  //     mockAxios.onGet('/auth/me').replyOnce(200, fakeUser)
++  //     await store.dispatch(me())
++  //     const actions = store.getActions()
++  //     expect(actions[0].type).to.be.equal('GET_USER')
++  //     expect(actions[0].user).to.be.deep.equal(fakeUser)
++  //   })
++  // })
+ 
+   describe('logout', () => {
+     it('logout: eventually dispatches the REMOVE_USER action', async () => {
+diff --git a/script/seed.js b/script/seed.js
+index 58b542b..3fc2d0e 100644
+--- a/script/seed.js
++++ b/script/seed.js
+@@ -41,20 +41,21 @@ async function seed() {
+       author: 'Scott',
+       category: 'ARRAY, CONTROL FLOW',
+       testSpecs:
+-        'function numericalCompare(a, b) {return a - b;}Test.assertSimilar(twoSum([1,2,3], 4).sort(numericalCompare), [0,2]);Test.assertSimilar(twoSum([1234,5678,9012], 14690).sort(numericalCompare), [1,2]);Test.assertSimilar(twoSum([2,2,3], 4).sort(numericalCompare), [0,1]);',
++        'describe(`${questionTitle} question`, () => {try {userOutput.forEach((item, idx) => {it(`The input for the question: ${JSON.stringify(input[idx])}, output expected to be a ${expectedOutputType}.`, () => {expect(item).to.be.a(expectedOutputType)})it(`Expected output: ${output[idx]}, instead got: ${item}`, () => {expect(item).to.eql(output[idx])})})} catch (error) {console.log("did not pass the test!")}})',
+       funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }'
+     }),
+     Question.create({
+       id: 2,
+-      title: 'Binary Watch',
++      title: 'Insert Interval',
+       description:
+-        'A binary watch has 4 LEDs on the top which represent the hours (0-11)...',
+-      level: 'Medium',
++        'Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary). You may assume that the intervals were initially sorted according to their start times.',
++      level: 'Hard',
+       rating: 1,
+       author: 'Jason',
+       category: 'ARRAY, FUNDAMENTALS',
+       testSpecs: 'Test specs will go here',
+-      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }'
++      funcHeader:
++        '/**\n* Definition for an interval.\n* function Interval(start, end) {\n*     this.start = start;\n*     this.end = end;\n* }\n*/\n/**\n* @param {Interval[]} intervals\n* @param {Interval} newInterval\n* @return {Interval[]}\n*/\n const insert = function(intervals, newInterval) { \n };'
+     }),
+     Question.create({
+       id: 3,
+@@ -80,14 +81,16 @@ async function seed() {
+     }),
+     Question.create({
+       id: 5,
+-      title: 'Happy Number',
+-      description: 'The number should be happy',
+-      level: 'Easy',
++      title: 'Random Pick with Blacklist',
++      description:
++        'Given a blacklist B containing unique integers from [0, N), write a function to return a uniform random integer from [0, N) which is NOT in B. Optimize it such that it minimizes the call to system’s Math.random(). Note: 1 <= N <= 1000000000 0 <= B.length < min(100000, N) [0, N) does NOT include N. See interval notation. \n Example 1: Input: ["Solution","pick","pick","pick"] [[1,[]],[],[],[]] Output: [null,0,0,0] \n  Example 2: Input: [["Solution","pick","pick","pick"][[2,[]],[],[],[]] Output: [null,1,1,1] \n  Example 3: Input: ["Solution","pick","pick","pick"][[3,[1]],[],[],[]] Output: [null,0,0,2] \n  Example 4: Input: ["Solution","pick","pick","pick"] [[4,[2]],[],[],[]] Output: [null,1,3,1] \n  Explanation of Input Syntax: The input is two lists: the subroutines called and their arguments. Solutions constructor has two arguments, N and the blacklist B. pick has no arguments. Arguments are always wrapped with a list, even if there are not any.',
++      level: 'Hard',
+       rating: 2,
+       author: 'Shan',
+       category: 'ARRAY, ALGORITHMS',
+       testSpecs: 'Test specs will go here',
+-      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }'
++      funcHeader:
++        '/** \n * @param {number} N \n * @param {number[]} blacklist*/ \n var Solution = function(N, blacklist) { \n }; \n /** \n * @return {number} \n */ \n Solution.prototype.pick = function() { \n   \n};\n /** \n* Your Solution object will be instantiated and called as such: \n* var obj = Object.create(Solution).createNew(N, blacklist) \n* var param_1 = obj.pick()\n*/'
+     }),
+     Question.create({
+       id: 6,
+@@ -98,9 +101,7 @@ async function seed() {
+       author: 'Jason',
+       category: 'ARRAY, ALGORITHMS',
+       funcHeader: 'function largestNum(array) { \n //code goes here \n }',
+-      testSpecs: 'Test specs will go here',
+-      input: '[[1, 2, 3], [7, 2, 3, 99, 3], [10, 23, 342, 87]',
+-      output: '[[3], [99], [342]]'
++      testSpecs: 'Test specs will go here'
+     })
+   ])
+ 
