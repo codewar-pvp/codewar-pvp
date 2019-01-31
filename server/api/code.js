@@ -10,26 +10,22 @@ router.post('/', async (req, res, next) => {
   try {
     let resultArray = []
     let success = true
-    let output
 
     const code = req.body.input.code
-    const tests = req.body.input.question.tests
+    const parsedInputs = JSON.parse(req.body.input.question.input)
+    const parsedOutputs = JSON.parse(req.body.input.question.output)
 
-    for (let i = 0; i < tests.length; i++) {
-      resultArray.push(vm.run(`(${code})(${tests[i].input})`))
+    for (let i = 0; i < parsedInputs.length; i++) {
+      let input = JSON.stringify(parsedInputs[i])
+      resultArray.push([vm.run(`(${code})(${input})`)])
     }
 
-    for (let i = 0; i < tests.length; i++) {
-      if (tests[i].outputType !== 'string') {
-        output = JSON.parse(tests[i].output)
-      } else {
-        output = tests[i].output
-      }
-
-      if (resultArray[i] !== output) {
-        success = false
-        break
-      }
+    for (let i = 0; i < parsedOutputs.length; i++) {
+      for (let j = 0; j < parsedOutputs[i].length; j++)
+        if (resultArray[i][j] !== parsedOutputs[i][j]) {
+          success = false
+          break
+        }
     }
 
     if (success) {
