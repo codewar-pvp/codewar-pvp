@@ -33,10 +33,10 @@ async function seed() {
   const questions = await Promise.all([
     Question.create({
       id: 1,
-      title: 'Two Sum',
+      title: 'Two Sum Extreme',
       description:
         ' Given an array of integers, find two numbers such that they add up to a specific target number.The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.You may assume that each input would have exactly one solution. Input: numbers={2, 7, 11, 15}, target=9 Output: index1=1, index2=2',
-      level: 'Easy',
+      level: 'Hard',
       rating: 3,
       author: 'Scott',
       category: 'ARRAY, CONTROL FLOW',
@@ -102,45 +102,6 @@ async function seed() {
       category: 'ARRAY, ALGORITHMS',
       funcHeader: 'function largestNum(array) { \n //code goes here \n }',
       testSpecs: 'Test specs will go here'
-    })
-  ])
-
-  const tests = await Promise.all([
-    Test.create({
-      input: '[1, 2, 3]',
-      output: '3',
-      outputType: 'array',
-      questionId: 6
-    }),
-    Test.create({
-      input: '[7, 2, 3, 99, 3]',
-      output: '99',
-      outputType: 'array',
-      questionId: 6
-    }),
-    Test.create({
-      input: '[10, 23, 342, 87]',
-      output: '342',
-      outputType: 'array',
-      questionId: 6
-    }),
-    Test.create({
-      input: '[1, 2, 3], 4',
-      output: '[]',
-      outputType: 'array',
-      questionId: 1
-    }),
-    Test.create({
-      input: '[ 1234, 5678, 9012 ], 14690',
-      output: '[1,2]',
-      outputType: 'array',
-      questionId: 1
-    }),
-    Test.create({
-      input: '[2,2,3], 4',
-      output: '[0,1]',
-      outputType: 'array',
-      questionId: 1
     })
   ])
 
