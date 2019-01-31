@@ -46,8 +46,10 @@ router.post('/logout', (req, res) => {
 })
 
 router.get('/me', async (req, res) => {
-  let friends = await req.user.getFriends()
-  res.json({user: req.user, friends: friends})
+  if (req.user) {
+    let friends = await req.user.getFriends()
+    res.json({user: req.user, friends: friends})
+  }
 })
 
 router.use('/google', require('./google'))
