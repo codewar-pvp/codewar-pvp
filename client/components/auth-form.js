@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {auth} from '../store'
+import {login, signup} from '../store'
 import {NavLink} from 'react-router-dom'
 import {
   Button,
@@ -35,6 +35,14 @@ const AuthForm = props => {
           </Header>
           <Form size="large" onSubmit={handleSubmit} name={name}>
             <Segment stacked>
+              {name === 'signup' ?
+              <Form.Input
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="user name"
+                name="userName"
+              /> : ''}
               <Form.Input
                 fluid
                 icon="user"
@@ -92,10 +100,16 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
+      const userName = evt.target.userName
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      if (formName === 'login') {
+        dispatch(login(email, password, formName))
+      } else {
+        dispatch(signup(userName, email, password, formName))
+      }
+
     }
   }
 }
