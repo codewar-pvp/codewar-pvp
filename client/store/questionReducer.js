@@ -42,6 +42,7 @@ export const fetchAllQuestions = () => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_QUESTIONS:
+      console.log(action.questions)
       return {...state, questions: action.questions}
     case SELECT_QUESTION:
       return {...state, selectedQuestion: action.question}
