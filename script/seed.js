@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Question, Test} = require('../server/db/models')
+const {User, Question} = require('../server/db/models')
 
 let UserFriends = db.model('user_friend')
 
@@ -97,36 +97,16 @@ async function seed() {
       rating: 1,
       author: 'Jason',
       category: 'ARRAY, ALGORITHMS',
+      funcHeader: 'function largestNum(array) { \n //code goes here \n }',
       testSpecs: 'Test specs will go here',
-      funcHeader: 'function largestNum(array) { \n //code goes here \n }'
-    })
-  ])
-
-  const tests = await Promise.all([
-    Test.create({
-      input: '[1, 2, 3]',
-      output: '3',
-      outputType: 'array',
-      questionId: 6
-    }),
-    Test.create({
-      input: '[7, 2, 3, 99, 3]',
-      output: '99',
-      outputType: 'array',
-      questionId: 6
-    }),
-    Test.create({
-      input: '[10, 23, 342, 87]',
-      output: '342',
-      outputType: 'array',
-      questionId: 6
+      input: '[[1, 2, 3], [7, 2, 3, 99, 3], [10, 23, 342, 87]',
+      output: '[[3], [99], [342]]'
     })
   ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${friends.length} friends`)
   console.log(`seeded ${questions.length} questions`)
-  console.log(`seeded ${tests.length} tests`)
   console.log(`seeded successfully`)
 }
 
@@ -156,13 +136,3 @@ if (module === require.main) {
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed
-
-function largestNum(array) {
-  let largest = 0
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] > largest) {
-      largest = array[i]
-    }
-  }
-  return largest
-}

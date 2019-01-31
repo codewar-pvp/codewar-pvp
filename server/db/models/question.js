@@ -22,12 +22,18 @@ const Question = db.define('question', {
   category: {
     type: Sequelize.STRING
   },
+  funcHeader: {
+    type: Sequelize.TEXT
+  },
   testSpecs: {
     type: Sequelize.TEXT,
     allowNull: false
   },
-  funcHeader: {
-    type: Sequelize.TEXT
+  input: {
+    type: Sequelize.STRING
+  },
+  output: {
+    type: Sequelize.STRING
   }
 })
 
