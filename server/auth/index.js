@@ -46,9 +46,6 @@ router.post('/logout', (req, res) => {
 
 router.get('/me', async (req, res) => {
   let friends = await req.user.getFriends()
-  console.log(friends)
-  console.log(req.user)
-
   res.json({user: req.user, friends: friends})
 })
 

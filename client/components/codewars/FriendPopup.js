@@ -14,13 +14,14 @@ const FriendPopup = props => {
       user.friends ?
       <List>
 {      user.friends.map((friend, i) => {
-          return <List.Item key={i}>{friend.email}</List.Item>
+          return <List.Item key={i}><Button inverted color='yellow'>{friend.name}</Button></List.Item>
       })}
       </List>
       : ""
       }
       on='click'
       position='top right'
+      style={{backgroundColor:'#5A3DBC'}}
     />
 
   )
