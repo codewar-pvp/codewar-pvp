@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Question, Test} = require('../server/db/models')
+const {User, Question} = require('../server/db/models')
 
 let UserFriends = db.model('user_friend')
 
@@ -10,11 +10,11 @@ async function seed() {
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'stuart@email.com', password: '123'}),
-    User.create({email: 'shan@email.com', password: '123'}),
-    User.create({email: 'scott@email.com', password: '123'}),
-    User.create({email: 'json@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({name: 'Stuart', email: 'stuart@email.com', password: '123'}),
+    User.create({name: 'Shan', email: 'shan@email.com', password: '123'}),
+    User.create({name: 'Scott', email: 'scott@email.com', password: '123'}),
+    User.create({name: 'Jason', email: 'json@email.com', password: '123'}),
+    User.create({name: 'Murphy', email: 'murphy@email.com', password: '123'})
   ])
 
   const friends = await Promise.all([
@@ -100,8 +100,8 @@ async function seed() {
       rating: 1,
       author: 'Jason',
       category: 'ARRAY, ALGORITHMS',
-      testSpecs: 'Test specs will go here',
-      funcHeader: 'function largestNum(array) { \n //code goes here \n }'
+      funcHeader: 'function largestNum(array) { \n //code goes here \n }',
+      testSpecs: 'Test specs will go here'
     })
   ])
 
@@ -147,7 +147,6 @@ async function seed() {
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${friends.length} friends`)
   console.log(`seeded ${questions.length} questions`)
-  console.log(`seeded ${tests.length} tests`)
   console.log(`seeded successfully`)
 }
 
@@ -177,13 +176,3 @@ if (module === require.main) {
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed
-
-function largestNum(array) {
-  let largest = 0
-  for (let i = 0; i < array.length; i++) {
-    if (array[i] > largest) {
-      largest = array[i]
-    }
-  }
-  return largest
-}
