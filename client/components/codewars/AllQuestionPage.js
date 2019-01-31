@@ -76,8 +76,7 @@ class AllQuestionPage extends React.Component {
                       width={1}
                       verticalAlign="middle"
                     >
-                      <FriendPopup user={this.props.user}/>
-
+                      <FriendPopup user={this.props.user} />
                     </Grid.Column>
 
                     <Grid.Column

@@ -35,14 +35,17 @@ const AuthForm = props => {
           </Header>
           <Form size="large" onSubmit={handleSubmit} name={name}>
             <Segment stacked>
-              {name === 'signup' ?
-              <Form.Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                placeholder="user name"
-                name="userName"
-              /> : ''}
+              {name === 'signup' ? (
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="user name"
+                  name="userName"
+                />
+              ) : (
+                ''
+              )}
               <Form.Input
                 fluid
                 icon="user"
@@ -109,7 +112,6 @@ const mapDispatch = dispatch => {
       } else {
         dispatch(signup(userName, email, password, formName))
       }
-
     }
   }
 }
