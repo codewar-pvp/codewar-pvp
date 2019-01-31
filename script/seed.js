@@ -101,7 +101,9 @@ async function seed() {
       author: 'Jason',
       category: 'ARRAY, ALGORITHMS',
       funcHeader: 'function largestNum(array) { \n //code goes here \n }',
-      testSpecs: 'Test specs will go here'
+      testSpecs: 'Test specs will go here',
+      input: '[[1, 2, 3], [7, 2, 3, 99, 3], [10, 23, 342, 87]]',
+      output: '[[3], [99], [342]]'
     })
   ])
 
