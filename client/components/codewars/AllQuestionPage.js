@@ -1,20 +1,33 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {List, Container, Grid, Button, Popup} from 'semantic-ui-react'
-import {postCode, fetchAllQuestions} from '../../store/'
+import {postCode, fetchAllQuestions, sendChallenge} from '../../store/'
 import QuestionLabel from './QuestionLabel'
 import QuestionRating from './QuestionRating'
 import {NavLink} from 'react-router-dom'
 import FriendPopup from './FriendPopup'
+import socket from '../../socket'
 
 /**
  * COMPONENT
  */
 
 class AllQuestionPage extends React.Component {
+  constructor() {
+    super()
+    this.state = {}
+    this.handleChallenge = this.handleChallenge.bind(this)
+  }
+
+  handleChallenge() {
+    socket.emit('challenge', this.props.user)
+  }
+
   render() {
     const {questions} = this.props
-    return questions ? (
+
+
+     return questions ? (
       <Container>
         <List divided relaxed>
           {questions.map((question, index) => {
@@ -76,7 +89,10 @@ class AllQuestionPage extends React.Component {
                       width={1}
                       verticalAlign="middle"
                     >
-                      <FriendPopup user={this.props.user} />
+
+                      {/* <FriendPopup user={this.props.user} /> */}
+                      <Button inverted color="purple" onClick={this.handleChallenge}>Challenge!</Button>
+
                     </Grid.Column>
 
                     <Grid.Column
@@ -101,11 +117,12 @@ const mapStateToProps = state => ({
   code: state.codeReducer.code,
   result: state.codeReducer.result,
   questions: state.questionReducer.questions,
-  user: state.user
+  user: state.user,
 })
 const mapDispatch = dispatch => ({
   testCode: code => dispatch(postCode(code)),
-  fetchAllQuestions: () => dispatch(fetchAllQuestions())
+  fetchAllQuestions: () => dispatch(fetchAllQuestions()),
+
 })
 
 export default connect(mapStateToProps, mapDispatch)(AllQuestionPage)

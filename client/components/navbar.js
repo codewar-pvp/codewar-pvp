@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink, withRouter} from 'react-router-dom'
 import {logout} from '../store'
-import {Menu, Segment} from 'semantic-ui-react'
+import {Menu, Segment, Modal, Image, Button, Header} from 'semantic-ui-react'
 
 class Navbar extends React.Component {
   state = {activeItem: ''}
@@ -34,11 +34,27 @@ class Navbar extends React.Component {
             position="left"
             icon="home"
           />
+
+            {this.props.challenger.id ?
+              <Modal basic centered={true} trigger={<Button inverted color='red'>NEW CHALLENGE!</Button>}>
+              <Modal.Content>
+
+                <Button inverted color='red'>Accept</Button>
+
+                <Button inverted color='blue'>Decline</Button>
+
+              </Modal.Content>
+            </Modal>
+            : ""
+            }
+
+
+
           {isLoggedIn ? (
             <Menu.Menu position="right">
               <Menu.Item
                 as="h4"
-                content={`Welcome back ${this.props.email}!`}
+                content={`Welcome back ${this.props.user.name}!`}
                 onClick={this.handleItemClick}
                 name="user"
                 icon="user circle"
@@ -88,7 +104,9 @@ class Navbar extends React.Component {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    email: state.user.email
+    email: state.user.email,
+    challenger: state.warReducer.challenge,
+    user: state.user
   }
 }
 
