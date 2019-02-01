@@ -1,20 +1,23 @@
 const router = require('express').Router()
 const {VM} = require('vm2')
+const {Question} = require('../db/models')
 
 const vm = new VM({
   timeout: 5000,
   sandbox: {}
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/:id', async (req, res, next) => {
   try {
     let resultArray = []
     let success = true
 
-    const code = req.body.input.code
+    const code = req.body.input
 
-    const parsedInputs = JSON.parse(req.body.input.question.input)
-    const parsedOutputs = JSON.parse(req.body.input.question.output)
+    const question = await Question.findById(req.params.id)
+
+    const parsedInputs = JSON.parse(question.input)
+    const parsedOutputs = JSON.parse(question.output)
 
     for (let i = 0; i < parsedInputs.length; i++) {
       let input = JSON.stringify(parsedInputs[i])
