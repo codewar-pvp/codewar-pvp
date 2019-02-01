@@ -18,9 +18,8 @@ class Navbar extends React.Component {
     const {isLoggedIn} = this.props
     const {activeItem} = this.state
     return (
-      // <Grid>
       <Segment inverted>
-        <Menu inverted pointing secondary>
+        <Menu inverted pointing secondary style={{paddingBottom: '10px'}}>
           <h4 id="pageHeader">
             <NavLink to="/questions">Code War PVP</NavLink>
           </h4>

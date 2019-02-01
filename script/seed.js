@@ -42,7 +42,9 @@ async function seed() {
       category: 'ARRAY, CONTROL FLOW',
       testSpecs:
         'describe(`${questionTitle} question`, () => {try {userOutput.forEach((item, idx) => {it(`The input for the question: ${JSON.stringify(input[idx])}, output expected to be a ${expectedOutputType}.`, () => {expect(item).to.be.a(expectedOutputType)})it(`Expected output: ${output[idx]}, instead got: ${item}`, () => {expect(item).to.eql(output[idx])})})} catch (error) {console.log("did not pass the test!")}})',
-      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }'
+      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }',
+      input: `[[[2,7,11,15],9],[[1234,5678,9012],14690],[[2,2,3],4]]`,
+      output: `[[0,1],[1,2],[0,1]]`
     }),
     Question.create({
       id: 2,
@@ -55,45 +57,65 @@ async function seed() {
       category: 'ARRAY, FUNDAMENTALS',
       testSpecs: 'Test specs will go here',
       funcHeader:
-        '/**\n* Definition for an interval.\n* function Interval(start, end) {\n*     this.start = start;\n*     this.end = end;\n* }\n*/\n/**\n* @param {Interval[]} intervals\n* @param {Interval} newInterval\n* @return {Interval[]}\n*/\n const insert = function(intervals, newInterval) { \n };',
+        '/**\n* Definition for an interval.\n* function Interval(start, end) {\n*     this.start = start;\n*     this.end = end;\n* }\n*/\n/**\n* @param {Interval[]} intervals\n* @param {Interval} newInterval\n* @return {Interval[]}\n*/\n function insert(intervals, newInterval) { \n };',
       input:
         '[[[[1,3],[6,9]], [2,5]], [[[1,2],[3,5],[6,7],[8,10],[12,16]],[4,8]]]',
       output: '[[[1,5],[6,9]], [[1,2],[3,10],[12,16]]]'
     }),
     Question.create({
       id: 3,
-      title: 'Happy Pigs',
-      description: 'Fun coding problem',
-      level: 'Medium',
+      title: 'Evaluate Mathematical Expression',
+      description:
+        '# Instructions\n\nGiven a mathematical expression as a string you must return the result as a number.\n\n## Numbers\nNumber may be both whole numbers and/or decimal numbers. The same goes for the returned result.\n\n## Operators\nYou need to support the following mathematical operators:\n\n - Multiplication `*`\n - Division `/` (as true division)\n - Addition `+`\n - Subtraction `-`\n\nOperators are always evaluated from left-to-right, and `*` and `/` must be evaluated before `+` and `-`.\n\n## Parentheses\nYou need to support multiple levels of nested parentheses, ex. `(2 / (2 + 3.33) * 4) - -6`\n\n## Whitespace\nThere may or may not be whitespace between numbers and operators.\n\nAn addition to this rule is that the minus sign (`-`) used for negating numbers and parentheses will *never* be separated by whitespace. I.e., all of the following are **valid** expressions.\n\n```\n1-1    // 0\n1 -1   // 0\n1- 1   // 0\n1 - 1  // 0\n1- -1  // 2\n1 - -1 // 2\n\n6 + -(4)   // 2\n6 + -( -4) // 10\n```\n\nAnd the following are **invalid** expressions\n```\n1 - - 1    // Invalid\n1- - 1     // Invalid\n6 + - (4)  // Invalid\n6 + -(- 4) // Invalid\n```\n\n## Validation\nYou do not need to worry about validation - you will only receive **valid** mathematical expressions following the above rules.\n\n```if:javascript\nNOTE: Both `eval` and `Function` are disabled. Same goes for `String.match`.\n```\n\n```if:php\nNOTE: `eval` is disallowed in your solution.\n```\n\n```if:python\nNOTE: `eval` and `exec` are disallowed in your solution.\n```',
+      level: 'Hard',
       rating: 5,
       author: 'Stuart',
       category: 'ARRAY, NUMBERS',
       testSpecs: 'Test specs will go here',
-      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }'
+      funcHeader:
+        'function calc(expression) { \n //evaluate expression and return result\n }',
+      input: `[
+        ["1+1"],
+        ["1 - 1"],
+        ["1* 1"],
+        ["1/1"],
+        ["-123"],
+        ["123"],
+        ["2/2+3 * 4.75- -6"],
+        ["12* 123"],
+        ["2/(2 + 3) * 4.33 - -6"]
+      ]`,
+      output: `[2,0, 1,1, -123, 123, 21.24, 1476, 7.732]`
     }),
     Question.create({
       id: 4,
-      title: 'Binary Search',
-      description: 'This is binary search description',
-      level: 'Easy',
+      title: 'Reverse Words in a String',
+      description:
+        'Given an input string, reverse the string word by word. \n Example: \nInput: "the sky is blue",\nOutput: "blue is sky the".\nNote:\nA word is defined as a sequence of non-space characters.\nInput string may contain leading or trailing spaces. However, your reversed string should not contain leading or trailing spaces.\nYou need to reduce multiple spaces between two words to a single space in the reversed string.',
+      level: 'Medium',
       rating: 4,
       author: 'Scott',
       category: 'ARRAY,DATA STRUCTURE',
       testSpecs: 'Test specs will go here',
-      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }'
+      funcHeader:
+        '/**\n* @param {string} str\n* @returns {string}\n*/\nfunction reverseWords(str) { \n //code goes here \n }',
+      input: `["the sky is blue"]`,
+      output: `["blue is sky the"]`
     }),
     Question.create({
       id: 5,
-      title: 'Random Pick with Blacklist',
+      title: 'Next bigger number with the same digits',
       description:
-        'Given a blacklist B containing unique integers from [0, N), write a function to return a uniform random integer from [0, N) which is NOT in B. Optimize it such that it minimizes the call to system’s Math.random(). Note: 1 <= N <= 1000000000 0 <= B.length < min(100000, N) [0, N) does NOT include N. See interval notation. \n Example 1: Input: ["Solution","pick","pick","pick"] [[1,[]],[],[],[]] Output: [null,0,0,0] \n  Example 2: Input: [["Solution","pick","pick","pick"][[2,[]],[],[],[]] Output: [null,1,1,1] \n  Example 3: Input: ["Solution","pick","pick","pick"][[3,[1]],[],[],[]] Output: [null,0,0,2] \n  Example 4: Input: ["Solution","pick","pick","pick"] [[4,[2]],[],[],[]] Output: [null,1,3,1] \n  Explanation of Input Syntax: The input is two lists: the subroutines called and their arguments. Solutions constructor has two arguments, N and the blacklist B. pick has no arguments. Arguments are always wrapped with a list, even if there are not any.',
-      level: 'Hard',
+        'You have to create a function that takes a positive integer number and returns the next bigger number formed by the same digits: 135==>531\n If no bigger number can be composed using those digits, return -1 9===>-1',
+      level: 'Medium',
       rating: 2,
       author: 'Shan',
       category: 'ARRAY, ALGORITHMS',
       testSpecs: 'Test specs will go here',
       funcHeader:
-        '/** \n * @param {number} N \n * @param {number[]} blacklist*/ \n var Solution = function(N, blacklist) { \n }; \n /** \n * @return {number} \n */ \n Solution.prototype.pick = function() { \n   \n};\n /** \n* Your Solution object will be instantiated and called as such: \n* var obj = Object.create(Solution).createNew(N, blacklist) \n* var param_1 = obj.pick()\n*/'
+        '/** \n * @param {number} n \n */ \n function nextBigger(n) { \n // coding start here... \n }',
+      input: `[[12],[514],[2018],[9],[111],[531]]`,
+      output: `[21,541,2081,-1,-1,-1]`
     }),
     Question.create({
       id: 6,
@@ -106,7 +128,7 @@ async function seed() {
       funcHeader: 'function largestNum(array) { \n //code goes here \n }',
       testSpecs: 'Test specs will go here',
       input: '[[1, 2, 3], [7, 2, 3, 99, 3], [10, 23, 342, 87]]',
-      output: '[[3], [99], [342]]'
+      output: '[3, 99, 342]'
     })
   ])
 
