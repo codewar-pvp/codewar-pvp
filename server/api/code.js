@@ -15,9 +15,22 @@ router.post('/', async (req, res, next) => {
 
     const parsedInputs = JSON.parse(req.body.input.question.input)
     const parsedOutputs = JSON.parse(req.body.input.question.output)
+
     for (let i = 0; i < parsedInputs.length; i++) {
       let input = JSON.stringify(parsedInputs[i])
-      resultArray.push(vm.run(`(${code})(...${input})`))
+      let multi = false
+
+      parsedInputs[i].forEach(elem => {
+        if (Array.isArray(elem)) {
+          multi = true
+        }
+      })
+
+      if (multi) {
+        resultArray.push(vm.run(`(${code})(...${input})`))
+      } else {
+        resultArray.push(vm.run(`(${code})(${input})`))
+      }
     }
 
     for (let i = 0; i < parsedOutputs.length; i++) {
