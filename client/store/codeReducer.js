@@ -24,7 +24,6 @@ export const gotResult = result => ({
 export const postCode = text => {
   return async dispatch => {
     try {
-      console.log('I AM TEXT ', text)
       const res = await axios.post(`/api/code/${text.questionId}`, {
         input: text.code
       })
