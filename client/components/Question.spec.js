@@ -17,8 +17,6 @@ const output = [0, 3, 342, 7]
 const expectedOutputType = 'number'
 const questionTitle = 'Two Sum'
 
-const str = JSON.stringify([['test', [0, 1, 3], 1]])
-console.log(JSON.parse(str))
 // This part run in VM code
 const userOutput = input.map(item => largestNum(item))
 

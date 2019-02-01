@@ -55,7 +55,10 @@ async function seed() {
       category: 'ARRAY, FUNDAMENTALS',
       testSpecs: 'Test specs will go here',
       funcHeader:
-        '/**\n* Definition for an interval.\n* function Interval(start, end) {\n*     this.start = start;\n*     this.end = end;\n* }\n*/\n/**\n* @param {Interval[]} intervals\n* @param {Interval} newInterval\n* @return {Interval[]}\n*/\n const insert = function(intervals, newInterval) { \n };'
+        '/**\n* Definition for an interval.\n* function Interval(start, end) {\n*     this.start = start;\n*     this.end = end;\n* }\n*/\n/**\n* @param {Interval[]} intervals\n* @param {Interval} newInterval\n* @return {Interval[]}\n*/\n const insert = function(intervals, newInterval) { \n };',
+      input:
+        '[[[[1,3],[6,9]], [2,5]], [[[1,2],[3,5],[6,7],[8,10],[12,16]],[4,8]]]',
+      output: '[[[1,5],[6,9]], [[1,2],[3,10],[12,16]]]'
     }),
     Question.create({
       id: 3,
