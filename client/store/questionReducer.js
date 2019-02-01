@@ -32,7 +32,6 @@ export const fetchAllQuestions = () => {
     try {
       const res = await axios.get('/api/questions')
       dispatch(gotQuestions(res.data))
-      // dispatch(gotQuestions(data))
     } catch (error) {
       console.warn('No Question Available')
     }

@@ -2,7 +2,6 @@ import React from 'react'
 
 import {Navbar} from './components'
 import Routes from './routes'
-import {Divider} from 'semantic-ui-react'
 
 const App = () => {
   return (
@@ -11,9 +10,11 @@ const App = () => {
       <hr
         style={{
           color: 'gold',
-          backgroundColor: 'gold',
-          height: 0.5,
-          opacity: 0.3
+          backgroundColor: 'yellow',
+          height: 1.5,
+          marginTop: 0,
+          marginBottom: 20,
+          opacity: 0.9
         }}
       />
       <Routes />
