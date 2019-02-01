@@ -20,10 +20,8 @@ router.post('/', async (req, res, next) => {
       resultArray.push(vm.run(`(${code})(...${input})`))
     }
 
-    console.log(resultArray, parsedOutputs)
     for (let i = 0; i < parsedOutputs.length; i++) {
       if (JSON.stringify(resultArray[i]) !== JSON.stringify(parsedOutputs[i])) {
-        console.log(resultArray[0] == parsedOutputs[0])
         success = false
         break
       }
