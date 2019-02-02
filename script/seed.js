@@ -33,9 +33,9 @@ async function seed() {
   const questions = await Promise.all([
     Question.create({
       id: 1,
-      title: 'Two Sum Extreme',
+      title: 'Two Sum',
       description:
-        ' Given an array of integers, find two numbers such that they add up to a specific target number.The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.You may assume that each input would have exactly one solution. Input: numbers={2, 7, 11, 15}, target=9 Output: index1=1, index2=2',
+        'Given an array of integers and a target, find the indices of the two numbers in the array that add up to the target. The function twoSum should return an array of these two indices (with the lower index of the two being the first element in the returned array). You may assume that each input has exactly one solution. EXAMPLE: Input: numbers = [2, 7, 11, 15], target = 9; Output: [0, 1].',
       level: 'Hard',
       rating: 3,
       author: 'Scott',
@@ -66,7 +66,7 @@ async function seed() {
       id: 3,
       title: 'Evaluate Mathematical Expression',
       description:
-        '# Instructions\n\nGiven a mathematical expression as a string you must return the result as a number.\n\n## Numbers\nNumber may be both whole numbers and/or decimal numbers. The same goes for the returned result.\n\n## Operators\nYou need to support the following mathematical operators:\n\n - Multiplication `*`\n - Division `/` (as true division)\n - Addition `+`\n - Subtraction `-`\n\nOperators are always evaluated from left-to-right, and `*` and `/` must be evaluated before `+` and `-`.\n\n## Parentheses\nYou need to support multiple levels of nested parentheses, ex. `(2 / (2 + 3.33) * 4) - -6`\n\n## Whitespace\nThere may or may not be whitespace between numbers and operators.\n\nAn addition to this rule is that the minus sign (`-`) used for negating numbers and parentheses will *never* be separated by whitespace. I.e., all of the following are **valid** expressions.\n\n```\n1-1    // 0\n1 -1   // 0\n1- 1   // 0\n1 - 1  // 0\n1- -1  // 2\n1 - -1 // 2\n\n6 + -(4)   // 2\n6 + -( -4) // 10\n```\n\nAnd the following are **invalid** expressions\n```\n1 - - 1    // Invalid\n1- - 1     // Invalid\n6 + - (4)  // Invalid\n6 + -(- 4) // Invalid\n```\n\n## Validation\nYou do not need to worry about validation - you will only receive **valid** mathematical expressions following the above rules.\n\n```if:javascript\nNOTE: Both `eval` and `Function` are disabled. Same goes for `String.match`.\n```\n\n```if:php\nNOTE: `eval` is disallowed in your solution.\n```\n\n```if:python\nNOTE: `eval` and `exec` are disallowed in your solution.\n```',
+        '# Instructions\n\n Given a mathematical expression as a string you must return the result as a number.\n\n ## Numbers\n Number may be both whole numbers and/or decimal numbers. The same goes for the returned result.\n\n ## Operators \n You need to support the following mathematical operators:\n\n - Multiplication `*`\n - Division `/` (as true division)\n - Addition `+`\n - Subtraction `-`\n\n Operators are always evaluated from left-to-right, and `*` and `/` must be evaluated before `+` and `-`.\n\n ## Parentheses\n You need to support multiple levels of nested parentheses, ex. `(2 / (2 + 3.33) * 4) - -6`\n\n ## Whitespace\n There may or may not be whitespace between numbers and operators.\n\n An addition to this rule is that the minus sign (`-`) used for negating numbers and parentheses will *never* be separated by whitespace. I.e., all of the following are **valid** expressions.\n\n```\n 1-1    // 0\n 1 -1   // 0\n 1- 1   // 0 \n1 - 1  // 0\n1- -1  // 2\n1 - -1 // 2\n\n6 + -(4)   // 2\n6 + -( -4) // 10\n```\n\nAnd the following are **invalid** expressions\n```\n1 - - 1    // Invalid\n1- - 1     // Invalid\n6 + - (4)  // Invalid\n6 + -(- 4) // Invalid\n```\n\n## Validation\nYou do not need to worry about validation - you will only receive **valid** mathematical expressions following the above rules.\n\n```if:javascript\nNOTE: Both `eval` and `Function` are disabled. Same goes for `String.match`.\n```\n\n```if:php\nNOTE: `eval` is disallowed in your solution.\n```\n\n```if:python\nNOTE: `eval` and `exec` are disallowed in your solution.\n```',
       level: 'Hard',
       rating: 5,
       author: 'Stuart',
@@ -91,7 +91,7 @@ async function seed() {
       id: 4,
       title: 'Reverse Words in a String',
       description:
-        'Given an input string, reverse the string word by word. \n Example: \nInput: "the sky is blue",\nOutput: "blue is sky the".\nNote:\nA word is defined as a sequence of non-space characters.\nInput string may contain leading or trailing spaces. However, your reversed string should not contain leading or trailing spaces.\nYou need to reduce multiple spaces between two words to a single space in the reversed string.',
+        'Given an input string, reverse the string word by word. \n EXAMPLE: \nInput: "the sky is blue";\n Output: "blue is sky the".\n NOTE:\n A word is defined as a sequence of non-space characters.\n While the input string may contain leading or trailing spaces, your reversed string should not contain leading or trailing spaces.\n You should reduce multiple spaces between two words to a single space in the reversed string.',
       level: 'Medium',
       rating: 4,
       author: 'Scott',
@@ -104,23 +104,24 @@ async function seed() {
     }),
     Question.create({
       id: 5,
-      title: 'Next bigger number with the same digits',
+      title: 'Next Largest Number with the Same Digits',
       description:
-        'You have to create a function that takes a positive integer number and returns the next bigger number formed by the same digits: 135==>531\n If no bigger number can be composed using those digits, return -1 9===>-1',
+        'Create a function that takes a positive integer number and returns the next largest number formed by the same digits (e.g. 135 ==> 531) \n If no larger number can be composed using those digits (i.e. 9), return -1.',
       level: 'Medium',
       rating: 2,
       author: 'Shan',
       category: 'ARRAY, ALGORITHMS',
       testSpecs: 'Test specs will go here',
       funcHeader:
-        '/** \n * @param {number} n \n */ \n function nextBigger(n) { \n // coding start here... \n }',
+        '/** \n * @param {number} n \n */ \n function nextLargest(n) { \n // coding start here... \n }',
       input: `[[12],[514],[2018],[9],[111],[531]]`,
       output: `[21,541,2081,-1,-1,-1]`
     }),
     Question.create({
       id: 6,
       title: 'Return Largest Number',
-      description: 'Takes in an array of integers and returns the largest one',
+      description:
+        'Given an array of integers, return the largest integer. EXAMPLE: Input: [54, 77, 2]; Output: 77.',
       level: 'Easy',
       rating: 1,
       author: 'Jason',
