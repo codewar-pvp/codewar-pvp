@@ -14,7 +14,7 @@ import {postCode, clearResult} from '../../store/'
 class userInput extends React.Component {
   constructor(props) {
     super()
-    this.state = {code: ''}
+    this.state = {code: '', isButtonDisabled: false}
   }
   onChange = newValue => {
     this.setState({code: newValue})
@@ -24,6 +24,11 @@ class userInput extends React.Component {
       code: this.state.code,
       questionId: this.props.question.id
     })
+    this.setState({
+      isButtonDisabled: true
+    })
+    // for now set it to 3 seconds
+    setTimeout(() => this.setState({isButtonDisabled: false}), 3000)
   }
 
   componentDidMount() {
@@ -39,7 +44,7 @@ class userInput extends React.Component {
   }
 
   render() {
-    const {question} = this.props
+    const {question, isRunning} = this.props
     return this.props.question && this.props.question.funcHeader ? (
       <Container>
         <Item style={{marginBottom: '10px'}}>
@@ -78,6 +83,8 @@ class userInput extends React.Component {
                 onClick={this.handleSubmit}
                 positive
                 style={{width: '200px', margin: '10px 0 10px 0'}}
+                loading={this.state.isButtonDisabled}
+                disabled={this.state.isButtonDisabled}
               >
                 Run
               </Button>
@@ -123,7 +130,8 @@ class userInput extends React.Component {
 const mapStateToProps = state => ({
   code: state.codeReducer.code,
   result: state.codeReducer.result,
-  questions: state.questionReducer.questions
+  questions: state.questionReducer.questions,
+  isRunning: state.codeReducer.isRunning
 })
 const mapDispatch = dispatch => ({
   testCode: code => dispatch(postCode(code)),

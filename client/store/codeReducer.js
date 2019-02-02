@@ -7,11 +7,13 @@ import history from '../history'
 const POST_CODE = 'GET_USER'
 const GOT_RESULT = 'GOT_RESULT'
 const CLEAR_RESULT = 'CLEAR_RESULT'
+const START_RUNNING = 'START_RUNNING'
+const FINISH_RUNNING = 'FINISH_RUNNING'
 
 /**
  * INITIAL STATE
  */
-const initialState = {code: '', result: null}
+const initialState = {code: '', result: null, isRunning: false}
 
 /**
  * ACTION CREATORS
@@ -21,6 +23,8 @@ export const gotResult = result => ({
   type: GOT_RESULT,
   result
 })
+export const startRunning = () => ({type: START_RUNNING})
+export const finishRunning = () => ({type: FINISH_RUNNING})
 
 export const clearResult = () => ({
   type: CLEAR_RESULT
@@ -29,9 +33,11 @@ export const clearResult = () => ({
 export const postCode = text => {
   return async dispatch => {
     try {
+      dispatch(startRunning())
       const res = await axios.post(`/api/code/${text.questionId}`, {
         input: text.code
       })
+      dispatch(finishRunning())
       const action = gotResult(res.data.output)
       dispatch(action)
     } catch (error) {
@@ -46,6 +52,10 @@ export default function(state = initialState, action) {
       return {...state, result: action.result}
     case CLEAR_RESULT:
       return {...state, result: null}
+    case FINISH_RUNNING:
+      return {...state, isRunning: false}
+    case START_RUNNING:
+      return {...state, isRunning: true}
     default:
       return state
   }
