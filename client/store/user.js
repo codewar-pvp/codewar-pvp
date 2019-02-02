@@ -52,7 +52,6 @@ export const login = (email, password, method) => async dispatch => {
 export const signup = (userName, email, password, method) => async dispatch => {
   let res
   try {
-    console.log(method, userName)
     res = await axios.post(`/auth/${method}`, {name: userName, email, password})
   } catch (authError) {
     return dispatch(getUser({error: authError}))
