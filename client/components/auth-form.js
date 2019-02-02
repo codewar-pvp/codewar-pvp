@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {login, signup} from '../store'
+import {login, signup, clearResult, clearError} from '../store'
 import {NavLink, withRouter} from 'react-router-dom'
 import {
   Button,
@@ -67,8 +67,22 @@ const AuthForm = props => {
                 error.response && <div id="error">{error.response.data}</div>}
             </Segment>
           </Form>
-          <Message>
-            New to us? <NavLink to="/signup">Sign Up</NavLink>
+          <Message
+            onClick={() => {
+              props.clearResult()
+              props.clearErrorMsg()
+            }}
+          >
+            {displayName === 'Login' ? (
+              <p>
+                New to us ? <NavLink to="/signup"> Sign Up</NavLink>
+              </p>
+            ) : (
+              <p>
+                Already have a account?
+                <NavLink to="/login"> Log In</NavLink>
+              </p>
+            )}
           </Message>
         </Grid.Column>
       </Grid>
@@ -113,6 +127,12 @@ const mapDispatch = dispatch => {
         const userName = evt.target.userName.value
         dispatch(signup(userName, email, password, formName))
       }
+    },
+    clearResult() {
+      dispatch(clearResult())
+    },
+    clearErrorMsg() {
+      dispatch(clearError())
     }
   }
 }
