@@ -1,7 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {List, Container, Grid, Button, Popup} from 'semantic-ui-react'
-import {postCode, fetchAllQuestions, sendChallenge} from '../../store/'
+import {
+  postCode,
+  fetchAllQuestions,
+  sendChallenge,
+  clearResult,
+  clearError
+} from '../../store/'
 import QuestionLabel from './QuestionLabel'
 import QuestionRating from './QuestionRating'
 import {NavLink} from 'react-router-dom'
@@ -40,7 +46,14 @@ class AllQuestionPage extends React.Component {
                 />
                 <List.Content>
                   <Grid style={{marginBottom: '10px'}}>
-                    <Grid.Column floated="left" width={6}>
+                    <Grid.Column
+                      floated="left"
+                      width={6}
+                      onClick={() => {
+                        this.props.clearResult()
+                        this.props.clearErrorMsg()
+                      }}
+                    >
                       <List.Header as="a">
                         <NavLink
                           to={`/questions/${question.id}`}
@@ -124,7 +137,9 @@ const mapStateToProps = state => ({
 })
 const mapDispatch = dispatch => ({
   testCode: code => dispatch(postCode(code)),
-  fetchAllQuestions: () => dispatch(fetchAllQuestions())
+  fetchAllQuestions: () => dispatch(fetchAllQuestions()),
+  clearResult: () => dispatch(clearResult()),
+  clearErrorMsg: () => dispatch(clearError())
 })
 
 export default connect(mapStateToProps, mapDispatch)(AllQuestionPage)
