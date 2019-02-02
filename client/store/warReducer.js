@@ -23,7 +23,6 @@ export const gotChallenge = user => ({
   user
 })
 
-
 // export const postCode = text => {
 //   return async dispatch => {
 //     try {

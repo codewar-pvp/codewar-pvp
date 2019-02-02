@@ -7,11 +7,7 @@ module.exports = io => {
     })
 
     socket.on('challenge', user => {
-      socket.broadcast.emit('challenge', user);
-    });
-
-
-
-
+      socket.broadcast.emit('challenge', user)
+    })
   })
 }

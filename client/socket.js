@@ -8,7 +8,7 @@ socket.on('connect', () => {
   console.log('Connected!')
 })
 
-socket.on('challenge', (user) => {
+socket.on('challenge', user => {
   store.dispatch(gotChallenge(user))
 })
 

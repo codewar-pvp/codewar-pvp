@@ -26,8 +26,7 @@ class AllQuestionPage extends React.Component {
   render() {
     const {questions} = this.props
 
-
-     return questions ? (
+    return questions ? (
       <Container>
         <List divided relaxed>
           {questions.map((question, index) => {
@@ -89,10 +88,14 @@ class AllQuestionPage extends React.Component {
                       width={1}
                       verticalAlign="middle"
                     >
-
                       {/* <FriendPopup user={this.props.user} /> */}
-                      <Button inverted color="purple" onClick={this.handleChallenge}>Challenge!</Button>
-
+                      <Button
+                        inverted
+                        color="purple"
+                        onClick={this.handleChallenge}
+                      >
+                        Challenge!
+                      </Button>
                     </Grid.Column>
 
                     <Grid.Column
@@ -117,12 +120,11 @@ const mapStateToProps = state => ({
   code: state.codeReducer.code,
   result: state.codeReducer.result,
   questions: state.questionReducer.questions,
-  user: state.user,
+  user: state.user
 })
 const mapDispatch = dispatch => ({
   testCode: code => dispatch(postCode(code)),
-  fetchAllQuestions: () => dispatch(fetchAllQuestions()),
-
+  fetchAllQuestions: () => dispatch(fetchAllQuestions())
 })
 
 export default connect(mapStateToProps, mapDispatch)(AllQuestionPage)

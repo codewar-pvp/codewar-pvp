@@ -6,6 +6,7 @@ import history from '../history'
  */
 const POST_CODE = 'GET_USER'
 const GOT_RESULT = 'GOT_RESULT'
+const CLEAR_RESULT = 'CLEAR_RESULT'
 
 /**
  * INITIAL STATE
@@ -19,6 +20,10 @@ const initialState = {code: '', result: null}
 export const gotResult = result => ({
   type: GOT_RESULT,
   result
+})
+
+export const clearResult = () => ({
+  type: CLEAR_RESULT
 })
 
 export const postCode = text => {
@@ -39,6 +44,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_RESULT:
       return {...state, result: action.result}
+    case CLEAR_RESULT:
+      return {...state, result: null}
     default:
       return state
   }

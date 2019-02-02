@@ -7,8 +7,12 @@ import codeReducer from './codeReducer'
 import questionReducer from './questionReducer'
 import warReducer from './warReducer'
 
-
-const reducer = combineReducers({user, codeReducer, questionReducer, warReducer})
+const reducer = combineReducers({
+  user,
+  codeReducer,
+  questionReducer,
+  warReducer
+})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )

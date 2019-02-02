@@ -2,13 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {login, signup} from '../store'
-import {NavLink} from 'react-router-dom'
+import {NavLink, withRouter} from 'react-router-dom'
 import {
   Button,
   Form,
   Grid,
   Header,
-  Image,
   Message,
   Segment,
   Icon
@@ -64,7 +63,8 @@ const AuthForm = props => {
               <Button color="teal" fluid size="large" type="submit">
                 {displayName}
               </Button>
-              {error && error.response && <div> {error.response.data} </div>}
+              {error &&
+                error.response && <div id="error">{error.response.data}</div>}
             </Segment>
           </Form>
           <Message>
@@ -103,21 +103,22 @@ const mapDispatch = dispatch => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
-      const userName = evt.target.userName
+
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
       if (formName === 'login') {
         dispatch(login(email, password, formName))
       } else {
+        const userName = evt.target.userName.value
         dispatch(signup(userName, email, password, formName))
       }
     }
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const Login = withRouter(connect(mapLogin, mapDispatch)(AuthForm))
+export const Signup = withRouter(connect(mapSignup, mapDispatch)(AuthForm))
 
 /**
  * PROP TYPES
