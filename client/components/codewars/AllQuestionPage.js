@@ -1,19 +1,31 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {List, Container, Grid, Button, Popup} from 'semantic-ui-react'
-import {postCode, fetchAllQuestions} from '../../store/'
+import {postCode, fetchAllQuestions, sendChallenge} from '../../store/'
 import QuestionLabel from './QuestionLabel'
 import QuestionRating from './QuestionRating'
 import {NavLink} from 'react-router-dom'
 import FriendPopup from './FriendPopup'
+import socket from '../../socket'
 
 /**
  * COMPONENT
  */
 
 class AllQuestionPage extends React.Component {
+  constructor() {
+    super()
+    this.state = {}
+    this.handleChallenge = this.handleChallenge.bind(this)
+  }
+
+  handleChallenge() {
+    socket.emit('challenge', this.props.user)
+  }
+
   render() {
     const {questions} = this.props
+
     return questions ? (
       <Container>
         <List divided relaxed>
@@ -76,7 +88,14 @@ class AllQuestionPage extends React.Component {
                       width={1}
                       verticalAlign="middle"
                     >
-                      <FriendPopup user={this.props.user} />
+                      {/* <FriendPopup user={this.props.user} /> */}
+                      <Button
+                        inverted
+                        color="purple"
+                        onClick={this.handleChallenge}
+                      >
+                        Challenge!
+                      </Button>
                     </Grid.Column>
 
                     <Grid.Column
