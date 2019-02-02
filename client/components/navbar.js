@@ -2,12 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink, withRouter} from 'react-router-dom'
-import {logout} from '../store'
+import {logout, clearResult, clearError} from '../store'
 import {Menu, Segment} from 'semantic-ui-react'
 
 class Navbar extends React.Component {
   state = {activeItem: ''}
   handleItemClick = (e, {name}) => {
+    this.props.clearResult()
+    this.props.clearErrorMsg()
     this.setState({activeItem: name})
     if (name === 'logout') {
       this.props.handleClick()
@@ -20,7 +22,12 @@ class Navbar extends React.Component {
     return (
       <Segment inverted>
         <Menu inverted pointing secondary style={{paddingBottom: '10px'}}>
-          <h4 id="pageHeader">
+          <h4
+            id="pageHeader"
+            onClick={() => {
+              this.props.clearResult()
+            }}
+          >
             <NavLink to="/questions">Code War PVP</NavLink>
           </h4>
 
@@ -96,6 +103,12 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+    },
+    clearResult() {
+      dispatch(clearResult())
+    },
+    clearErrorMsg() {
+      dispatch(clearError())
     }
   }
 }

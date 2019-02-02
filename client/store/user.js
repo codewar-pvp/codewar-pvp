@@ -6,6 +6,7 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const CLEAR_ERROR = 'CLEAR_ERROR'
 
 /**
  * INITIAL STATE
@@ -17,6 +18,7 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
+export const clearError = () => ({type: CLEAR_ERROR})
 
 /**
  * THUNK CREATORS
@@ -83,6 +85,8 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case CLEAR_ERROR:
+      return {...state, error: null}
     default:
       return state
   }

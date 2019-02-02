@@ -67,3 +67,7 @@ div .ui.fluid.left.icon.input {
 #multiCodeEditor {
   width: 50%;
 }
+
+#error {
+  color: red;
+}

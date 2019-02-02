@@ -6,7 +6,7 @@ import AceEditor from 'react-ace'
 import {Button, Icon, Message, Container, Item, Grid} from 'semantic-ui-react'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
-import {postCode} from '../../store/'
+import {postCode, clearResult} from '../../store/'
 
 /**
  * COMPONENT
@@ -88,7 +88,10 @@ class userInput extends React.Component {
               style={{marginRight: '0', paddingRight: '0'}}
             >
               <Button
-                onClick={() => history.push('/questions')}
+                onClick={() => {
+                  this.props.clearResult()
+                  history.push('/questions')
+                }}
                 attached="bottom"
                 floated="right"
                 negative
@@ -123,7 +126,8 @@ const mapStateToProps = state => ({
   questions: state.questionReducer.questions
 })
 const mapDispatch = dispatch => ({
-  testCode: code => dispatch(postCode(code))
+  testCode: code => dispatch(postCode(code)),
+  clearResult: () => dispatch(clearResult())
 })
 
 export default connect(mapStateToProps, mapDispatch)(userInput)
