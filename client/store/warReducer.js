@@ -39,7 +39,6 @@ export const gotChallenge = user => ({
 export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_CHALLENGE:
-    console.log('reducer', action.user)
       return {...state, challenge: action.user}
     default:
       return state

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink, withRouter} from 'react-router-dom'
 import {logout} from '../store'
-import {Menu, Segment, Modal, Image, Button, Header} from 'semantic-ui-react'
+import {Menu, Segment, Modal, Image, Button, Header, Grid} from 'semantic-ui-react'
 
 class Navbar extends React.Component {
   state = {activeItem: ''}
@@ -36,14 +36,24 @@ class Navbar extends React.Component {
           />
 
             {this.props.challenger.id ?
-              <Modal basic centered={true} trigger={<Button inverted color='red'>NEW CHALLENGE!</Button>}>
+              <Modal basic centered trigger={<Button inverted color='red'>NEW CHALLENGE!</Button>}>
+
               <Modal.Content>
+              <Grid container textAlign='center'>
+                <Grid.Row>
+                <Header inverted as='h2' color="yellow">{this.props.challenger.name} Wants to Challenge you!</Header>
+                </Grid.Row>
 
-                <Button inverted color='red'>Accept</Button>
+                <Grid.Row>
 
-                <Button inverted color='blue'>Decline</Button>
+                <Button inverted color='blue'>Accept</Button>
 
+                <Button inverted color='red'>Decline</Button>
+
+                </Grid.Row>
+                </Grid>
               </Modal.Content>
+
             </Modal>
             : ""
             }
