@@ -5,8 +5,10 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import codeReducer from './codeReducer'
 import questionReducer from './questionReducer'
+import warReducer from './warReducer'
 
-const reducer = combineReducers({user, codeReducer, questionReducer})
+
+const reducer = combineReducers({user, codeReducer, questionReducer, warReducer})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
@@ -14,5 +16,6 @@ const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'
+export * from './warReducer'
 export * from './codeReducer'
 export * from './questionReducer'
