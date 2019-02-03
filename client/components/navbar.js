@@ -3,7 +3,15 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink, withRouter} from 'react-router-dom'
 import {logout, clearResult, clearError} from '../store'
-import {Menu, Segment, Modal, Button, Header, Grid} from 'semantic-ui-react'
+import {
+  Menu,
+  Segment,
+  Modal,
+  Button,
+  Header,
+  Grid,
+  Image
+} from 'semantic-ui-react'
 
 class Navbar extends React.Component {
   state = {activeItem: ''}
@@ -28,6 +36,12 @@ class Navbar extends React.Component {
               this.props.clearResult()
             }}
           >
+            <Image
+              src="/866455.png"
+              size="mini"
+              spaced="right"
+              verticalAlign="middle"
+            />
             <NavLink to="/questions">Code War PVP</NavLink>
           </h4>
 
