@@ -7,27 +7,32 @@ const vm = new VM({
   sandbox: {}
 })
 
+// eslint-disable-next-line complexity
 router.post('/:id', async (req, res, next) => {
   try {
     let resultArray = []
     let success = true
 
     const code = req.body.input
-
     const question = await Question.findById(req.params.id)
 
     const parsedInputs = JSON.parse(question.input)
     const parsedOutputs = JSON.parse(question.output)
 
+    console.log('code: ', code)
+    console.log('parsedInputs: ', parsedInputs)
+
     for (let i = 0; i < parsedInputs.length; i++) {
       let input = JSON.stringify(parsedInputs[i])
       let multi = false
 
-      parsedInputs[i].forEach(elem => {
-        if (Array.isArray(elem)) {
-          multi = true
-        }
-      })
+      if (Array.isArray(parsedInputs[i])) {
+        parsedInputs[i].forEach(elem => {
+          if (Array.isArray(elem)) {
+            multi = true
+          }
+        })
+      }
 
       if (multi) {
         resultArray.push(vm.run(`(${code})(...${input})`))
@@ -37,6 +42,8 @@ router.post('/:id', async (req, res, next) => {
     }
 
     for (let i = 0; i < parsedOutputs.length; i++) {
+      console.log('I AM RESULT ARRAY: ', resultArray)
+      console.log('I am parsed outputs: ', parsedOutputs)
       if (JSON.stringify(resultArray[i]) !== JSON.stringify(parsedOutputs[i])) {
         success = false
         break
