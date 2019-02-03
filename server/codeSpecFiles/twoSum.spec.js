@@ -44,7 +44,7 @@ describe(`twoSum question`, () => {
       }), output expected to be an array`, () => {
         expect(userCodeResult).to.be.a('array')
       })
-      it(`Expected output: [${output[idx]}], got: ${userCodeResult}`, () => {
+      it(`Expected output: ${output[idx]}, got: ${userCodeResult}`, () => {
         expect(userCodeResult).to.eql(output[idx])
       })
     } catch (error) {
