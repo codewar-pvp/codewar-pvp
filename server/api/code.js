@@ -23,7 +23,7 @@ router.post('/:id', async (req, res, next) => {
       testSpecs
     })
     console.log(response)
-    res.json({output: response.data})
+    res.status(201).json({output: response.data})
   } catch (err) {
     if (err.message === 'Script execution timed out.') {
       err.status = 400
