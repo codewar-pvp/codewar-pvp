@@ -35,9 +35,7 @@ describe(`twoSum question`, () => {
       throw new SyntaxError('code failure - stopping tests')
     }
     try {
-      console.log(result)
       const {userCodeResult, userConsoleHistory} = result
-      console.log(userCodeResult)
       userConsoleHistory.forEach(line => console.log(line))
       it(`The input for the question: (${JSON.stringify(input[idx][0])},${
         input[idx][1]

@@ -61,7 +61,6 @@
     "semantic-ui-react": "^0.84.0",
     "sequelize": "^4.38.0",
     "socket.io": "^2.1.1",
-    "vm2": "^3.6.6",
     "yarn": "^1.13.0"
   },
   "devDependencies": {
