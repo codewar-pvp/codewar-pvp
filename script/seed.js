@@ -242,7 +242,7 @@ async function runSeed() {
 // Execute the `seed` function, IF we ran this module directly (`node seed`).
 // `Async` functions always return a promise, so we can use `catch` to handle
 // any errors that might occur inside of `seed`.
-// Execute the `seed` function, IF we ran this module dir
+
 if (module === require.main) {
   runSeed()
 }
