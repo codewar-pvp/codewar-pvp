@@ -42,7 +42,7 @@ async function seed() {
       category: 'ARRAY, CONTROL FLOW',
       testSpecs:
         'describe(`${questionTitle} question`, () => {try {userOutput.forEach((item, idx) => {it(`The input for the question: ${JSON.stringify(input[idx])}, output expected to be a ${expectedOutputType}.`, () => {expect(item).to.be.a(expectedOutputType)})it(`Expected output: ${output[idx]}, instead got: ${item}`, () => {expect(item).to.eql(output[idx])})})} catch (error) {console.log("did not pass the test!")}})',
-      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n }',
+      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n}',
       input: `[[[2,7,11,15],9],[[1234,5678,9012],14690],[[2,2,3],4]]`,
       output: `[[0,1],[1,2],[0,1]]`
     }),
@@ -66,14 +66,14 @@ async function seed() {
       id: 3,
       title: 'Evaluate Mathematical Expression',
       description:
-        '# Instructions\n\n Given a mathematical expression as a string you must return the result as a number.\n\n ## Numbers\n Number may be both whole numbers and/or decimal numbers. The same goes for the returned result.\n\n ## Operators \n You need to support the following mathematical operators:\n\n - Multiplication `*`\n - Division `/` (as true division)\n - Addition `+`\n - Subtraction `-`\n\n Operators are always evaluated from left-to-right, and `*` and `/` must be evaluated before `+` and `-`.\n\n ## Parentheses\n You need to support multiple levels of nested parentheses, ex. `(2 / (2 + 3.33) * 4) - -6`\n\n ## Whitespace\n There may or may not be whitespace between numbers and operators.\n\n An addition to this rule is that the minus sign (`-`) used for negating numbers and parentheses will *never* be separated by whitespace. I.e., all of the following are **valid** expressions.\n\n```\n 1-1    // 0\n 1 -1   // 0\n 1- 1   // 0 \n1 - 1  // 0\n1- -1  // 2\n1 - -1 // 2\n\n6 + -(4)   // 2\n6 + -( -4) // 10\n```\n\nAnd the following are **invalid** expressions\n```\n1 - - 1    // Invalid\n1- - 1     // Invalid\n6 + - (4)  // Invalid\n6 + -(- 4) // Invalid\n```\n\n## Validation\nYou do not need to worry about validation - you will only receive **valid** mathematical expressions following the above rules.\n\n```if:javascript\nNOTE: Both `eval` and `Function` are disabled. Same goes for `String.match`.\n```\n\n```if:php\nNOTE: `eval` is disallowed in your solution.\n```\n\n```if:python\nNOTE: `eval` and `exec` are disallowed in your solution.\n```',
+        '# Given a mathematical expression as a string you must return the result as a number.\n\n ## Numbers may be both whole numbers and/or decimal numbers. The same goes for the returned result.\n\n ## You need to support the following mathematical operators:\n\n - Multiplication `*`\n - Division `/` (as true division)\n - Addition `+`\n - Subtraction `-`\n\n Operators are always evaluated from left-to-right, and `*` and `/` must be evaluated before `+` and `-`.\n\n ## Parentheses\n You need to support multiple levels of nested parentheses, ex. `(2 / (2 + 3.33) * 4) - -6`\n\n ## Whitespace\n There may or may not be whitespace between numbers and operators.\n\n An addition to this rule is that the minus sign (`-`) used for negating numbers and parentheses will *never* be separated by whitespace. I.e., all of the following are **valid** expressions.\n\n```\n 1-1    // 0\n 1 -1   // 0\n 1- 1   // 0 \n1 - 1  // 0\n1- -1  // 2\n1 - -1 // 2\n\n6 + -(4)   // 2\n6 + -( -4) // 10\n```\n\nAnd the following are **invalid** expressions\n```\n1 - - 1    // Invalid\n1- - 1     // Invalid\n6 + - (4)  // Invalid\n6 + -(- 4) // Invalid\n```\n\n## Validation\nYou do not need to worry about validation - you will only receive **valid** mathematical expressions following the above rules.\n\n```if:javascript\nNOTE: Both `eval` and `Function` are disabled. Same goes for `String.match`.\n```\n\n```if:php\nNOTE: `eval` is disallowed in your solution.\n```\n\n```if:python\nNOTE: `eval` and `exec` are disallowed in your solution.\n```',
       level: 'Hard',
       rating: 5,
       author: 'Stuart',
       category: 'ARRAY, NUMBERS',
       testSpecs: 'Test specs will go here',
       funcHeader:
-        'function calc(expression) { \n //evaluate expression and return result\n }',
+        'function calc(expression) { \n //evaluate expression and return result\n}',
       input: `[
         ["1+1"],
         ["1 - 1"],
@@ -97,8 +97,7 @@ async function seed() {
       author: 'Scott',
       category: 'ARRAY,DATA STRUCTURE',
       testSpecs: 'Test specs will go here',
-      funcHeader:
-        '/**\n* @param {string} str\n* @returns {string}\n*/\nfunction reverseWords(str) { \n //code goes here \n }',
+      funcHeader: 'function reverseWords(str) { \n //code goes here \n}',
       input: `["the sky is blue"]`,
       output: `["blue is sky the"]`
     }),
@@ -112,24 +111,109 @@ async function seed() {
       author: 'Shan',
       category: 'ARRAY, ALGORITHMS',
       testSpecs: 'Test specs will go here',
-      funcHeader:
-        '/** \n * @param {number} n \n */ \n function nextLargest(n) { \n // coding start here... \n }',
+      funcHeader: 'function nextLargest(n) { \n // coding start here... \n}',
       input: `[[12],[514],[2018],[9],[111],[531]]`,
       output: `[21,541,2081,-1,-1,-1]`
     }),
     Question.create({
       id: 6,
-      title: 'Return Largest Number',
+      title: 'Largest Number',
       description:
         'Given an array of integers, return the largest integer. EXAMPLE: Input: [54, 77, 2]; Output: 77.',
       level: 'Easy',
-      rating: 1,
+      rating: 3,
       author: 'Jason',
       category: 'ARRAY, ALGORITHMS',
-      funcHeader: 'function largestNum(array) { \n //code goes here \n }',
+      funcHeader: 'function largestNum(array) { \n //code goes here \n}',
       testSpecs: 'Test specs will go here',
       input: '[[1, 2, 3], [7, 2, 3, 99, 3], [10, 23, 342, 87]]',
       output: '[3, 99, 342]'
+    }),
+    Question.create({
+      id: 7,
+      title: 'Median Number',
+      description:
+        'Given an array of integers of an odd length, return the median integer. EXAMPLE: Input: [54, 77, 22, 656, 2, 6, 444]; Output: 54.',
+      level: 'Medium',
+      rating: 4,
+      author: 'Jason',
+      category: 'ARRAY, ALGORITHMS',
+      funcHeader: 'function medianNum(array) { \n //code goes here \n}',
+      testSpecs: 'Test specs will go here',
+      input:
+        '[[54, 77, 22, 656, 2, 6, 444], [7, 3, 5], [23, 999999, 24, 65, 21]]',
+      output: '[54, 5, 24]'
+    }),
+    Question.create({
+      id: 8,
+      title: 'Overlapping Arrays',
+      description:
+        'Given two ordered arrays of integers, return an ordered array of all of the integers that they have in common. EXAMPLE: Input: [1, 5, 17, 65, 88, 98], [2, 5, 34, 54, 65, 66, 67, 88, 99, 132]; Output: [5, 65, 88].',
+      level: 'Medium',
+      rating: 3,
+      author: 'Jason',
+      category: 'ARRAY, ALGORITHMS',
+      funcHeader: 'function overlap(array1, array2) { \n //code goes here \n}',
+      testSpecs: 'Test specs will go here',
+      input:
+        '[[[1, 5, 17, 65, 88, 98], [2, 5, 34, 54, 65, 66, 67, 88, 99, 132]], [[3, 5, 7], [4, 6, 7]]]',
+      output: '[[5, 65, 88], [7]]'
+    }),
+    Question.create({
+      id: 9,
+      title: 'No Vowels Allowed!',
+      description:
+        'Given a string, return a string with all of the vowels (excluding y) removed (if any). EXAMPLE: Input: "andromeda"; Output: "ndrmd".',
+      level: 'Easy',
+      rating: 3,
+      author: 'Jason',
+      category: 'STRING, ALGORITHMS',
+      funcHeader: 'function noVowels(string) { \n //code goes here \n}',
+      testSpecs: 'Test specs will go here',
+      input: '["castle", "elephant", "andromeda"',
+      output: '["cstl", "lphnt", "ndrmd"]'
+    }),
+    Question.create({
+      id: 10,
+      title: 'Alphabetize',
+      description:
+        'Given an array of string, return a new array of those strings in alphabetical order." EXAMPLE: Input: ["name", "my", "Joe", "hi"]; Output: ["hi", "my", "Joe", "name"].',
+      level: 'Easy',
+      rating: 2,
+      author: 'Jason',
+      category: 'ARRAY, STRING, ALGORITHMS',
+      funcHeader: 'function alphabetize(array) { \n //code goes here \n}',
+      testSpecs: 'Test specs will go here',
+      input: '[["name", "my", "Joe", "hi"]]',
+      output: '[["Joe", "hi", "my", "name"]]'
+    }),
+    Question.create({
+      id: 11,
+      title: 'Replace Character',
+      description:
+        'Given a string of words, return a new string that replaces every instance of the character "a" with the character "b". EXAMPLE: Input: "I would like to see an elephant one day", Output: "I would like to see bn elephbnt one day".',
+      level: 'Easy',
+      rating: 2,
+      author: 'Jason',
+      category: 'ARRAY, STRING, ALGORITHMS',
+      funcHeader: 'function replaceAB(string) { \n //code goes here \n}',
+      testSpecs: 'Test specs will go here',
+      input: '["I would like to see an elephant one day"]',
+      output: '["I would like to see bn elephbnt one dby"]'
+    }),
+    Question.create({
+      id: 12,
+      title: 'Quantam Mechanics',
+      description:
+        'Given an array of "electrons", return a new array of "quarks". If you are unfamiliar with quantam mechanics, please check out the very helpful wikipedia page. It is a good place to start. Aftewards, consider getting a phd in theoretical physics. Once complete, you should have a good foundation for approaching this question.',
+      level: 'Hard',
+      rating: 5,
+      author: 'Jason',
+      category: 'ARRAY, QUANTAM MECHANICS',
+      funcHeader: 'function quantam(array) { \n //code goes here \n}',
+      testSpecs: 'Test specs will go here',
+      input: '[["electrons"]]',
+      output: '[["quarks"]]'
     })
   ])
 
@@ -155,10 +239,10 @@ async function runSeed() {
     console.log('db connection closed')
   }
 }
-
 // Execute the `seed` function, IF we ran this module directly (`node seed`).
 // `Async` functions always return a promise, so we can use `catch` to handle
 // any errors that might occur inside of `seed`.
+
 if (module === require.main) {
   runSeed()
 }
