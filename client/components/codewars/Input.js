@@ -3,10 +3,13 @@ import {connect} from 'react-redux'
 import history from '../../history'
 import brace from 'brace'
 import AceEditor from 'react-ace'
-import {Button, Icon, Message, Container, Item, Grid} from 'semantic-ui-react'
+import {Button, Container, Grid} from 'semantic-ui-react'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import {postCode, clearResult} from '../../store/'
+import Loader from './Loader'
+import Result from './Result'
+import QuestionHeader from './QuestionHeader'
 
 /**
  * COMPONENT
@@ -44,20 +47,10 @@ class userInput extends React.Component {
   }
 
   render() {
-    const {question, isRunning} = this.props
+    const {question} = this.props
     return this.props.question && this.props.question.funcHeader ? (
       <Container>
-        <Item style={{marginBottom: '10px'}}>
-          <Item.Content>
-            <Item.Header as="h4" style={{color: 'gold'}}>
-              <Icon name="diamond" size="small" />
-              {question.title}
-            </Item.Header>
-            <Item.Description>
-              <p>{question.description}</p>
-            </Item.Description>
-          </Item.Content>
-        </Item>
+        <QuestionHeader question={question} />
         <AceEditor
           mode="javascript"
           theme="monokai"
@@ -114,16 +107,11 @@ class userInput extends React.Component {
           </Grid.Row>
         </Grid>
 
-        {this.props.result ? (
-          <Message attached="right" color="olive">
-            <Icon name="user secret" />
-            Result: {JSON.stringify(this.props.result)}
-          </Message>
-        ) : (
-          <div />
-        )}
+        {this.props.result ? <Result /> : null}
       </Container>
-    ) : null
+    ) : (
+      <Loader />
+    )
   }
 }
 
