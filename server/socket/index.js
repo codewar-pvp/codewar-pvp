@@ -7,7 +7,17 @@ module.exports = io => {
     })
 
     socket.on('challenge', user => {
+      socket.join(user.name)
       socket.broadcast.emit('challenge', user)
     })
+
+    socket.on('acceptChallenge', user => {
+      socket.join(user.challenger.name)
+      socket.to(user.challenger.name).emit('readyToPlay', user);
+    })
+
+
   })
+
+
 }

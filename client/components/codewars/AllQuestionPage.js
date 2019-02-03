@@ -25,8 +25,10 @@ class AllQuestionPage extends React.Component {
     this.handleChallenge = this.handleChallenge.bind(this)
   }
 
-  handleChallenge() {
-    socket.emit('challenge', this.props.user)
+  handleChallenge(question) {
+    const user = this.props.user
+    user.question = question
+    socket.emit('challenge', user)
   }
 
   render() {
@@ -105,7 +107,7 @@ class AllQuestionPage extends React.Component {
                       <Button
                         inverted
                         color="purple"
-                        onClick={this.handleChallenge}
+                        onClick={() => this.handleChallenge(question)}
                       >
                         Challenge!
                       </Button>

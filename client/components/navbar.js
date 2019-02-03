@@ -12,9 +12,17 @@ import {
   Grid,
   Image
 } from 'semantic-ui-react'
+import socket from '../socket'
+
 
 class Navbar extends React.Component {
-  state = {activeItem: ''}
+  constructor() {
+    super()
+    this.state = {activeItem: ''}
+    this.handleAcceptChallenge = this.handleAcceptChallenge.bind(this)
+    this.handleItemClick = this.handleItemClick.bind(this)
+  }
+
   handleItemClick = (e, {name}) => {
     this.props.clearResult()
     this.props.clearErrorMsg()
@@ -22,6 +30,14 @@ class Navbar extends React.Component {
     if (name === 'logout') {
       this.props.handleClick()
     }
+  }
+
+  handleAcceptChallenge() {
+    // attach name of challenger to user object to refer to room
+    const userObject = this.props.user;
+    userObject.challenger = this.props.challenger
+    socket.emit('acceptChallenge', userObject);
+    this.props.history.push(`/challenges/${this.props.challenger.question.id}`)
   }
 
   render() {
@@ -75,7 +91,7 @@ class Navbar extends React.Component {
                   </Grid.Row>
 
                   <Grid.Row>
-                    <Button inverted color="blue">
+                    <Button inverted color="blue" onClick={this.handleAcceptChallenge}>
                       Accept
                     </Button>
 
