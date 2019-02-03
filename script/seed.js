@@ -156,7 +156,7 @@ async function seed() {
       funcHeader: 'function overlap(array1, array2) { \n //code goes here \n}',
       testSpecs: 'Test specs will go here',
       input:
-        '[[[1, 5, 17, 65, 88, 98], [2, 5, 34, 54, 65, 66, 67, 88, 99, 132]], [[3, 5, 7], [4, 6, 7]]',
+        '[[[1, 5, 17, 65, 88, 98], [2, 5, 34, 54, 65, 66, 67, 88, 99, 132]], [[3, 5, 7], [4, 6, 7]]]',
       output: '[[5, 65, 88], [7]]'
     }),
     Question.create({
