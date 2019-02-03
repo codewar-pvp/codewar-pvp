@@ -2,6 +2,7 @@
 
 const db = require('../server/db')
 const {User, Question} = require('../server/db/models')
+const fs = require('fs')
 
 let UserFriends = db.model('user_friend')
 
@@ -40,9 +41,9 @@ async function seed() {
       rating: 3,
       author: 'Scott',
       category: 'ARRAY, CONTROL FLOW',
-      testSpecs:
-        'describe(`${questionTitle} question`, () => {try {userOutput.forEach((item, idx) => {it(`The input for the question: ${JSON.stringify(input[idx])}, output expected to be a ${expectedOutputType}.`, () => {expect(item).to.be.a(expectedOutputType)})it(`Expected output: ${output[idx]}, instead got: ${item}`, () => {expect(item).to.eql(output[idx])})})} catch (error) {console.log("did not pass the test!")}})',
-      funcHeader: 'function twoSum(numbers, target) { \n //code goes here \n}',
+      testSpecs: fs.readFileSync('server/codeSpecFiles/twoSum.spec.js', 'utf8'),
+      funcHeader:
+        'function twoSum(numbers, target) { \n  // code goes here...\n}',
       input: [[[2, 7, 11, 15], 9], [[1234, 5678, 9012], 14690], [[2, 2, 3], 4]],
       output: [[0, 1], [1, 2], [0, 1]]
     }),
@@ -55,9 +56,12 @@ async function seed() {
       rating: 1,
       author: 'Jason',
       category: 'ARRAY, FUNDAMENTALS',
-      testSpecs: 'Test specs will go here',
+      testSpecs: fs.readFileSync(
+        'server/codeSpecFiles/insertInterval.spec.js',
+        'utf8'
+      ),
       funcHeader:
-        '/**\n* Definition for an interval.\n* function Interval(start, end) {\n*     this.start = start;\n*     this.end = end;\n* }\n*/\n/**\n* @param {Interval[]} intervals\n* @param {Interval} newInterval\n* @return {Interval[]}\n*/\n function insert(intervals, newInterval) { \n };',
+        'function insert(intervals, newInterval) { \n  // code goes here...\n}',
       input: [
         [[[1, 3], [6, 9]], [2, 5]],
         [[[1, 2], [3, 5], [6, 7], [8, 10], [12, 16]], [4, 8]]
@@ -68,14 +72,16 @@ async function seed() {
       id: 3,
       title: 'Evaluate Mathematical Expression',
       description:
-        '# Given a mathematical expression as a string you must return the result as a number.\n\n ## Numbers may be both whole numbers and/or decimal numbers. The same goes for the returned result.\n\n ## You need to support the following mathematical operators:\n\n - Multiplication `*`\n - Division `/` (as true division)\n - Addition `+`\n - Subtraction `-`\n\n Operators are always evaluated from left-to-right, and `*` and `/` must be evaluated before `+` and `-`.\n\n ## Parentheses\n You need to support multiple levels of nested parentheses, ex. `(2 / (2 + 3.33) * 4) - -6`\n\n ## Whitespace\n There may or may not be whitespace between numbers and operators.\n\n An addition to this rule is that the minus sign (`-`) used for negating numbers and parentheses will *never* be separated by whitespace. I.e., all of the following are **valid** expressions.\n\n```\n 1-1    // 0\n 1 -1   // 0\n 1- 1   // 0 \n1 - 1  // 0\n1- -1  // 2\n1 - -1 // 2\n\n6 + -(4)   // 2\n6 + -( -4) // 10\n```\n\nAnd the following are **invalid** expressions\n```\n1 - - 1    // Invalid\n1- - 1     // Invalid\n6 + - (4)  // Invalid\n6 + -(- 4) // Invalid\n```\n\n## Validation\nYou do not need to worry about validation - you will only receive **valid** mathematical expressions following the above rules.\n\n```if:javascript\nNOTE: Both `eval` and `Function` are disabled. Same goes for `String.match`.\n```\n\n```if:php\nNOTE: `eval` is disallowed in your solution.\n```\n\n```if:python\nNOTE: `eval` and `exec` are disallowed in your solution.\n```',
+        'Given a mathematical expression as a string you must return the result as a number.\n\n ## Numbers may be both whole numbers and/or decimal numbers. The same goes for the returned result.\n\n You need to support the following mathematical operators:\n\n - Multiplication `*`\n - Division `/` (as true division)\n - Addition `+`\n - Subtraction `-`\n\n Operators are always evaluated from left-to-right, and `*` and `/` must be evaluated before `+` and `-`.\n\n ## Parentheses\n You need to support multiple levels of nested parentheses, ex. `(2 / (2 + 3.33) * 4) - -6`\n\n ## Whitespace\n There may or may not be whitespace between numbers and operators.\n\n An addition to this rule is that the minus sign (`-`) used for negating numbers and parentheses will *never* be separated by whitespace. I.e., all of the following are **valid** expressions.\n\n```\n 1-1    // 0\n 1 -1   // 0\n 1- 1   // 0 \n1 - 1  // 0\n1- -1  // 2\n1 - -1 // 2\n\n6 + -(4)   // 2\n6 + -( -4) // 10\n```\n\nAnd the following are **invalid** expressions\n```\n1 - - 1    // Invalid\n1- - 1     // Invalid\n6 + - (4)  // Invalid\n6 + -(- 4) // Invalid\n```\n\n## Validation\nYou do not need to worry about validation - you will only receive **valid** mathematical expressions following the above rules.\n\n```if:javascript\nNOTE: Both `eval` and `Function` are disabled. Same goes for `String.match`.\n```\n\n```if:php\nNOTE: `eval` is disallowed in your solution.\n```\n\n```if:python\nNOTE: `eval` and `exec` are disallowed in your solution.\n```',
       level: 'Hard',
       rating: 5,
       author: 'Stuart',
       category: 'ARRAY, NUMBERS',
-      testSpecs: 'Test specs will go here',
-      funcHeader:
-        'function calc(expression) { \n //evaluate expression and return result\n}',
+      testSpecs: fs.readFileSync(
+        'server/codeSpecFiles/evalMathExp.spec.js',
+        'utf8'
+      ),
+      funcHeader: 'function calc(expression) { \n  // code goes here...\n}',
       input: [
         ['1+1'],
         ['1 - 1'],
@@ -98,8 +104,11 @@ async function seed() {
       rating: 4,
       author: 'Scott',
       category: 'ARRAY,DATA STRUCTURE',
-      testSpecs: 'Test specs will go here',
-      funcHeader: 'function reverseWords(str) { \n //code goes here \n}',
+      testSpecs: fs.readFileSync(
+        'server/codeSpecFiles/reverseWords.spec.js',
+        'utf8'
+      ),
+      funcHeader: 'function reverseWords(str) { \n  // code goes here...\n}',
       input: ['the sky is blue'],
       output: ['blue is sky the']
     }),
@@ -112,8 +121,11 @@ async function seed() {
       rating: 2,
       author: 'Shan',
       category: 'ARRAY, ALGORITHMS',
-      testSpecs: 'Test specs will go here',
-      funcHeader: 'function nextLargest(n) { \n // coding start here... \n}',
+      testSpecs: fs.readFileSync(
+        'server/codeSpecFiles/nextLargestNum.spec.js',
+        'utf8'
+      ),
+      funcHeader: 'function nextLargest(n) { \n  // code goes here...\n}',
       input: [[12], [514], [2018], [9], [111], [531]],
       output: [21, 541, 2081, -1, -1, -1]
     }),
@@ -126,8 +138,11 @@ async function seed() {
       rating: 3,
       author: 'Jason',
       category: 'ARRAY, ALGORITHMS',
-      funcHeader: 'function largestNum(array) { \n //code goes here \n}',
-      testSpecs: 'Test specs will go here',
+      funcHeader: 'function largestNum(array) { \n  // code goes here...\n}',
+      testSpecs: fs.readFileSync(
+        'server/codeSpecFiles/largestNum.spec.js',
+        'utf8'
+      ),
       input: [[1, 2, 3], [7, 2, 3, 99, 3], [10, 23, 342, 87]],
       output: [3, 99, 342]
     }),
@@ -140,8 +155,11 @@ async function seed() {
       rating: 4,
       author: 'Jason',
       category: 'ARRAY, ALGORITHMS',
-      funcHeader: 'function medianNum(array) { \n //code goes here \n}',
-      testSpecs: 'Test specs will go here',
+      funcHeader: 'function medianNum(array) { \n  // code goes here...\n}',
+      testSpecs: fs.readFileSync(
+        'server/codeSpecFiles/medianNum.spec.js',
+        'utf8'
+      ),
       input: [
         [54, 77, 22, 656, 2, 6, 444],
         [7, 3, 5],
@@ -158,8 +176,12 @@ async function seed() {
       rating: 3,
       author: 'Jason',
       category: 'ARRAY, ALGORITHMS',
-      funcHeader: 'function overlap(array1, array2) { \n //code goes here \n}',
-      testSpecs: 'Test specs will go here',
+      funcHeader:
+        'function overlap(array1, array2) { \n  // code goes here...\n}',
+      testSpecs: fs.readFileSync(
+        'server/codeSpecFiles/overlappingArr.spec.js',
+        'utf8'
+      ),
       input: [
         [[1, 5, 17, 65, 88, 98], [2, 5, 34, 54, 65, 66, 67, 88, 99, 132]],
         [[3, 5, 7], [4, 6, 7]]
@@ -175,8 +197,11 @@ async function seed() {
       rating: 3,
       author: 'Jason',
       category: 'STRING, ALGORITHMS',
-      funcHeader: 'function noVowels(string) { \n //code goes here \n}',
-      testSpecs: 'Test specs will go here',
+      funcHeader: 'function noVowels(string) { \n  // code goes here...\n}',
+      testSpecs: fs.readFileSync(
+        'server/codeSpecFiles/noVowels.spec.js',
+        'utf8'
+      ),
       input: ['castle', 'elephant', 'andromeda'],
       output: ['cstl', 'lphnt', 'ndrmd']
     }),
@@ -189,8 +214,11 @@ async function seed() {
       rating: 2,
       author: 'Jason',
       category: 'ARRAY, STRING, ALGORITHMS',
-      funcHeader: 'function alphabetize(array) { \n //code goes here \n}',
-      testSpecs: 'Test specs will go here',
+      funcHeader: 'function alphabetize(array) { \n  // code goes here...\n}',
+      testSpecs: fs.readFileSync(
+        'server/codeSpecFiles/alphabetize.spec.js',
+        'utf8'
+      ),
       input: [['name', 'my', 'Joe', 'hi']],
       output: [['Joe', 'hi', 'my', 'name']]
     }),
@@ -203,8 +231,11 @@ async function seed() {
       rating: 2,
       author: 'Jason',
       category: 'ARRAY, STRING, ALGORITHMS',
-      funcHeader: 'function replaceAB(string) { \n //code goes here \n}',
-      testSpecs: 'Test specs will go here',
+      funcHeader: 'function replaceAB(string) { \n  // code goes here...\n}',
+      testSpecs: fs.readFileSync(
+        'server/codeSpecFiles/replaceChar.spec.js',
+        'utf8'
+      ),
       input: ['I would like to see an elephant one day'],
       output: ['I would like to see bn elephbnt one dby']
     }),
@@ -217,8 +248,11 @@ async function seed() {
       rating: 5,
       author: 'Jason',
       category: 'ARRAY, QUANTAM MECHANICS',
-      funcHeader: 'function quantam(array) { \n //code goes here \n}',
-      testSpecs: 'Test specs will go here',
+      funcHeader: 'function quantam(array) { \n  // code goes here...\n}',
+      testSpecs: fs.readFileSync(
+        'server/codeSpecFiles/quantumMech.spec.js',
+        'utf8'
+      ),
       input: [['electrons']],
       output: [['quarks']]
     })
