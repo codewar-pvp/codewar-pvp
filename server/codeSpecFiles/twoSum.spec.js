@@ -24,8 +24,9 @@ describe(`twoSum question`, () => {
     try {
       result = vm.run(`(function(){
               return {
-                userCodeResult: ((${userCode})(${(input[idx][0],
-      input[idx][1])})),
+                userCodeResult: (${userCode})(${JSON.stringify(
+        input[idx][0]
+      )}, ${input[idx][1]}),
                 userConsoleHistory: console.logHistory
               }
             })()`)
@@ -34,13 +35,16 @@ describe(`twoSum question`, () => {
       throw new SyntaxError('code failure - stopping tests')
     }
     try {
+      console.log(result)
       const {userCodeResult, userConsoleHistory} = result
+      console.log(userCodeResult)
       userConsoleHistory.forEach(line => console.log(line))
-      it(`The input for the question: ${(input[idx][0],
-      input[idx][1])}, output expected to be an array`, () => {
+      it(`The input for the question: (${JSON.stringify(input[idx][0])},${
+        input[idx][1]
+      }), output expected to be an array`, () => {
         expect(userCodeResult).to.be.a('array')
       })
-      it(`Expected output: ${output[idx]}, got: ${userCodeResult}`, () => {
+      it(`Expected output: [${output[idx]}], got: ${userCodeResult}`, () => {
         expect(userCodeResult).to.eql(output[idx])
       })
     } catch (error) {
