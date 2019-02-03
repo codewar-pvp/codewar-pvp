@@ -13,8 +13,17 @@ module.exports = io => {
 
     socket.on('acceptChallenge', user => {
       socket.join(user.challenger.name)
+      socket.emit('gameStarted')
       socket.to(user.challenger.name).emit('readyToPlay', user);
     })
+
+    socket.on('challengeMessage', user => {
+      socket.to(user.challenger.name).emit('readyToPlay', user);
+
+    })
+
+
+
 
 
   })

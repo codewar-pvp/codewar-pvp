@@ -13,6 +13,7 @@ import {
   Image
 } from 'semantic-ui-react'
 import socket from '../socket'
+import {gotChallenge} from '../store/warReducer'
 
 
 class Navbar extends React.Component {
@@ -72,7 +73,7 @@ class Navbar extends React.Component {
             icon="home"
           />
 
-          {this.props.challenger.id ? (
+          {this.props.challengeStatus ? (
             <Modal
               basic
               centered
@@ -162,6 +163,7 @@ const mapState = state => {
     isLoggedIn: !!state.user.id,
     email: state.user.email,
     challenger: state.warReducer.challenge,
+    challengeStatus: state.warReducer.activeChallenge,
     user: state.user
   }
 }

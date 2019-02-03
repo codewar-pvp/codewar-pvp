@@ -1,5 +1,5 @@
 import io from 'socket.io-client'
-import {gotChallenge} from './store/warReducer'
+import {gotChallenge, changeStatus} from './store/warReducer'
 import store from './store'
 import history from './history';
 
@@ -11,15 +11,16 @@ socket.on('connect', () => {
 })
 
 socket.on('challenge', user => {
-  store.dispatch(gotChallenge(user))
+  store.dispatch(gotChallenge(user, true))
 })
 
-socket.on('acceptChallenge', user => {
-  store.dispatch(gotChallenge(user))
+socket.on('gameStarted', () => {
+  console.log('status yo')
+  store.dispatch(changeStatus(false))
 })
 
 socket.on('readyToPlay', user => {
-  store.dispatch(gotChallenge(user))
+  store.dispatch(gotChallenge(user, false))
   history.push(`/challenges/${user.challenger.question.id}`)
 })
 
