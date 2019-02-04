@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import socket from '../socket'
 
 /**
  * ACTION TYPES
@@ -28,6 +29,7 @@ export const me = () => async dispatch => {
     const res = await axios.get('/auth/me')
     res.data.user.friends = res.data.friends
     dispatch(getUser(res.data.user || defaultUser))
+    socket.emit('login', res.data.user)
   } catch (err) {
     console.error(err)
   }
@@ -43,6 +45,7 @@ export const login = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data))
+    socket.emit('login', res.data)
     history.push('/questions')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
@@ -59,6 +62,7 @@ export const signup = (userName, email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data))
+    socket.emit('login', res.data)
     history.push('/questions')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)

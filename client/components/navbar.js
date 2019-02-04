@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink, withRouter} from 'react-router-dom'
-import {logout, clearResult, clearError} from '../store'
+import {logout, clearResult, clearError, fetchAllQuestions} from '../store'
 import {
   Menu,
   Segment,
@@ -27,6 +27,7 @@ class Navbar extends React.Component {
   handleItemClick = (e, {name}) => {
     this.props.clearResult()
     this.props.clearErrorMsg()
+    this.props.fetchAllQuestions()
     this.setState({activeItem: name})
     if (name === 'logout') {
       this.props.handleClick()
@@ -51,6 +52,7 @@ class Navbar extends React.Component {
             id="pageHeader"
             onClick={() => {
               this.props.clearResult()
+              this.props.fetchAllQuestions()
             }}
           >
             <Image
@@ -178,7 +180,8 @@ const mapDispatch = dispatch => {
     },
     clearErrorMsg() {
       dispatch(clearError())
-    }
+    },
+    fetchAllQuestions: () => dispatch(fetchAllQuestions())
   }
 }
 

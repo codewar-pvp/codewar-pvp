@@ -98,11 +98,7 @@ class AllQuestionPage extends React.Component {
                       <QuestionRating rating={question.rating} />
                     </Grid.Column>
 
-                    <Grid.Column
-                      floated="middle"
-                      width={1}
-                      verticalAlign="middle"
-                    >
+                    <Grid.Column width={1} verticalAlign="middle">
                       {/* <FriendPopup user={this.props.user} /> */}
                       <Button
                         inverted
