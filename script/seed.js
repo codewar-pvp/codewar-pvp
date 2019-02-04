@@ -70,30 +70,26 @@ async function seed() {
     }),
     Question.create({
       id: 3,
-      title: 'Evaluate Mathematical Expression',
+      title: 'Balanced Brackets',
       description:
-        'Given a mathematical expression as a string you must return the result as a number.\n\n ## Numbers may be both whole numbers and/or decimal numbers. The same goes for the returned result.\n\n You need to support the following mathematical operators:\n\n - Multiplication `*`\n - Division `/` (as true division)\n - Addition `+`\n - Subtraction `-`\n\n Operators are always evaluated from left-to-right, and `*` and `/` must be evaluated before `+` and `-`.\n\n ## Parentheses\n You need to support multiple levels of nested parentheses, ex. `(2 / (2 + 3.33) * 4) - -6`\n\n ## Whitespace\n There may or may not be whitespace between numbers and operators.\n\n An addition to this rule is that the minus sign (`-`) used for negating numbers and parentheses will *never* be separated by whitespace. I.e., all of the following are **valid** expressions.\n\n```\n 1-1    // 0\n 1 -1   // 0\n 1- 1   // 0 \n1 - 1  // 0\n1- -1  // 2\n1 - -1 // 2\n\n6 + -(4)   // 2\n6 + -( -4) // 10\n```\n\nAnd the following are **invalid** expressions\n```\n1 - - 1    // Invalid\n1- - 1     // Invalid\n6 + - (4)  // Invalid\n6 + -(- 4) // Invalid\n```\n\n## Validation\nYou do not need to worry about validation - you will only receive **valid** mathematical expressions following the above rules.\n\n```if:javascript\nNOTE: Both `eval` and `Function` are disabled. Same goes for `String.match`.\n```\n\n```if:php\nNOTE: `eval` is disallowed in your solution.\n```\n\n```if:python\nNOTE: `eval` and `exec` are disallowed in your solution.\n```',
-      level: 'Hard',
+        "Write a function that takes in a string made up of brackets ( '(', '[', '{' ) and other optional characters.  The function should return a boolean representing whether or not the string is balanced in regards to brackets.  A string is said to be balanced if it has as many opening brackets of a given type as it has closing brackets of that type and if no bracket is unmatched.  Note that a closing bracket cannot match a corresponding opening bracket that comes after it.  Similarly, brackets cannot overlap each other, as in ' [ ( ] ) '.",
+      level: 'Medium',
       rating: 5,
-      author: 'Stuart',
-      category: 'ARRAY, NUMBERS',
+      author: 'Matt',
+      category: 'STRING, DATA STRUCTURE',
       testSpecs: fs.readFileSync(
-        'server/codeSpecFiles/evalMathExp.spec.js',
+        'server/codeSpecFiles/balancedBracks.spec.js',
         'utf8'
       ),
-      funcHeader: 'function calc(expression) { \n  // code goes here...\n}',
+      funcHeader: 'function balanceBrackets(str) { \n  // code goes here...\n}',
       input: [
-        ['1+1'],
-        ['1 - 1'],
-        ['1* 1'],
-        ['1/1'],
-        ['-123'],
-        ['123'],
-        ['2/2+3 * 4.75- -6'],
-        ['12* 123'],
-        ['2/(2 + 3) * 4.33 - -6']
+        '{abc}',
+        '{bbb[c(a)]}',
+        '[j[a[s[o[n',
+        '[over{]lap}',
+        '[{h[(e([l])p)]m}e]'
       ],
-      output: [2, 0, 1, 1, -123, 123, 21.24, 1476, 7.732]
+      output: [true, true, false, false, true]
     }),
     Question.create({
       id: 4,
