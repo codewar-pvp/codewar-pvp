@@ -109,8 +109,8 @@ async function seed() {
         'utf8'
       ),
       funcHeader: 'function reverseWords(str) { \n  // code goes here...\n}',
-      input: ['the sky is blue'],
-      output: ['blue is sky the']
+      input: [['DOG IS GOD'], ['the sky is blue']],
+      output: [['GOD IS DOG'], ['blue is sky the']]
     }),
     Question.create({
       id: 5,
@@ -241,7 +241,7 @@ async function seed() {
     }),
     Question.create({
       id: 12,
-      title: 'Quantam Mechanics',
+      title: 'Quantum Mechanics',
       description:
         'Given an array of "electrons", return a new array of "quarks". If you are unfamiliar with quantam mechanics, please check out the very helpful wikipedia page. It is a good place to start. Aftewards, consider getting a phd in theoretical physics. Once complete, you should have a good foundation for approaching this question.',
       level: 'Hard',

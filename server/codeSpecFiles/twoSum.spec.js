@@ -1,7 +1,6 @@
 const {VM} = require('vm2')
 const fs = require('fs')
 const {expect} = require('chai')
-
 const input = [[[2, 7, 11, 15], 9], [[1234, 5678, 9012], 14690], [[2, 2, 3], 4]]
 const output = [[0, 1], [1, 2], [0, 1]]
 const userCode = fs.readFileSync(`./userCode-${process.env.sandboxId}.js`)
