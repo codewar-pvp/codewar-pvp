@@ -2,7 +2,6 @@ const {VM} = require('vm2')
 const fs = require('fs')
 const {expect} = require('chai')
 const input = [['electrons']]
-
 const output = [['quarks']]
 const userCode = fs.readFileSync(`./userCode-${process.env.sandboxId}.js`)
 
