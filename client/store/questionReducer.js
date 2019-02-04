@@ -22,9 +22,9 @@ export const gotQuestions = questions => ({
   questions
 })
 
-export const selectedQuestion = question => ({
+export const selectedLevel = level => ({
   type: SELECT_QUESTION,
-  question
+  level
 })
 
 export const fetchAllQuestions = () => {
@@ -43,7 +43,10 @@ export default function(state = initialState, action) {
     case GOT_QUESTIONS:
       return {...state, questions: action.questions}
     case SELECT_QUESTION:
-      return {...state, selectedQuestion: action.question}
+      const questionsLeveled = state.questions.filter(
+        q => q.level == action.level
+      )
+      return {...state, questions: questionsLeveled}
     default:
       return state
   }
