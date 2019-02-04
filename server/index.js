@@ -4,6 +4,7 @@ const morgan = require('morgan')
 const compression = require('compression')
 const session = require('express-session')
 const passport = require('passport')
+const sharedSession = require('express-socket.io-session')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
 const sessionStore = new SequelizeStore({db})
@@ -102,6 +103,20 @@ const startListening = () => {
 
   // set up our socket control center
   const io = socketio(server)
+  io.use(
+    sharedSession(
+      session({
+        secret: process.env.SESSION_SECRET || 'my best friend is Cody',
+        store: sessionStore,
+        resave: false,
+        saveUninitialized: false
+      }),
+      {
+        autoSave: true
+      }
+    )
+  )
+
   require('./socket')(io)
 }
 
