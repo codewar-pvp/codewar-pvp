@@ -5,7 +5,7 @@ const input = ['DOG IS GOD', 'the sky is blue']
 const output = ['GOD IS DOG', 'blue is sky the']
 const userCode = fs.readFileSync(`./userCode-${process.env.sandboxId}.js`)
 
-describe(`reverseStr question`, () => {
+describe(`reverseWords question`, () => {
   console.log('Log:')
   input.forEach((item, idx) => {
     const vm = new VM({

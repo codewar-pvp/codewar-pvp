@@ -11,7 +11,7 @@ const output = [
 ]
 const userCode = fs.readFileSync(`./userCode-${process.env.sandboxId}.js`)
 
-describe(`twoSum question`, () => {
+describe(`alphabetize question`, () => {
   console.log('Log:')
   input.forEach((item, idx) => {
     const vm = new VM({

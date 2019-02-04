@@ -5,7 +5,7 @@ const input = ['castle', 'elephant', 'andromeda']
 const output = ['cstl', 'lphnt', 'ndrmd']
 const userCode = fs.readFileSync(`./userCode-${process.env.sandboxId}.js`)
 
-describe(`reverseStr question`, () => {
+describe(`noVowels question`, () => {
   console.log('Log:')
   input.forEach((item, idx) => {
     const vm = new VM({
