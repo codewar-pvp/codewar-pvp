@@ -122,7 +122,7 @@ async function seed() {
         'utf8'
       ),
       funcHeader: 'function nextLargest(n) { \n  // code goes here...\n}',
-      input: [[12], [514], [2018], [9], [111], [531]],
+      input: [12, 514, 2018, 9, 111, 531],
       output: [21, 541, 2081, -1, -1, -1]
     }),
     Question.create({
