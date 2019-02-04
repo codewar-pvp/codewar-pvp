@@ -19,7 +19,6 @@ module.exports = io => {
 
     socket.on('challengeMessage', user => {
       socket.to(user.challenger.name).emit('readyToPlay', user);
-
     })
 
 
