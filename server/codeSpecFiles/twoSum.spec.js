@@ -36,9 +36,9 @@ describe(`twoSum question`, () => {
     try {
       const {userCodeResult, userConsoleHistory} = result
       userConsoleHistory.forEach(line => console.log(line))
-      it(`The input for the question: (${JSON.stringify(input[idx][0])},${
+      it(`The input for the question: [${JSON.stringify(input[idx][0])},${
         input[idx][1]
-      }), output expected to be an array`, () => {
+      }], output expected to be an array`, () => {
         expect(userCodeResult).to.be.a('array')
       })
       it(`Expected output: ${output[idx]}, got: ${userCodeResult}`, () => {

@@ -169,7 +169,7 @@ async function seed() {
     }),
     Question.create({
       id: 8,
-      title: 'Overlapping Arrays',
+      title: 'Intersection',
       description:
         'Given two ordered arrays of integers, return an ordered array of all of the integers that they have in common. EXAMPLE: Input: [1, 5, 17, 65, 88, 98], [2, 5, 34, 54, 65, 66, 67, 88, 99, 132]; Output: [5, 65, 88].',
       level: 'Medium',
@@ -177,9 +177,9 @@ async function seed() {
       author: 'Jason',
       category: 'ARRAY, ALGORITHMS',
       funcHeader:
-        'function overlap(array1, array2) { \n  // code goes here...\n}',
+        'function intersection(array1, array2) { \n  // code goes here...\n}',
       testSpecs: fs.readFileSync(
-        'server/codeSpecFiles/overlappingArr.spec.js',
+        'server/codeSpecFiles/intersection.spec.js',
         'utf8'
       ),
       input: [
