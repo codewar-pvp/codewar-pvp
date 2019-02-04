@@ -1,8 +1,8 @@
 const {VM} = require('vm2')
 const fs = require('fs')
 const {expect} = require('chai')
-const input = [['DOG IS GOD'], ['the sky is blue']]
-const output = [['GOD IS DOG'], ['blue is sky the']]
+const input = ['DOG IS GOD', 'the sky is blue']
+const output = ['GOD IS DOG', 'blue is sky the']
 const userCode = fs.readFileSync(`./userCode-${process.env.sandboxId}.js`)
 
 describe(`reverseStr question`, () => {
@@ -38,7 +38,7 @@ describe(`reverseStr question`, () => {
         expect(userCodeResult).to.be.a('string')
       })
       it(`Expected output: ${output[idx]}, got: ${userCodeResult}`, () => {
-        expect(userCodeResult).to.eql(`${output[idx]}`)
+        expect(userCodeResult).to.eql(output[idx])
       })
     } catch (error) {
       console.error(error)
