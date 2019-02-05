@@ -3,12 +3,11 @@ import {Button, TextArea, Grid, Input, List} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {submitMessage} from '../../store/chatReducer'
 
-
 class Chat extends React.Component {
   constructor() {
     super()
     this.state = {
-      message: ""
+      message: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -20,7 +19,7 @@ class Chat extends React.Component {
     })
   }
 
-  handleSubmit (event) {
+  handleSubmit(event) {
     event.preventDefault()
     this.props.submitMessage({
       content: this.state.message,
@@ -31,33 +30,35 @@ class Chat extends React.Component {
     })
   }
 
-  render () {
+  render() {
     return (
       <Grid style={{marginLeft: '10%'}}>
-      <Grid.Row>
-        {/* <TextArea
+        <Grid.Row>
+          {/* <TextArea
           rows={15}
           style={{width: '100%', backgroundColor: 'gray', color: 'white'}}
         > */}
-        <List>
-          {this.props.chatMessages ? this.props.chatMessages.map((message, i) => {
-            return <List.Item key={i}>{message.content}</List.Item>
-          }): ""}
+          <List>
+            {this.props.chatMessages
+              ? this.props.chatMessages.map((message, i) => {
+                  return <List.Item key={i}>{message.content}</List.Item>
+                })
+              : ''}
           </List>
-        {/* </TextArea> */}
-      </Grid.Row>
-      <Grid.Row>
-        <Input
-          icon="users"
-          iconPosition="left"
-          placeholder="Search users..."
-          style={{width: '80%'}}
-          value={this.state.message}
-          onChange={this.handleChange}
-        />
-        <Button onClick={this.handleSubmit}>Submit</Button>
-      </Grid.Row>
-    </Grid>
+          {/* </TextArea> */}
+        </Grid.Row>
+        <Grid.Row>
+          <Input
+            icon="users"
+            iconPosition="left"
+            placeholder="Chat..."
+            style={{width: '80%'}}
+            value={this.state.message}
+            onChange={this.handleChange}
+          />
+          <Button onClick={this.handleSubmit}>Submit</Button>
+        </Grid.Row>
+      </Grid>
     )
   }
 }
