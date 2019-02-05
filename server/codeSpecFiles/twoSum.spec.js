@@ -33,19 +33,15 @@ describe(`twoSum question`, () => {
       console.log(error.stack)
       throw new SyntaxError('code failure - stopping tests')
     }
-    try {
-      const {userCodeResult, userConsoleHistory} = result
-      userConsoleHistory.forEach(line => console.log(line))
-      it(`The input for the question: [${JSON.stringify(input[idx][0])},${
-        input[idx][1]
-      }], output expected to be an array`, () => {
-        expect(userCodeResult).to.be.a('array')
-      })
-      it(`Expected output: ${output[idx]}, got: ${userCodeResult}`, () => {
-        expect(userCodeResult).to.eql(output[idx])
-      })
-    } catch (error) {
-      console.error(error)
-    }
+    const {userCodeResult, userConsoleHistory} = result
+    userConsoleHistory.forEach(line => console.log(line))
+    it(`The input for the question: [${JSON.stringify(input[idx][0])},${
+      input[idx][1]
+    }], output expected to be an array`, () => {
+      expect(userCodeResult).to.be.a('array')
+    })
+    it(`Expected output: ${output[idx]}, got: ${userCodeResult}`, () => {
+      expect(userCodeResult).to.eql(output[idx])
+    })
   })
 })
