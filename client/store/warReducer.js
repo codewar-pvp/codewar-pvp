@@ -7,7 +7,6 @@ import history from '../history'
 const GOT_CHALLENGE = 'GOT_CHALLENGE'
 const CHANGE_STATUS = 'CHANGE_STATUS'
 
-
 /**
  * INITIAL STATE
  */
@@ -50,11 +49,18 @@ export const changeStatus = (challengeStatus, fightStatus, gameStatus) => ({
 export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_CHALLENGE:
-      return {...state, challenge: action.challenger, challengeStatus: action.status}
+      return {
+        ...state,
+        challenge: action.challenger,
+        challengeStatus: action.status
+      }
     case CHANGE_STATUS:
-      return {...state, challengeStatus: action.challengeStatus,
+      return {
+        ...state,
+        challengeStatus: action.challengeStatus,
         fightStatus: action.fightStatus,
-        gameStatus: action.gameStatus}
+        gameStatus: action.gameStatus
+      }
     default:
       return state
   }

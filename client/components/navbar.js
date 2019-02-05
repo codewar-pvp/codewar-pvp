@@ -15,7 +15,6 @@ import {
 import socket from '../socket'
 import {gotChallenge, changeStatus} from '../store/warReducer'
 
-
 class Navbar extends React.Component {
   constructor() {
     super()
@@ -36,9 +35,9 @@ class Navbar extends React.Component {
 
   handleAcceptChallenge() {
     // attach name of challenger to user object to refer to room
-    const userObject = this.props.user;
+    const userObject = this.props.user
     userObject.challenger = this.props.challenger
-    socket.emit('acceptChallenge', userObject);
+    socket.emit('acceptChallenge', userObject)
     this.props.changeStatus(false, true, false)
     this.props.history.push(`/challenges/${this.props.challenger.question}`)
   }
@@ -95,7 +94,11 @@ class Navbar extends React.Component {
                   </Grid.Row>
 
                   <Grid.Row>
-                    <Button inverted color="blue" onClick={this.handleAcceptChallenge}>
+                    <Button
+                      inverted
+                      color="blue"
+                      onClick={this.handleAcceptChallenge}
+                    >
                       Accept
                     </Button>
 
@@ -163,11 +166,11 @@ class Navbar extends React.Component {
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id,
-    email: state.user.email,
+    isLoggedIn: !!state.userReducer.user.id,
+    email: state.userReducer.user.email,
     challenger: state.warReducer.challenge,
-    challengeStatus: state.warReducer.challengeStatus,
-    user: state.user
+    user: state.userReducer.user,
+    challengeStatus: state.warReducer.challengeStatus
   }
 }
 

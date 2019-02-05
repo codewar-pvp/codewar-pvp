@@ -42,6 +42,7 @@ const FriendPopup = props => {
       />
     )
   }
+
 }
 
 export default FriendPopup

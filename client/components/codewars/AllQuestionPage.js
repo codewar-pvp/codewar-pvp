@@ -100,6 +100,7 @@ class AllQuestionPage extends React.Component {
                     </Grid.Column>
 
                     <Grid.Column width={1} verticalAlign="middle">
+
                       <FriendPopup
                         question={question.id}
                         user={this.props.user}
@@ -129,7 +130,7 @@ const mapStateToProps = state => ({
   code: state.codeReducer.code,
   result: state.codeReducer.result,
   questions: state.questionReducer.questions,
-  user: state.user
+  user: state.userReducer.user
 })
 const mapDispatch = dispatch => ({
   testCode: code => dispatch(postCode(code)),
