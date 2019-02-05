@@ -3,20 +3,14 @@ import {connect} from 'react-redux'
 import history from '../../history'
 import brace from 'brace'
 import AceEditor from 'react-ace'
-import {
-  Button,
-  Icon,
-  Message,
-  Container,
-  Item,
-  Grid,
-  Input,
-  TextArea
-} from 'semantic-ui-react'
+import Loader from './Loader'
+import Result from './Result'
+import {Button, Container, Input, Grid, TextArea} from 'semantic-ui-react'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import Chat from './Chat'
 import {postCode} from '../../store/'
+import QuestionHeader from './QuestionHeader'
 
 /**
  * COMPONENT
@@ -24,13 +18,24 @@ import {postCode} from '../../store/'
 class Multiply extends React.Component {
   constructor(props) {
     super()
-    this.state = {code: ''}
+    this.state = {code: '', isButtonDisabled: false, opponentsCode: ''}
   }
   onChange = newValue => {
     this.setState({code: newValue})
   }
+  opponentEnterCode = newValue => {
+    this.setState({opponentsCode: newValue})
+  }
   handleSubmit = () => {
-    this.props.testCode(this.state.code)
+    this.props.testCode({
+      code: this.state.code,
+      questionId: this.props.question.id
+    })
+    this.setState({
+      isButtonDisabled: true
+    })
+    // for now set it to 3 seconds
+    setTimeout(() => this.setState({isButtonDisabled: false}), 3000)
   }
 
   componentDidMount() {
@@ -49,17 +54,7 @@ class Multiply extends React.Component {
     const {question} = this.props
     return this.props.question && this.props.question.funcHeader ? (
       <Container>
-        <Item style={{marginBottom: '10px'}}>
-          <Item.Content>
-            <Item.Header as="h4" style={{color: 'gold'}}>
-              <Icon name="diamond" size="small" />
-              {question.title}
-            </Item.Header>
-            <Item.Description>
-              <p>{question.description}</p>
-            </Item.Description>
-          </Item.Content>
-        </Item>
+        <QuestionHeader question={question} />
         <Grid columns={2}>
           <Grid.Row>
             <Grid.Column>
@@ -80,12 +75,18 @@ class Multiply extends React.Component {
             <Grid.Column>
               <Grid>
                 <Grid.Row>
-                  <TextArea
+                  {/* <TextArea
                     rows={10}
                     style={{marginLeft: '10%', width: '100%'}}
                   >
                     Test
-                  </TextArea>
+                  </TextArea> */}
+                  <Input
+                    disabled
+                    onChange={this.opponentEnterCode}
+                    style={{marginLeft: '10%', width: '78%'}}
+                    size="massive"
+                  />
                 </Grid.Row>
                 <Grid.Row>
                   <Chat />
@@ -98,8 +99,9 @@ class Multiply extends React.Component {
               <Button
                 onClick={this.handleSubmit}
                 positive
-                floated="left"
                 style={{width: '100px', margin: '10px 0 10px 0'}}
+                loading={this.state.isButtonDisabled}
+                disabled={this.state.isButtonDisabled}
               >
                 Run
               </Button>
@@ -118,16 +120,11 @@ class Multiply extends React.Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        {this.props.result ? (
-          <Message attached="right" color="olive">
-            <Icon name="user secret" />
-            Result: {JSON.stringify(this.props.result)}
-          </Message>
-        ) : (
-          <div />
-        )}
+        {this.props.result ? <Result /> : null}
       </Container>
-    ) : null
+    ) : (
+      <Loader />
+    )
   }
 }
 
