@@ -1,5 +1,9 @@
 import axios from 'axios'
 import history from '../history'
+import {changeStatus} from './warReducer'
+import store from './index'
+import socket from '../socket'
+
 
 /**
  * ACTION TYPES
@@ -31,7 +35,7 @@ export const clearResult = () => ({
 })
 
 export const postCode = text => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     try {
       dispatch(startRunning())
       const res = await axios.post(`/api/code/${text.questionId}`, {
@@ -40,6 +44,22 @@ export const postCode = text => {
       dispatch(finishRunning())
       const action = gotResult(res.data.output)
       dispatch(action)
+
+
+      if (action.result.passedAllTests) {
+        store.dispatch(changeStatus(false, false, false, true))
+
+        const user = getState().user
+
+        socket.emit('game status', {status: {challengeStatus: false,
+          fightStatus: false,
+          lose: true,
+          win: false},
+          user
+        })
+      }
+
+
     } catch (error) {
       console.warn('not correct')
     }

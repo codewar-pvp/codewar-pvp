@@ -26,6 +26,11 @@ module.exports = io => {
       socket.to(user.challenger.name + user.name).emit('readyToPlay', user);
     })
 
+    socket.on('game status', (status) => {
+      socket.to(status.user.challenger.name + status.user.name).emit('game status', status.status);
+      socket.to(status.user.name + status.user.challenger.name).emit('game status', status.status);
+    })
+
     // socket.on('challengeMessage', user => {
     //   socket.to(user.name + user.opponent.name).emit('readyToPlay', user);
     //   // socket.to(user.opponent.name + user.name).emit('readyToPlay', user);

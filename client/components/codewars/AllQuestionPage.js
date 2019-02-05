@@ -26,8 +26,6 @@ class AllQuestionPage extends React.Component {
   }
 
   handleChallenge(friend, question) {
-    // console.log('friend', friend)
-    // console.log('question', question)
     const user = this.props.user
     user.question = question
     user.challenger = friend
