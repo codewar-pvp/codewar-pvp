@@ -61,8 +61,11 @@ class userInput extends React.Component {
           name="codeEditor"
           value={this.state.code}
           width="100%"
+          height="300px"
           editorProps={{$blockScrolling: true}}
           setOptions={{cursorStyle: 'ace', fontFamily: 'monospace'}}
+          enableLiveAutocompletion={true}
+          wrapEnabled={true}
         />
 
         <Grid style={{marginBottom: '10px'}}>

@@ -11,12 +11,10 @@ module.exports = io => {
     })
 
     socket.on('login', function(user) {
-      console.log('login', user)
       socket.handshake.session.user = user
       socket.handshake.session.save()
     })
 
-    // we dont need this logout event, boilermaker already handled it!
     socket.on('logout', function(user) {
       if (socket.handshake.session.user) {
         delete socket.handshake.session.user

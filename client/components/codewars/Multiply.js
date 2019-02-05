@@ -18,12 +18,17 @@ import QuestionHeader from './QuestionHeader'
 class Multiply extends React.Component {
   constructor(props) {
     super()
-    this.state = {code: '', isButtonDisabled: false, opponentsCode: ''}
+    this.state = {
+      code: '',
+      isButtonDisabled: false,
+      opponentsCode: 'dfgdsfgsdfgsdfasd'
+    }
   }
   onChange = newValue => {
     this.setState({code: newValue})
   }
   opponentEnterCode = newValue => {
+    console.log(newValue)
     this.setState({opponentsCode: newValue})
   }
   handleSubmit = () => {
@@ -70,22 +75,26 @@ class Multiply extends React.Component {
                 width="100%"
                 editorProps={{$blockScrolling: true}}
                 setOptions={{cursorStyle: 'ace', fontFamily: 'monospace'}}
+                wrapEnabled={true}
               />
             </Grid.Column>
             <Grid.Column>
               <Grid>
                 <Grid.Row>
-                  {/* <TextArea
-                    rows={10}
-                    style={{marginLeft: '10%', width: '100%'}}
-                  >
-                    Test
-                  </TextArea> */}
-                  <Input
-                    disabled
-                    onChange={this.opponentEnterCode}
-                    style={{marginLeft: '10%', width: '78%'}}
-                    size="massive"
+                  <AceEditor
+                    mode="javascript"
+                    theme="monokai"
+                    name="output"
+                    showGutter={false}
+                    showPrintMargin={false}
+                    // value={this.state.opponentsCode}
+                    width="100%"
+                    editorProps={{$blockScrolling: true}}
+                    setOptions={{cursorStyle: 'ace', fontFamily: 'monospace'}}
+                    wrapEnabled={true}
+                    readOnly={true}
+                    height="200px"
+                    // onBlur={this.opponentEnterCode}
                   />
                 </Grid.Row>
                 <Grid.Row>
