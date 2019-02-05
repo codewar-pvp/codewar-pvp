@@ -11,6 +11,7 @@ import {
 import QuestionLabel from './QuestionLabel'
 import QuestionRating from './QuestionRating'
 import {NavLink} from 'react-router-dom'
+import Loader from './Loader'
 import FriendPopup from './FriendPopup'
 import socket from '../../socket'
 
@@ -100,7 +101,6 @@ class AllQuestionPage extends React.Component {
                     </Grid.Column>
 
                     <Grid.Column width={1} verticalAlign="middle">
-
                       <FriendPopup
                         question={question.id}
                         user={this.props.user}
@@ -122,7 +122,9 @@ class AllQuestionPage extends React.Component {
           })}
         </List>
       </Container>
-    ) : null
+    ) : (
+      <Loader />
+    )
   }
 }
 

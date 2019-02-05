@@ -1,5 +1,6 @@
 import React from 'react'
 import {List, Container, Grid, Button, Popup} from 'semantic-ui-react'
+import Loader from './Loader'
 
 const FriendPopup = props => {
   const user = props.user
@@ -33,7 +34,7 @@ const FriendPopup = props => {
               })}
             </List>
           ) : (
-            ''
+            <Loader />
           )
         }
         on="click"
@@ -42,7 +43,6 @@ const FriendPopup = props => {
       />
     )
   }
-
 }
 
 export default FriendPopup
