@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, TextArea, Grid, Input} from 'semantic-ui-react'
+import {Button, TextArea, Grid, Input, List} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {submitMessage} from '../../store/chatReducer'
 
@@ -35,14 +35,16 @@ class Chat extends React.Component {
     return (
       <Grid style={{marginLeft: '10%'}}>
       <Grid.Row>
-        <TextArea
+        {/* <TextArea
           rows={15}
           style={{width: '100%', backgroundColor: 'gray', color: 'white'}}
-        >
+        > */}
+        <List>
           {this.props.chatMessages ? this.props.chatMessages.map((message, i) => {
-            return <div key={i}>{message}</div>
+            return <List.Item key={i}>{message.content}</List.Item>
           }): ""}
-        </TextArea>
+          </List>
+        {/* </TextArea> */}
       </Grid.Row>
       <Grid.Row>
         <Input
@@ -61,9 +63,14 @@ class Chat extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  chatMessages: state.chatMessages,
+  chatMessages: state.chatReducer.chatMessages,
   user: state.user
 })
+
+// const mapStateToProps = state => ({
+//   chatMessages: state.chatMessages,
+//   user: state.user
+// })
 
 const mapDispatch = dispatch => ({
   submitMessage: message => dispatch(submitMessage(message))

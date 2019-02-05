@@ -25,9 +25,12 @@ class AllQuestionPage extends React.Component {
     this.handleChallenge = this.handleChallenge.bind(this)
   }
 
-  handleChallenge(question) {
+  handleChallenge(friend, question) {
+    // console.log('friend', friend)
+    // console.log('question', question)
     const user = this.props.user
     user.question = question
+    user.challenger = friend
     socket.emit('challenge', user)
   }
 
@@ -100,13 +103,14 @@ class AllQuestionPage extends React.Component {
 
                     <Grid.Column width={1} verticalAlign="middle">
                       {/* <FriendPopup user={this.props.user} /> */}
-                      <Button
+                      {/* <Button
                         inverted
                         color="purple"
                         onClick={() => this.handleChallenge(question)}
                       >
                         Challenge!
-                      </Button>
+                      </Button> */}
+                      <FriendPopup question={question.id} user={this.props.user} handleChallenge={this.handleChallenge}/>
                     </Grid.Column>
 
                     <Grid.Column

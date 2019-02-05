@@ -31,16 +31,13 @@ export const gotMessage = (message) => ({
 // SEND MESSAGE
 export const submitMessage = message => async (dispatch, getState) => {
   // const { data } = await axios.post('/api/messages', message)
-  // console.log('reducer message', message)
   dispatch(gotMessage(message))
-
   socket.emit('newMessage', message)
 }
 
 
 
 export default function(state = initialState, action) {
-  console.log('action', action)
   switch (action.type) {
     case GOT_MESSAGE:
       return {...state, chatMessages: [...state.chatMessages, action.message]}

@@ -11,18 +11,17 @@ socket.on('connect', () => {
   console.log('Connected!')
 })
 
-socket.on('challenge', user => {
-  store.dispatch(gotChallenge(user, true))
+socket.on('challenge', challenger => {
+  store.dispatch(gotChallenge(challenger, true))
 })
 
 socket.on('gameStarted', () => {
-  // console.log('status yo')
-  store.dispatch(changeStatus(false))
+  store.dispatch(changeStatus(false, true, false))
 })
 
 socket.on('readyToPlay', user => {
   store.dispatch(gotChallenge(user, false))
-  history.push(`/challenges/${user.challenger.question.id}`)
+  history.push(`/challenges/${user.challenger.question}`)
 })
 
 socket.on('newMessage', (message) => {

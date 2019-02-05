@@ -7,28 +7,32 @@ import history from '../history'
 const GOT_CHALLENGE = 'GOT_CHALLENGE'
 const CHANGE_STATUS = 'CHANGE_STATUS'
 
+
 /**
  * INITIAL STATE
  */
 const initialState = {
   challenge: {},
-  activeChallenge: false,
-  battling: false
+  challengeStatus: false,
+  fightStatus: false,
+  gameStatus: false
 }
 
 /**
  * ACTION CREATORS
  */
 
-export const gotChallenge =(user, status) => ({
+export const gotChallenge = (challenger, status) => ({
   type: GOT_CHALLENGE,
-  user,
+  challenger,
   status
 })
 
-export const changeStatus =(status) => ({
+export const changeStatus = (challengeStatus, fightStatus, gameStatus) => ({
   type: CHANGE_STATUS,
-  status
+  challengeStatus,
+  fightStatus,
+  gameStatus
 })
 
 // export const postCode = text => {
@@ -46,9 +50,11 @@ export const changeStatus =(status) => ({
 export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_CHALLENGE:
-      return {...state, challenge: action.user, activeChallenge: action.status}
+      return {...state, challenge: action.challenger, challengeStatus: action.status}
     case CHANGE_STATUS:
-      return {...state, activeChallenge: action.status}
+      return {...state, challengeStatus: action.challengeStatus,
+        fightStatus: action.fightStatus,
+        gameStatus: action.gameStatus}
     default:
       return state
   }

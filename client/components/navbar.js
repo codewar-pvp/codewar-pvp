@@ -13,7 +13,7 @@ import {
   Image
 } from 'semantic-ui-react'
 import socket from '../socket'
-import {gotChallenge} from '../store/warReducer'
+import {gotChallenge, changeStatus} from '../store/warReducer'
 
 
 class Navbar extends React.Component {
@@ -39,7 +39,8 @@ class Navbar extends React.Component {
     const userObject = this.props.user;
     userObject.challenger = this.props.challenger
     socket.emit('acceptChallenge', userObject);
-    this.props.history.push(`/challenges/${this.props.challenger.question.id}`)
+    this.props.changeStatus(false, true, false)
+    this.props.history.push(`/challenges/${this.props.challenger.question}`)
   }
 
   render() {
@@ -165,7 +166,7 @@ const mapState = state => {
     isLoggedIn: !!state.user.id,
     email: state.user.email,
     challenger: state.warReducer.challenge,
-    challengeStatus: state.warReducer.activeChallenge,
+    challengeStatus: state.warReducer.challengeStatus,
     user: state.user
   }
 }
@@ -180,6 +181,9 @@ const mapDispatch = dispatch => {
     },
     clearErrorMsg() {
       dispatch(clearError())
+    },
+    changeStatus(challengeStatus, fightStatus, gameStatus) {
+      dispatch(changeStatus(challengeStatus, fightStatus, gameStatus))
     },
     fetchAllQuestions: () => dispatch(fetchAllQuestions())
   }
