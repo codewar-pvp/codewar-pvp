@@ -26,8 +26,6 @@ class AllQuestionPage extends React.Component {
   }
 
   handleChallenge(friend, question) {
-    // console.log('friend', friend)
-    // console.log('question', question)
     const user = this.props.user
     user.question = question
     user.challenger = friend
@@ -102,14 +100,7 @@ class AllQuestionPage extends React.Component {
                     </Grid.Column>
 
                     <Grid.Column width={1} verticalAlign="middle">
-                      {/* <FriendPopup user={this.props.user} /> */}
-                      {/* <Button
-                        inverted
-                        color="purple"
-                        onClick={() => this.handleChallenge(question)}
-                      >
-                        Challenge!
-                      </Button> */}
+
                       <FriendPopup
                         question={question.id}
                         user={this.props.user}
