@@ -12,9 +12,17 @@ import {
   Grid,
   Image
 } from 'semantic-ui-react'
+import socket from '../socket'
+import {gotChallenge, changeStatus} from '../store/warReducer'
 
 class Navbar extends React.Component {
-  state = {activeItem: ''}
+  constructor() {
+    super()
+    this.state = {activeItem: ''}
+    this.handleAcceptChallenge = this.handleAcceptChallenge.bind(this)
+    this.handleItemClick = this.handleItemClick.bind(this)
+  }
+
   handleItemClick = (e, {name}) => {
     this.props.clearResult()
     this.props.clearErrorMsg()
@@ -23,6 +31,15 @@ class Navbar extends React.Component {
     if (name === 'logout') {
       this.props.handleClick()
     }
+  }
+
+  handleAcceptChallenge() {
+    // attach name of challenger to user object to refer to room
+    const userObject = this.props.user
+    userObject.challenger = this.props.challenger
+    socket.emit('acceptChallenge', userObject)
+    this.props.changeStatus(false, true, false)
+    this.props.history.push(`/challenges/${this.props.challenger.question}`)
   }
 
   render() {
@@ -44,7 +61,7 @@ class Navbar extends React.Component {
               spaced="right"
               verticalAlign="middle"
             />
-            <NavLink to="/questions">Code War PVP</NavLink>
+            <NavLink to="/questions">StreetByter</NavLink>
           </h4>
 
           <Menu.Item
@@ -58,7 +75,7 @@ class Navbar extends React.Component {
             icon="home"
           />
 
-          {this.props.challenger.id ? (
+          {this.props.challengeStatus ? (
             <Modal
               basic
               centered
@@ -77,7 +94,11 @@ class Navbar extends React.Component {
                   </Grid.Row>
 
                   <Grid.Row>
-                    <Button inverted color="blue">
+                    <Button
+                      inverted
+                      color="blue"
+                      onClick={this.handleAcceptChallenge}
+                    >
                       Accept
                     </Button>
 
@@ -148,7 +169,8 @@ const mapState = state => {
     isLoggedIn: !!state.userReducer.user.id,
     email: state.userReducer.user.email,
     challenger: state.warReducer.challenge,
-    user: state.userReducer.user
+    user: state.userReducer.user,
+    challengeStatus: state.warReducer.challengeStatus
   }
 }
 
@@ -162,6 +184,9 @@ const mapDispatch = dispatch => {
     },
     clearErrorMsg() {
       dispatch(clearError())
+    },
+    changeStatus(challengeStatus, fightStatus, gameStatus) {
+      dispatch(changeStatus(challengeStatus, fightStatus, gameStatus))
     },
     fetchAllQuestions: () => dispatch(fetchAllQuestions())
   }
