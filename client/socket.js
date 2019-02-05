@@ -1,5 +1,6 @@
 import io from 'socket.io-client'
 import {gotChallenge, changeStatus} from './store/warReducer'
+import {gotMessage} from './store/chatReducer'
 import store from './store'
 import history from './history';
 
@@ -15,13 +16,17 @@ socket.on('challenge', user => {
 })
 
 socket.on('gameStarted', () => {
-  console.log('status yo')
+  // console.log('status yo')
   store.dispatch(changeStatus(false))
 })
 
 socket.on('readyToPlay', user => {
   store.dispatch(gotChallenge(user, false))
   history.push(`/challenges/${user.challenger.question.id}`)
+})
+
+socket.on('newMessage', (message) => {
+  store.dispatch(gotMessage(message))
 })
 
 export default socket

@@ -4,7 +4,7 @@ module.exports = io => {
 
     // console.log(`A socket connection to the server has been made: ${socket.id}`)
     // console.log('userId', socket.handshake.session.passport || undefined)
-    console.log('userId', socket.handshake.session.passport || undefined)
+    // console.log('userId', socket.handshake.session.passport || undefined)
     socket.on('disconnect', () => {
       console.log(`Connection ${socket.id} has left the building`)
     })
@@ -24,20 +24,22 @@ module.exports = io => {
       socket.to(user.challenger.name).emit('readyToPlay', user);
     })
 
-
-
+    socket.on('newMessage', (message) => {
+      socket.to(message.user.challenger.name).emit('newMessage', message);
+    })
 
 
     socket.on('login', function(user) {
-      console.log('login', user)
+      // console.log('login', user)
       socket.handshake.session.user = user
       socket.handshake.session.save()
     })
 
     // we dont need this logout event, boilermaker already handled it!
-    socket.on('logout', function(user) {
+    socket.on('disconnect', function() {
       if (socket.handshake.session.user) {
-        delete socket.handshake.session.user
+        // delete socket.handshake.session.user
+        socket.handshake.session.user = {}
         socket.handshake.session.save()
       }
     })
