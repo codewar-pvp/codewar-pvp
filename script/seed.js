@@ -99,7 +99,7 @@ async function seed() {
       level: 'Medium',
       rating: 4,
       author: 'Scott',
-      category: 'ARRAY,DATA STRUCTURE',
+      category: 'ARRAY, DATA STRUCTURE',
       testSpecs: fs.readFileSync(
         'server/codeSpecFiles/reverseWords.spec.js',
         'utf8'
@@ -239,7 +239,7 @@ async function seed() {
       id: 12,
       title: 'Quantum Mechanics',
       description:
-        'Given an array of "electrons", return a new array of "quarks". If you are unfamiliar with quantum mechanics, please check out the very helpful wikipedia page. It is a good place to start. Aftewards, consider getting a phd in theoretical physics. Once complete, you should have a good foundation for approaching this question.',
+        'Given an array of "electrons", return a new array of "quarks". If you are unfamiliar with quantum mechanics, please check out the very helpful wikipedia page. Afterwards, consider getting a phd in theoretical physics. Once complete, you should have a good foundation for approaching this question.',
       level: 'Hard',
       rating: 5,
       author: 'Jason',
