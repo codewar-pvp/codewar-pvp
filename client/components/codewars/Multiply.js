@@ -98,7 +98,9 @@ class Multiply extends React.Component {
                   />
                 </Grid.Row>
                 <Grid.Row>
+
                   <Chat />
+
                 </Grid.Row>
               </Grid>
             </Grid.Column>
@@ -142,6 +144,7 @@ const mapStateToProps = state => ({
   result: state.codeReducer.result,
   questions: state.questionReducer.questions
 })
+
 const mapDispatch = dispatch => ({
   testCode: code => dispatch(postCode(code))
 })
