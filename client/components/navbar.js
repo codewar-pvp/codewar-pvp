@@ -145,10 +145,10 @@ class Navbar extends React.Component {
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id,
-    email: state.user.email,
+    isLoggedIn: !!state.userReducer.user.id,
+    email: state.userReducer.user.email,
     challenger: state.warReducer.challenge,
-    user: state.user
+    user: state.userReducer.user
   }
 }
 

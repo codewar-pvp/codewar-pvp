@@ -2,13 +2,13 @@ import {createStore, combineReducers, applyMiddleware} from 'redux'
 import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import user from './user'
+import userReducer from './user'
 import codeReducer from './codeReducer'
 import questionReducer from './questionReducer'
 import warReducer from './warReducer'
 
 const reducer = combineReducers({
-  user,
+  userReducer,
   codeReducer,
   questionReducer,
   warReducer
