@@ -3,6 +3,7 @@ import {List, Container, Grid, Button, Popup} from 'semantic-ui-react'
 
 const FriendPopup = props => {
   const user = props.user
+  const question = props.question
   return (
     <Popup
       trigger={
@@ -16,7 +17,11 @@ const FriendPopup = props => {
             {user.friends.map((friend, i) => {
               return (
                 <List.Item key={i}>
-                  <Button inverted color="yellow">
+                  <Button
+                    inverted
+                    color="yellow"
+                    onClick={() => props.handleChallenge(friend, question)}
+                  >
                     {friend.name}
                   </Button>
                 </List.Item>

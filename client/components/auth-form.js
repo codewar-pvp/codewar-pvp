@@ -39,7 +39,7 @@ const AuthForm = props => {
                   fluid
                   icon="user"
                   iconPosition="left"
-                  placeholder="user name"
+                  placeholder="Username"
                   name="userName"
                 />
               ) : (
