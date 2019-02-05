@@ -31,19 +31,15 @@ describe(`largestNum question`, () => {
       console.log(error.stack)
       throw new SyntaxError('code failure - stopping tests')
     }
-    try {
-      const {userCodeResult, userConsoleHistory} = result
-      userConsoleHistory.forEach(line => console.log(line))
-      it(`The input for the question: (${JSON.stringify(
-        item
-      )}, output expected to be a number`, () => {
-        expect(userCodeResult).to.be.a('number')
-      })
-      it(`Expected output: ${output[idx]}, got: ${userCodeResult}`, () => {
-        expect(userCodeResult).to.eql(output[idx])
-      })
-    } catch (error) {
-      console.error(error)
-    }
+    const {userCodeResult, userConsoleHistory} = result
+    userConsoleHistory.forEach(line => console.log(line))
+    it(`The input for the question: (${JSON.stringify(
+      item
+    )}, output expected to be a number`, () => {
+      expect(userCodeResult).to.be.a('number')
+    })
+    it(`Expected output: ${output[idx]}, got: ${userCodeResult}`, () => {
+      expect(userCodeResult).to.eql(output[idx])
+    })
   })
 })

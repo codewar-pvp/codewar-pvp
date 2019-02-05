@@ -62,7 +62,7 @@ class Navbar extends React.Component {
               spaced="right"
               verticalAlign="middle"
             />
-            <NavLink to="/questions">Code War PVP</NavLink>
+            <NavLink to="/questions">StreetByter</NavLink>
           </h4>
 
           <Menu.Item
