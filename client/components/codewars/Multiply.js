@@ -22,7 +22,7 @@ class Multiply extends React.Component {
       code: '',
       isButtonDisabled: false,
       opponentsCode:
-        'dfgdsfgsdfgsdfasasdfasdf asdf asdf asd fasd fasdf asdf asdf asdf asdf asdfasdf asdf asdf asd fasdf asd fasdf asdf asdf asdf asd fasd fasdfd'
+        'Testing with string: dfgdsfgsdfgsdfasasdfasdf asdf asdf asd fasd fasdf asdf asdf asdf asdf asdfasdf asdf asdf asd fasdf asd fasdf asdf asdf asdf asd fasd fasdfd'
     }
   }
   onChange = newValue => {
@@ -98,6 +98,7 @@ class Multiply extends React.Component {
                     onClick={() => false}
                   />
                 </Grid.Row>
+
                 <Grid.Row>
                   <Chat />
                 </Grid.Row>
