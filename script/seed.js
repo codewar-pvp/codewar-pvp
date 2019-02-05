@@ -99,7 +99,7 @@ async function seed() {
       level: 'Medium',
       rating: 4,
       author: 'Scott',
-      category: 'ARRAY, DATA STRUCTURE',
+      category: 'STRING, ALGORITHMS',
       testSpecs: fs.readFileSync(
         'server/codeSpecFiles/reverseWords.spec.js',
         'utf8'
