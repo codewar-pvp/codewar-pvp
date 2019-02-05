@@ -20,6 +20,7 @@ module.exports = io => {
     socket.on('logout', function(user) {
       if (socket.handshake.session.user) {
         delete socket.handshake.session.user
+
         socket.handshake.session.save()
       }
     })
