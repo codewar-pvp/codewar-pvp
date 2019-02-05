@@ -51,7 +51,7 @@ class Chat extends React.Component {
           <Input
             icon="users"
             iconPosition="left"
-            placeholder="Search users..."
+            placeholder="Chat..."
             style={{width: '80%'}}
             value={this.state.message}
             onChange={this.handleChange}
