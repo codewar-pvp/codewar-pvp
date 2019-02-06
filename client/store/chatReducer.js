@@ -6,7 +6,7 @@ import socket from '../socket'
  * ACTION TYPES
  */
 const GOT_MESSAGE = 'GOT_MESSAGE'
-
+const CLEAR_MESSAGE = 'CLEAR_MESSAGE'
 /**
  * INITIAL STATE
  */
@@ -23,6 +23,10 @@ export const gotMessage = message => ({
   message
 })
 
+export const clearMessage = () => ({
+  type: CLEAR_MESSAGE
+})
+
 // SEND MESSAGE
 export const submitMessage = message => async (dispatch, getState) => {
   dispatch(gotMessage(message))
@@ -33,6 +37,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_MESSAGE:
       return {...state, chatMessages: [...state.chatMessages, action.message]}
+    case CLEAR_MESSAGE:
+      return {...state, chatMessages: []}
     default:
       return state
   }
