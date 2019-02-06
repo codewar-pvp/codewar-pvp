@@ -54,6 +54,16 @@ module.exports = io => {
         .emit('newMessage', message)
     })
 
+    socket.on('challengerCodeUpload', args => {
+      const [user, newValue] = args
+      socket
+        .to(user.challenger.name + user.name)
+        .emit('challengerCodeDownload', newValue)
+      socket
+        .to(user.name + user.challenger.name)
+        .emit('challengerCodeDownload', newValue)
+    })
+
     socket.on('login', function(user) {
       // friends to replace
       socket.join(user.name)

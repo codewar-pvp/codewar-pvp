@@ -11,6 +11,7 @@ import 'brace/theme/monokai'
 import Chat from './Chat'
 import {postCode} from '../../store/'
 import QuestionHeader from './QuestionHeader'
+import socket from '../../socket'
 
 /**
  * COMPONENT
@@ -21,14 +22,35 @@ class Multiply extends React.Component {
     this.state = {
       code: '',
       isButtonDisabled: false,
-      opponentsCode:
-        'Testing with string: dfgdsfgsdfgsdfasasdfasdf asdf asdf asd fasd fasdf asdf asdf asdf asdf asdfasdf asdf asdf asd fasdf asd fasdf asdf asdf asdf asd fasd fasdfd'
+      opponentsCode: ''
     }
+    socket.on('challengerCodeDownload', newValue => {
+      this.opponentEnterCode(newValue)
+    })
   }
   onChange = newValue => {
     this.setState({code: newValue})
+    socket.emit('challengerCodeUpload', [
+      this.props.challenge,
+      this.hashCode(newValue)
+    ])
   }
-
+  hashCode = newValue => {
+    return newValue
+      .split('\n')
+      .map(val => {
+        return val
+          .split('')
+          .map(char => {
+            console.log(char)
+            return ' /\\{}[]()$!123456789;+-=|&%`<>"\''.includes(char)
+              ? char
+              : '0'
+          })
+          .join('')
+      })
+      .join('\n')
+  }
   opponentEnterCode = newValue => {
     this.setState({opponentsCode: newValue})
   }
@@ -46,7 +68,10 @@ class Multiply extends React.Component {
 
   componentDidMount() {
     if (this.props.question && this.props.question.funcHeader) {
-      this.setState({code: this.props.question.funcHeader})
+      this.setState({
+        code: this.props.question.funcHeader,
+        opponentsCode: this.hashCode(this.props.question.funcHeader)
+      })
     }
   }
 
@@ -142,7 +167,8 @@ class Multiply extends React.Component {
 const mapStateToProps = state => ({
   code: state.codeReducer.code,
   result: state.codeReducer.result,
-  questions: state.questionReducer.questions
+  questions: state.questionReducer.questions,
+  challenge: state.warReducer.challenge
 })
 
 const mapDispatch = dispatch => ({
