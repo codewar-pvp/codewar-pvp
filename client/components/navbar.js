@@ -45,10 +45,9 @@ class Navbar extends React.Component {
     this.props.history.push(`/challenges/${this.props.challenger.question}`)
   }
 
-  handleDeclineChallenge(evt) {
+  handleDeclineChallenge() {
     this.props.resetChallenge()
     this.closeModal()
-    // history.push('/')
   }
 
   closeModal() {
