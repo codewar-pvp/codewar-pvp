@@ -13,6 +13,16 @@ class Chat extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.chatMessages &&
+      this.props.chatMessages.length !== prevProps.chatMessages.length
+    ) {
+      const objDiv = document.getElementById('list')
+      objDiv.scrollTop = objDiv.scrollHeight
+    }
+  }
+
   handleChange(e) {
     this.setState({
       message: e.target.value
@@ -35,6 +45,7 @@ class Chat extends React.Component {
       <Grid style={{marginLeft: '10%'}}>
         <Grid.Row>
           <List
+            id="list"
             style={{
               height: '250px',
               width: '450px',
@@ -52,9 +63,17 @@ class Chat extends React.Component {
                       style={{marginLeft: '10px', marginTop: '10px'}}
                       key={i}
                     >
-                      <div style={{color: 'royalblue', display: 'inline'}}>
-                        {message.user.name + ':'}
-                      </div>
+                      {message.user.name === this.props.user.name ? (
+                        <div style={{color: 'royalblue', display: 'inline'}}>
+                          {' '}
+                          {message.user.name + ':'}
+                        </div>
+                      ) : (
+                        <div style={{color: 'crimson', display: 'inline'}}>
+                          {' '}
+                          {message.user.name + ':'}
+                        </div>
+                      )}
                       <div style={{display: 'inline'}}> {message.content} </div>
                     </List.Item>
                   )
