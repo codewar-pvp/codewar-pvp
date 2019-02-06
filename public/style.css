@@ -78,9 +78,14 @@ div .ui.fluid.left.icon.input {
   pointer-events: none;
 }
 
+<<<<<<< HEAD
 span {
   font-family: '8BITWONDERNominal';
   font-weight: normal;
   font-style: normal;
   margin-top: 25px;
+=======
+div.ui.left.icon.input {
+  margin-left: 0;
+>>>>>>> master
 }
