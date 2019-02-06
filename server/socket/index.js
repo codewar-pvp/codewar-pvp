@@ -89,13 +89,8 @@ module.exports = io => {
       socket.broadcast.emit('challenge', user)
     })
 
-    socket.on('logout', function(user) {
-      console.log('logged out')
+    socket.on('logout', function() {
       if (socket.handshake.session.user) {
-        console.log(
-          'socket handshake session user name',
-          socket.handshake.session.user.name
-        )
         const {name, friends} = socket.handshake.session.user
         friends.forEach(friend => {
           io.to(friend.name).emit('friendLeave', name)

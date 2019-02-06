@@ -6,7 +6,6 @@ import Loader from './Loader'
 const FriendPopup = props => {
   const user = props.user
   const question = props.question
-  console.log(props.onlineFriends)
   if (!user.name) {
     return <div />
   } else {
