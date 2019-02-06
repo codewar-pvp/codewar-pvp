@@ -52,12 +52,14 @@ module.exports = io => {
     // })
 
     socket.on('newMessage', message => {
-      socket
-        .to(message.user.challenger.name + message.user.name)
-        .emit('newMessage', message)
-      socket
-        .to(message.user.name + message.user.challenger.name)
-        .emit('newMessage', message)
+      if (message.user && message.user.challenger) {
+        socket
+          .to(message.user.challenger.name + message.user.name)
+          .emit('newMessage', message)
+        socket
+          .to(message.user.name + message.user.challenger.name)
+          .emit('newMessage', message)
+      }
     })
 
     socket.on('challengerCodeUpload', args => {
@@ -103,10 +105,6 @@ module.exports = io => {
 
     socket.on('logout', function() {
       if (socket.handshake.session.user) {
-        // console.log(
-        //   'socket handshake session user name',
-        //   socket.handshake.session.user.name
-        // )
         const {name, friends} = socket.handshake.session.user
         friends.forEach(friend => {
           io.to(friend.name).emit('friendLeave', name)
@@ -114,13 +112,5 @@ module.exports = io => {
         })
       }
     })
-
-    // socket.on('disconnect', function() {
-    //   if (socket.handshake.session.user) {
-    //     // delete socket.handshake.session.user
-    //     socket.handshake.session.user = {}
-    //     socket.handshake.session.save()
-    //   }
-    // })
   })
 }
