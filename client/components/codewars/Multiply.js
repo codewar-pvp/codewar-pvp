@@ -19,6 +19,7 @@ import 'brace/theme/monokai'
 import Chat from './Chat'
 import {postCode} from '../../store/'
 import QuestionHeader from './QuestionHeader'
+import socket from '../../socket'
 
 /**
  * COMPONENT
@@ -29,11 +30,34 @@ class Multiply extends React.Component {
     this.state = {
       code: '',
       isButtonDisabled: false,
-      opponentsCode: 'dfgdsfgsdfgsdfasd'
+      opponentsCode: ''
     }
+    socket.on('challengerCodeDownload', newValue => {
+      this.opponentEnterCode(newValue)
+    })
   }
   onChange = newValue => {
     this.setState({code: newValue})
+    socket.emit('challengerCodeUpload', [
+      this.props.challenger,
+      this.hashCode(newValue)
+    ])
+  }
+  hashCode = newValue => {
+    return newValue
+      .split('\n')
+      .map(val => {
+        return val
+          .split('')
+          .map(char => {
+            console.log(char)
+            return ' /\\{}[]()$!123456789;+-=|&%`<>"\''.includes(char)
+              ? char
+              : '0'
+          })
+          .join('')
+      })
+      .join('\n')
   }
   opponentEnterCode = newValue => {
     console.log(newValue)
@@ -54,7 +78,10 @@ class Multiply extends React.Component {
 
   componentDidMount() {
     if (this.props.question && this.props.question.funcHeader) {
-      this.setState({code: this.props.question.funcHeader})
+      this.setState({
+        code: this.props.question.funcHeader,
+        opponentsCode: this.hashCode(this.props.question.funcHeader)
+      })
     }
   }
 
@@ -122,20 +149,21 @@ class Multiply extends React.Component {
             <Grid.Column>
               <Grid>
                 <Grid.Row>
-                  <AceEditor
-                    mode="javascript"
-                    theme="monokai"
-                    name="output"
-                    showGutter={false}
-                    showPrintMargin={false}
-                    // value={this.state.opponentsCode}
-                    width="100%"
-                    editorProps={{$blockScrolling: true}}
-                    setOptions={{cursorStyle: 'ace', fontFamily: 'monospace'}}
-                    wrapEnabled={true}
-                    readOnly={true}
-                    height="200px"
-                    // onBlur={this.opponentEnterCode}
+                  <TextArea
+                    id="blurry-text"
+                    disabled
+                    value={this.state.opponentsCode}
+                    onChange={this.opponentEnterCode}
+                    style={{
+                      backgroundColor: 'gray',
+                      marginLeft: '10%',
+                      fontSize: 10,
+                      width: '78%',
+                      height: '200px',
+                      pointerEvents: 'none',
+                      userSelect: 'none'
+                    }}
+                    onClick={() => false}
                   />
                 </Grid.Row>
                 <Grid.Row>
