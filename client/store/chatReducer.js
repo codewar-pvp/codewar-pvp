@@ -23,14 +23,8 @@ export const gotMessage = message => ({
   message
 })
 
-// export const submitMessage = message => {
-
-//   // socket.emit('newMessage', message)
-// }
-
 // SEND MESSAGE
 export const submitMessage = message => async (dispatch, getState) => {
-  // const { data } = await axios.post('/api/messages', message)
   dispatch(gotMessage(message))
   socket.emit('newMessage', message)
 }
