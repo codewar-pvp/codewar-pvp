@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, TextArea, Grid, Input, List} from 'semantic-ui-react'
+import {Button, Grid, Input, List, Form} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {submitMessage} from '../../store/chatReducer'
 
@@ -22,7 +22,7 @@ class Chat extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     this.props.submitMessage({
-      content: this.props.user.name + ': ' + this.state.message,
+      content: this.state.message,
       user: this.props.user
     })
     this.setState({
@@ -34,25 +34,45 @@ class Chat extends React.Component {
     return (
       <Grid style={{marginLeft: '10%'}}>
         <Grid.Row>
-          <List>
+          <List
+            style={{
+              height: '250px',
+              width: '450px',
+              overflow: 'scroll',
+              display: 'flex',
+              flexDirection: 'column',
+              backgroundColor: 'rgb(64, 64, 64)'
+            }}
+          >
+            <div />
             {this.props.chatMessages
               ? this.props.chatMessages.map((message, i) => {
-                  return <List.Item key={i}>{message.content}</List.Item>
+                  return (
+                    <List.Item
+                      style={{marginLeft: '10px', marginTop: '10px'}}
+                      key={i}
+                    >
+                      <div style={{color: 'royalblue', display: 'inline'}}>
+                        {message.user.name + ':'}
+                      </div>
+                      <div style={{display: 'inline'}}> {message.content} </div>
+                    </List.Item>
+                  )
                 })
               : ''}
           </List>
         </Grid.Row>
-        <Grid.Row>
+        <Form onSubmit={this.handleSubmit}>
           <Input
             icon="users"
             iconPosition="left"
             placeholder="Chat..."
-            style={{width: '80%'}}
+            style={{width: '100%'}}
             value={this.state.message}
             onChange={this.handleChange}
           />
-          <Button onClick={this.handleSubmit}>Submit</Button>
-        </Grid.Row>
+          <Button iconPosition="left">Submit</Button>
+        </Form>
       </Grid>
     )
   }
