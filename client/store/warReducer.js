@@ -15,7 +15,8 @@ const initialState = {
   challenge: {},
   challengeStatus: false,
   fightStatus: false,
-  gameStatus: false
+  lose: null,
+  win: null
 }
 
 /**
@@ -28,28 +29,17 @@ export const gotChallenge = (challenger, status) => ({
   status
 })
 
-export const changeStatus = (challengeStatus, fightStatus, gameStatus) => ({
+export const changeStatus = (challengeStatus, fightStatus, lose, win) => ({
   type: CHANGE_STATUS,
   challengeStatus,
   fightStatus,
-  gameStatus
+  lose,
+  win
 })
 
 export const clearChallenge = () => ({
   type: CLEAR_CHALLENGE
 })
-
-// export const postCode = text => {
-//   return async dispatch => {
-//     try {
-//       const res = await axios.post('/api/code', {input: text})
-//       const action = gotResult(res.data.output)
-//       dispatch(action)
-//     } catch (error) {
-//       console.warn('not correct')
-//     }
-//   }
-// }
 
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -64,7 +54,8 @@ export default function(state = initialState, action) {
         ...state,
         challengeStatus: action.challengeStatus,
         fightStatus: action.fightStatus,
-        gameStatus: action.gameStatus
+        lose: action.lose,
+        win: action.win
       }
     case CLEAR_CHALLENGE:
       return {...state, challengeStatus: false, challenge: {}}
