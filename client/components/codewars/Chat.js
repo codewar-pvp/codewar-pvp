@@ -53,8 +53,7 @@ class Chat extends React.Component {
                       key={i}
                     >
                       <div style={{color: 'royalblue', display: 'inline'}}>
-                        {' '}
-                        {this.props.user.name + ':'}{' '}
+                        {this.props.user.name + ':'}
                       </div>
                       <div style={{display: 'inline'}}> {message.content} </div>
                     </List.Item>
