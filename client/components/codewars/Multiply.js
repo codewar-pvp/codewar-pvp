@@ -149,20 +149,21 @@ class Multiply extends React.Component {
             <Grid.Column>
               <Grid>
                 <Grid.Row>
-                  <AceEditor
-                    mode="javascript"
-                    theme="monokai"
-                    name="output"
-                    showGutter={false}
-                    showPrintMargin={false}
-                    // value={this.state.opponentsCode}
-                    width="100%"
-                    editorProps={{$blockScrolling: true}}
-                    setOptions={{cursorStyle: 'ace', fontFamily: 'monospace'}}
-                    wrapEnabled={true}
-                    readOnly={true}
-                    height="200px"
-                    // onBlur={this.opponentEnterCode}
+                  <TextArea
+                    id="blurry-text"
+                    disabled
+                    value={this.state.opponentsCode}
+                    onChange={this.opponentEnterCode}
+                    style={{
+                      backgroundColor: 'gray',
+                      marginLeft: '10%',
+                      fontSize: 10,
+                      width: '78%',
+                      height: '200px',
+                      pointerEvents: 'none',
+                      userSelect: 'none'
+                    }}
+                    onClick={() => false}
                   />
                 </Grid.Row>
                 <Grid.Row>
