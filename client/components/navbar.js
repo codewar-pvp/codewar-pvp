@@ -2,7 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {NavLink, withRouter} from 'react-router-dom'
-import {logout, clearResult, clearError, fetchAllQuestions} from '../store'
+import {
+  logout,
+  clearResult,
+  clearError,
+  fetchAllQuestions,
+  clearMessage
+} from '../store'
 import {
   Menu,
   Segment,
@@ -65,6 +71,10 @@ class Navbar extends React.Component {
             onClick={() => {
               this.props.clearResult()
               this.props.fetchAllQuestions()
+              this.props.clearGameInfo()
+              this.props.resetChallenge()
+              this.props.clearErrorMsg()
+              this.props.clearChat()
             }}
           >
             <Image
@@ -213,6 +223,10 @@ const mapDispatch = dispatch => {
     resetChallenge() {
       dispatch(clearChallenge())
     },
+    clearChat() {
+      dispatch(clearMessage())
+    },
+    clearGameInfo: () => dispatch(changeStatus(false, false, null, null)),
     fetchAllQuestions: () => dispatch(fetchAllQuestions())
   }
 }

@@ -77,3 +77,7 @@ div .ui.fluid.left.icon.input {
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   pointer-events: none;
 }
+
+div.ui.left.icon.input {
+  margin-left: 0;
+}
