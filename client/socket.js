@@ -29,7 +29,6 @@ socket.on('readyToPlay', user => {
   history.push(`/challenges/${user.challenger.question}`)
 })
 
-<<<<<<< HEAD
 socket.on('game status', status => {
   store.dispatch(changeStatus(status.challengeStatus,
     status.fightStatus,
@@ -37,10 +36,8 @@ socket.on('game status', status => {
     status.win))
 })
 
-socket.on('newMessage', (message) => {
-=======
+
 socket.on('newMessage', message => {
->>>>>>> 9b92be3af84f7331494473ee86527ffb58cad4d2
   store.dispatch(gotMessage(message))
 })
 

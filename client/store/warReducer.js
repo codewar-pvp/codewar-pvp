@@ -49,12 +49,8 @@ export default function(state = initialState, action) {
         ...state,
         challengeStatus: action.challengeStatus,
         fightStatus: action.fightStatus,
-<<<<<<< HEAD
         lose: action.lose,
         win: action.win
-=======
-        gameStatus: action.gameStatus
->>>>>>> 9b92be3af84f7331494473ee86527ffb58cad4d2
       }
     default:
       return state
