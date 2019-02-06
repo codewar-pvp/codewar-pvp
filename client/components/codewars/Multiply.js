@@ -21,15 +21,14 @@ class Multiply extends React.Component {
     this.state = {
       code: '',
       isButtonDisabled: false,
-      opponentsCode:
-        'Testing with string: dfgdsfgsdfgsdfasasdfasdf asdf asdf asd fasd fasdf asdf asdf asdf asdf asdfasdf asdf asdf asd fasdf asd fasdf asdf asdf asdf asd fasd fasdfd'
+      opponentsCode: 'dfgdsfgsdfgsdfasd'
     }
   }
   onChange = newValue => {
     this.setState({code: newValue})
   }
-
   opponentEnterCode = newValue => {
+    console.log(newValue)
     this.setState({opponentsCode: newValue})
   }
 
@@ -125,23 +124,22 @@ class Multiply extends React.Component {
             <Grid.Column>
               <Grid>
                 <Grid.Row>
-                  <TextArea
-                    id="blurry-text"
-                    disabled
-                    value={this.state.opponentsCode}
-                    onChange={this.opponentEnterCode}
-                    style={{
-                      backgroundColor: 'gray',
-                      marginLeft: '10%',
-                      fontSize: 10,
-                      width: '78%',
-                      height: '200px',
-                      pointerEvents: 'none'
-                    }}
-                    onClick={() => false}
+                  <AceEditor
+                    mode="javascript"
+                    theme="monokai"
+                    name="output"
+                    showGutter={false}
+                    showPrintMargin={false}
+                    // value={this.state.opponentsCode}
+                    width="100%"
+                    editorProps={{$blockScrolling: true}}
+                    setOptions={{cursorStyle: 'ace', fontFamily: 'monospace'}}
+                    wrapEnabled={true}
+                    readOnly={true}
+                    height="200px"
+                    // onBlur={this.opponentEnterCode}
                   />
                 </Grid.Row>
-
                 <Grid.Row>
                   <Chat />
                 </Grid.Row>
@@ -192,7 +190,6 @@ const mapStateToProps = state => ({
   lose: state.warReducer.lose,
   win: state.warReducer.win
 })
-
 const mapDispatch = dispatch => ({
   testCode: code => dispatch(postCode(code))
 })
