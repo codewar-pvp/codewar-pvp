@@ -5,6 +5,7 @@ import brace from 'brace'
 import AceEditor from 'react-ace'
 
 const Result = props => {
+  console.log(props.result)
   return (
     <AceEditor
       mode="javascript"

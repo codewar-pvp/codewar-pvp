@@ -21,13 +21,21 @@ socket.on('challenge', challenger => {
 })
 
 socket.on('gameStarted', () => {
-  store.dispatch(changeStatus(false, true, false))
+  store.dispatch(changeStatus(false, true, null, null))
 })
 
 socket.on('readyToPlay', user => {
   store.dispatch(gotChallenge(user, false))
   history.push(`/challenges/${user.challenger.question}`)
 })
+
+socket.on('game status', status => {
+  store.dispatch(changeStatus(status.challengeStatus,
+    status.fightStatus,
+    status.lose,
+    status.win))
+})
+
 
 socket.on('newMessage', message => {
   store.dispatch(gotMessage(message))
