@@ -38,8 +38,8 @@ const User = db.define('user', {
   googleId: {
     type: Sequelize.STRING
   },
-  online: {
-    type: Sequelize.BOOLEAN
+  imageURL: {
+    type: Sequelize.STRING
   }
 })
 

@@ -67,16 +67,26 @@ class Navbar extends React.Component {
               this.props.fetchAllQuestions()
             }}
           >
+
+          <Grid.Row verticalAlign="middle" textAlign="center">
             <Image
-              src="/866455.png"
+              src='./star.png'
               size="mini"
               spaced="right"
               verticalAlign="middle"
             />
-            <NavLink to="/questions">StreetByter</NavLink>
+            <NavLink to="/questions"><span>StreetByter</span></NavLink>
+            <Image
+              src='./star.png'
+              size="mini"
+              spaced="right"
+              verticalAlign="middle"
+            />
+            </Grid.Row>
+
           </h4>
 
-          <Menu.Item
+          {/* <Menu.Item
             as={NavLink}
             to="/questions"
             content="Home"
@@ -85,7 +95,7 @@ class Navbar extends React.Component {
             active={activeItem === 'home'}
             position="left"
             icon="home"
-          />
+          /> */}
 
           {this.props.challengeStatus ? (
             <Modal
@@ -137,12 +147,20 @@ class Navbar extends React.Component {
 
           {isLoggedIn ? (
             <Menu.Menu position="right">
+              <Image
+                src={this.props.user.imageURL}
+                spaced="right"
+                verticalAlign="middle"
+                avatar
+                wrapped
+                style={{marginTop: "10px"}}
+              />
               <Menu.Item
                 as="h4"
-                content={`Welcome back ${this.props.user.name}!`}
+                content={this.props.user.name}
                 onClick={this.handleItemClick}
                 name="user"
-                icon="user circle"
+
               />
               <Menu.Item
                 as={NavLink}
