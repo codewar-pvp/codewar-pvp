@@ -8,7 +8,6 @@ import Result from './Result'
 import {
   Button,
   Container,
-  Input,
   Grid,
   TextArea,
   Modal,
@@ -17,7 +16,14 @@ import {
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import Chat from './Chat'
-import {postCode} from '../../store/'
+import {
+  postCode,
+  changeStatus,
+  clearResult,
+  clearError,
+  clearChallenge,
+  clearMessage
+} from '../../store/'
 import QuestionHeader from './QuestionHeader'
 import socket from '../../socket'
 
@@ -35,6 +41,8 @@ class Multiply extends React.Component {
     socket.on('challengerCodeDownload', newValue => {
       this.opponentEnterCode(newValue)
     })
+    this.gameOverHelper = this.gameOverHelper.bind(this)
+    this.handleGameOver = this.handleGameOver.bind(this)
   }
   onChange = newValue => {
     this.setState({code: newValue})
@@ -50,7 +58,6 @@ class Multiply extends React.Component {
         return val
           .split('')
           .map(char => {
-            console.log(char)
             return ' /\\{}[]()$!123456789;+-=|&%`<>"\''.includes(char)
               ? char
               : '0'
@@ -60,8 +67,20 @@ class Multiply extends React.Component {
       .join('\n')
   }
   opponentEnterCode = newValue => {
-    console.log(newValue)
     this.setState({opponentsCode: newValue})
+  }
+
+  gameOverHelper = () => {
+    this.props.clearGameInfo()
+    this.props.resetChallenge()
+    this.props.clearErrorMsg()
+    this.props.clearChat()
+    this.props.clearResult()
+    history.push('/questions')
+  }
+
+  handleGameOver = () => {
+    setTimeout(() => this.gameOverHelper(), 5000)
   }
 
   handleSubmit = () => {
@@ -96,7 +115,13 @@ class Multiply extends React.Component {
     return this.props.question && this.props.question.funcHeader ? (
       <Container>
         {this.props.win && !this.props.lose ? (
-          <Modal basic centered defaultOpen closeIcon>
+          <Modal
+            basic
+            centered
+            defaultOpen
+            closeIcon
+            onMount={this.handleGameOver}
+          >
             <Modal.Content>
               <Grid container textAlign="center">
                 <Grid.Row>
@@ -112,7 +137,13 @@ class Multiply extends React.Component {
         )}
 
         {!this.props.win && this.props.lose ? (
-          <Modal basic centered defaultOpen closeIcon>
+          <Modal
+            basic
+            centered
+            defaultOpen
+            closeIcon
+            onMount={this.handleGameOver}
+          >
             <Modal.Content>
               <Grid container textAlign="center">
                 <Grid.Row>
@@ -217,7 +248,20 @@ const mapStateToProps = state => ({
   win: state.warReducer.win
 })
 const mapDispatch = dispatch => ({
-  testCode: code => dispatch(postCode(code))
+  testCode: code => dispatch(postCode(code)),
+  clearGameInfo: () => dispatch(changeStatus(false, false, null, null)),
+  clearResult() {
+    dispatch(clearResult())
+  },
+  clearErrorMsg() {
+    dispatch(clearError())
+  },
+  resetChallenge() {
+    dispatch(clearChallenge())
+  },
+  clearChat() {
+    dispatch(clearMessage())
+  }
 })
 
 export default connect(mapStateToProps, mapDispatch)(Multiply)
