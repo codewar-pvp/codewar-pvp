@@ -172,10 +172,37 @@ class Multiply extends React.Component {
                 name="multiCodeEditor"
                 value={this.state.code}
                 width="100%"
+                height="90%"
                 editorProps={{$blockScrolling: true}}
                 setOptions={{cursorStyle: 'ace', fontFamily: 'monospace'}}
                 wrapEnabled={true}
               />
+
+              <Grid.Row>
+                <Grid.Column>
+                  <Button
+                    onClick={this.handleSubmit}
+                    positive
+                    style={{width: '100px', margin: '10px 0 10px 0'}}
+                    loading={this.state.isButtonDisabled}
+                    disabled={this.state.isButtonDisabled}
+                  >
+                    Run
+                  </Button>
+                  <Button
+                    onClick={() => history.push('/questions')}
+                    negative
+                    style={{
+                      width: '180px',
+                      margin: '10px 0 10px 35%',
+                      textAlign: 'center'
+                    }}
+                    floated="right"
+                  >
+                    Back to All Questions
+                  </Button>
+                </Grid.Column>
+              </Grid.Row>
             </Grid.Column>
             <Grid.Column>
               <Grid>
@@ -190,7 +217,7 @@ class Multiply extends React.Component {
                       marginLeft: '10%',
                       fontSize: 10,
                       width: '78%',
-                      height: '200px',
+                      height: '250px',
                       pointerEvents: 'none',
                       userSelect: 'none'
                     }}
@@ -201,31 +228,6 @@ class Multiply extends React.Component {
                   <Chat />
                 </Grid.Row>
               </Grid>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column>
-              <Button
-                onClick={this.handleSubmit}
-                positive
-                style={{width: '100px', margin: '10px 0 10px 0'}}
-                loading={this.state.isButtonDisabled}
-                disabled={this.state.isButtonDisabled}
-              >
-                Run
-              </Button>
-              <Button
-                onClick={() => history.push('/questions')}
-                negative
-                style={{
-                  width: '180px',
-                  margin: '10px 0 10px 35%',
-                  textAlign: 'center'
-                }}
-                floated="right"
-              >
-                Back to All Questions
-              </Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>

@@ -62,16 +62,29 @@ class Chat extends React.Component {
               : ''}
           </List>
         </Grid.Row>
-        <Form onSubmit={this.handleSubmit}>
-          <Input
-            icon="users"
-            iconPosition="left"
-            placeholder="Chat..."
-            style={{width: '100%'}}
-            value={this.state.message}
-            onChange={this.handleChange}
-          />
-          <Button iconPosition="left">Submit</Button>
+        <Form
+          onSubmit={this.handleSubmit}
+          style={{paddingLeft: 0, marginLeft: 0, width: '100%'}}
+        >
+          <Form.Group style={{width: '100%'}}>
+            <Form.Input
+              icon="users"
+              iconPosition="left"
+              placeholder="Chat..."
+              value={this.state.message}
+              onChange={this.handleChange}
+              style={{width: '320px'}}
+            />
+            <Form.Button
+              style={{
+                marginTop: '14%',
+                width: '100px',
+                color: 'white',
+                backgroundColor: 'Blue'
+              }}
+              content="Submit"
+            />
+          </Form.Group>
         </Form>
       </Grid>
     )
