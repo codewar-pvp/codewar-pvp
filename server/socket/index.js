@@ -36,9 +36,13 @@ module.exports = io => {
       socket.to(user.challenger.name + user.name).emit('readyToPlay', user)
     })
 
-    socket.on('game status', (status) => {
-      socket.to(status.user.challenger.name + status.user.name).emit('game status', status.status);
-      socket.to(status.user.name + status.user.challenger.name).emit('game status', status.status);
+    socket.on('game status', status => {
+      socket
+        .to(status.user.challenger.name + status.user.name)
+        .emit('game status', status.status)
+      socket
+        .to(status.user.name + status.user.challenger.name)
+        .emit('game status', status.status)
     })
 
     // socket.on('challengeMessage', user => {
@@ -87,8 +91,7 @@ module.exports = io => {
       socket.broadcast.emit('challenge', user)
     })
 
-    socket.on('logout', function(user) {
-      console.log('logged out')
+    socket.on('logout', function() {
       if (socket.handshake.session.user) {
         // console.log(
         //   'socket handshake session user name',

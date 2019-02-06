@@ -5,7 +5,15 @@ import brace from 'brace'
 import AceEditor from 'react-ace'
 import Loader from './Loader'
 import Result from './Result'
-import {Button, Container, Input, Grid, TextArea, Modal, Header} from 'semantic-ui-react'
+import {
+  Button,
+  Container,
+  Input,
+  Grid,
+  TextArea,
+  Modal,
+  Header
+} from 'semantic-ui-react'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import Chat from './Chat'
@@ -60,45 +68,37 @@ class Multiply extends React.Component {
     const {question} = this.props
     return this.props.question && this.props.question.funcHeader ? (
       <Container>
+        {this.props.win && !this.props.lose ? (
+          <Modal basic centered defaultOpen closeIcon>
+            <Modal.Content>
+              <Grid container textAlign="center">
+                <Grid.Row>
+                  <Header inverted as="h1" color="green">
+                    YOU WIN!
+                  </Header>
+                </Grid.Row>
+              </Grid>
+            </Modal.Content>
+          </Modal>
+        ) : (
+          ''
+        )}
 
-        {this.props.win && !this.props.lose ?
-          <Modal
-              basic
-              centered
-              defaultOpen
-              closeIcon
-            >
-              <Modal.Content>
-                <Grid container textAlign="center">
-                  <Grid.Row>
-                    <Header inverted as="h1" color="green">
-                      YOU WIN!
-                    </Header>
-                  </Grid.Row>
-                </Grid>
-              </Modal.Content>
-            </Modal>
-        : ""}
-
-        {!this.props.win && this.props.lose ?
-          <Modal
-              basic
-              centered
-              defaultOpen
-              closeIcon
-            >
-              <Modal.Content>
-                <Grid container textAlign="center">
-                  <Grid.Row>
-                    <Header inverted as="h1" color="red">
-                      YOU LOSE!
-                    </Header>
-                  </Grid.Row>
-                </Grid>
-              </Modal.Content>
-            </Modal>
-        : ""}
-
+        {!this.props.win && this.props.lose ? (
+          <Modal basic centered defaultOpen closeIcon>
+            <Modal.Content>
+              <Grid container textAlign="center">
+                <Grid.Row>
+                  <Header inverted as="h1" color="red">
+                    YOU LOSE!
+                  </Header>
+                </Grid.Row>
+              </Grid>
+            </Modal.Content>
+          </Modal>
+        ) : (
+          ''
+        )}
 
         <QuestionHeader question={question} />
         <Grid columns={2}>

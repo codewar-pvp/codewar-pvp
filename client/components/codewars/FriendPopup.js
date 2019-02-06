@@ -1,11 +1,11 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {List, Container, Grid, Button, Popup} from 'semantic-ui-react'
 import Loader from './Loader'
 
 const FriendPopup = props => {
   const user = props.user
   const question = props.question
-
   if (!user.name) {
     return <div />
   } else {
@@ -17,9 +17,9 @@ const FriendPopup = props => {
           </Button>
         }
         content={
-          user.friends ? (
+          props.onlineFriends ? (
             <List>
-              {user.friends.map((friend, i) => {
+              {props.onlineFriends.map((friend, i) => {
                 return (
                   <List.Item key={i}>
                     <Button
@@ -45,4 +45,8 @@ const FriendPopup = props => {
   }
 }
 
-export default FriendPopup
+const mapStateToProps = state => ({
+  onlineFriends: state.userReducer.onlineFriends
+})
+
+export default connect(mapStateToProps, null)(FriendPopup)

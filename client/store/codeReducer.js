@@ -4,7 +4,6 @@ import {changeStatus} from './warReducer'
 import store from './index'
 import socket from '../socket'
 
-
 /**
  * ACTION TYPES
  */
@@ -45,21 +44,20 @@ export const postCode = text => {
       const action = gotResult(res.data.output)
       dispatch(action)
 
-
       if (action.result.passedAllTests) {
-
         store.dispatch(changeStatus(false, false, false, true))
         const user = getState().userReducer.user
 
-        socket.emit('game status', {status: {challengeStatus: false,
-          fightStatus: false,
-          lose: true,
-          win: false},
+        socket.emit('game status', {
+          status: {
+            challengeStatus: false,
+            fightStatus: false,
+            lose: true,
+            win: false
+          },
           user
         })
       }
-
-
     } catch (error) {
       console.warn('not correct')
     }

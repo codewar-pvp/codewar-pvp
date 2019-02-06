@@ -30,12 +30,15 @@ socket.on('readyToPlay', user => {
 })
 
 socket.on('game status', status => {
-  store.dispatch(changeStatus(status.challengeStatus,
-    status.fightStatus,
-    status.lose,
-    status.win))
+  store.dispatch(
+    changeStatus(
+      status.challengeStatus,
+      status.fightStatus,
+      status.lose,
+      status.win
+    )
+  )
 })
-
 
 socket.on('newMessage', message => {
   store.dispatch(gotMessage(message))
