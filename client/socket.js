@@ -1,9 +1,14 @@
 import io from 'socket.io-client'
-import {gotChallenge, changeStatus} from './store/warReducer'
+import {
+  addFriend,
+  removeFriend,
+  setOnlineFriendsOnStore,
+  gotChallenge
+} from './store'
+import {changeStatus} from './store/warReducer'
 import {gotMessage} from './store/chatReducer'
 import store from './store'
-import history from './history';
-
+import history from './history'
 
 const socket = io(window.location.origin)
 
@@ -24,6 +29,7 @@ socket.on('readyToPlay', user => {
   history.push(`/challenges/${user.challenger.question}`)
 })
 
+<<<<<<< HEAD
 socket.on('game status', status => {
   store.dispatch(changeStatus(status.challengeStatus,
     status.fightStatus,
@@ -32,7 +38,22 @@ socket.on('game status', status => {
 })
 
 socket.on('newMessage', (message) => {
+=======
+socket.on('newMessage', message => {
+>>>>>>> 9b92be3af84f7331494473ee86527ffb58cad4d2
   store.dispatch(gotMessage(message))
+})
+
+socket.on('friendJoin', friendName => {
+  store.dispatch(addFriend(friendName))
+})
+
+socket.on('friendLeave', friendName => {
+  store.dispatch(removeFriend(friendName))
+})
+
+socket.on('gotAllFriends', onlineFriends => {
+  store.dispatch(setOnlineFriendsOnStore(onlineFriends))
 })
 
 export default socket

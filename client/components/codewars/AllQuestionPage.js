@@ -100,15 +100,12 @@ class AllQuestionPage extends React.Component {
                     </Grid.Column>
 
                     <Grid.Column width={1} verticalAlign="middle">
-                      {/* <FriendPopup user={this.props.user} /> */}
-                      {/* <Button
-                        inverted
-                        color="purple"
-                        onClick={() => this.handleChallenge(question)}
-                      >
-                        Challenge!
-                      </Button> */}
-                      <FriendPopup question={question.id} user={this.props.user} handleChallenge={this.handleChallenge}/>
+
+                      <FriendPopup
+                        question={question.id}
+                        user={this.props.user}
+                        handleChallenge={this.handleChallenge}
+                      />
                     </Grid.Column>
 
                     <Grid.Column
@@ -133,7 +130,7 @@ const mapStateToProps = state => ({
   code: state.codeReducer.code,
   result: state.codeReducer.result,
   questions: state.questionReducer.questions,
-  user: state.user
+  user: state.userReducer.user
 })
 const mapDispatch = dispatch => ({
   testCode: code => dispatch(postCode(code)),

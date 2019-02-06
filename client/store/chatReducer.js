@@ -18,7 +18,7 @@ const initialState = {
  * ACTION CREATORS
  */
 
-export const gotMessage = (message) => ({
+export const gotMessage = message => ({
   type: GOT_MESSAGE,
   message
 })
@@ -34,8 +34,6 @@ export const submitMessage = message => async (dispatch, getState) => {
   dispatch(gotMessage(message))
   socket.emit('newMessage', message)
 }
-
-
 
 export default function(state = initialState, action) {
   switch (action.type) {

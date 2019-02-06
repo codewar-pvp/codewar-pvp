@@ -30,8 +30,7 @@ const QuestionLabel = props => {
 }
 
 const mapStateToProps = state => ({
-  questions: state.questionReducer.questions,
-  user: state.user
+  questions: state.questionReducer.questions
 })
 const mapDispatch = dispatch => ({
   selectedLevel: level => dispatch(selectedLevel(level))
