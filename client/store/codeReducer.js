@@ -8,7 +8,7 @@ import socket from '../socket'
 /**
  * ACTION TYPES
  */
-const POST_CODE = 'GET_USER'
+// const POST_CODE = 'GET_USER'
 const GOT_RESULT = 'GOT_RESULT'
 const CLEAR_RESULT = 'CLEAR_RESULT'
 const START_RUNNING = 'START_RUNNING'
@@ -47,9 +47,9 @@ export const postCode = text => {
 
 
       if (action.result.passedAllTests) {
-        store.dispatch(changeStatus(false, false, false, true))
 
-        const user = getState().user
+        store.dispatch(changeStatus(false, false, false, true))
+        const user = getState().userReducer.user
 
         socket.emit('game status', {status: {challengeStatus: false,
           fightStatus: false,

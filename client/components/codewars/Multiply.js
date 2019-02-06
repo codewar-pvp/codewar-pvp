@@ -60,8 +60,6 @@ class Multiply extends React.Component {
     const {question} = this.props
     return this.props.question && this.props.question.funcHeader ? (
       <Container>
-        {console.log('win' , this.props.win)}
-        {console.log('lose' , this.props.lose)}
 
         {this.props.win && !this.props.lose ?
           <Modal
