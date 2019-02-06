@@ -60,7 +60,7 @@ class Chat extends React.Component {
 
 const mapStateToProps = state => ({
   chatMessages: state.chatReducer.chatMessages,
-  user: state.user
+  user: state.userReducer.user
 })
 
 const mapDispatch = dispatch => ({

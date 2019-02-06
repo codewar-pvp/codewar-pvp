@@ -5,7 +5,15 @@ import brace from 'brace'
 import AceEditor from 'react-ace'
 import Loader from './Loader'
 import Result from './Result'
-import {Button, Container, Input, Grid, TextArea} from 'semantic-ui-react'
+import {
+  Button,
+  Container,
+  Input,
+  Grid,
+  TextArea,
+  Modal,
+  Header
+} from 'semantic-ui-react'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import Chat from './Chat'
@@ -31,7 +39,7 @@ class Multiply extends React.Component {
   onChange = newValue => {
     this.setState({code: newValue})
     socket.emit('challengerCodeUpload', [
-      this.props.challenge,
+      this.props.challenger,
       this.hashCode(newValue)
     ])
   }
@@ -52,8 +60,10 @@ class Multiply extends React.Component {
       .join('\n')
   }
   opponentEnterCode = newValue => {
+    console.log(newValue)
     this.setState({opponentsCode: newValue})
   }
+
   handleSubmit = () => {
     this.props.testCode({
       code: this.state.code,
@@ -85,6 +95,38 @@ class Multiply extends React.Component {
     const {question} = this.props
     return this.props.question && this.props.question.funcHeader ? (
       <Container>
+        {this.props.win && !this.props.lose ? (
+          <Modal basic centered defaultOpen closeIcon>
+            <Modal.Content>
+              <Grid container textAlign="center">
+                <Grid.Row>
+                  <Header inverted as="h1" color="green">
+                    YOU WIN!
+                  </Header>
+                </Grid.Row>
+              </Grid>
+            </Modal.Content>
+          </Modal>
+        ) : (
+          ''
+        )}
+
+        {!this.props.win && this.props.lose ? (
+          <Modal basic centered defaultOpen closeIcon>
+            <Modal.Content>
+              <Grid container textAlign="center">
+                <Grid.Row>
+                  <Header inverted as="h1" color="red">
+                    YOU LOSE!
+                  </Header>
+                </Grid.Row>
+              </Grid>
+            </Modal.Content>
+          </Modal>
+        ) : (
+          ''
+        )}
+
         <QuestionHeader question={question} />
         <Grid columns={2}>
           <Grid.Row>
@@ -107,23 +149,22 @@ class Multiply extends React.Component {
             <Grid.Column>
               <Grid>
                 <Grid.Row>
-                  <TextArea
-                    id="blurry-text"
-                    disabled
-                    value={this.state.opponentsCode}
-                    onChange={this.opponentEnterCode}
-                    style={{
-                      backgroundColor: 'gray',
-                      marginLeft: '10%',
-                      fontSize: 10,
-                      width: '78%',
-                      height: '200px',
-                      pointerEvents: 'none'
-                    }}
-                    onClick={() => false}
+                  <AceEditor
+                    mode="javascript"
+                    theme="monokai"
+                    name="output"
+                    showGutter={false}
+                    showPrintMargin={false}
+                    // value={this.state.opponentsCode}
+                    width="100%"
+                    editorProps={{$blockScrolling: true}}
+                    setOptions={{cursorStyle: 'ace', fontFamily: 'monospace'}}
+                    wrapEnabled={true}
+                    readOnly={true}
+                    height="200px"
+                    // onBlur={this.opponentEnterCode}
                   />
                 </Grid.Row>
-
                 <Grid.Row>
                   <Chat />
                 </Grid.Row>
@@ -168,9 +209,12 @@ const mapStateToProps = state => ({
   code: state.codeReducer.code,
   result: state.codeReducer.result,
   questions: state.questionReducer.questions,
-  challenge: state.warReducer.challenge
+  challenger: state.warReducer.challenge,
+  challengeStatus: state.warReducer.challengeStatus,
+  fightStatus: state.warReducer.fightStatus,
+  lose: state.warReducer.lose,
+  win: state.warReducer.win
 })
-
 const mapDispatch = dispatch => ({
   testCode: code => dispatch(postCode(code))
 })

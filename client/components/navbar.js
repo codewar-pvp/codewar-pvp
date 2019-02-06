@@ -13,14 +13,17 @@ import {
   Image
 } from 'semantic-ui-react'
 import socket from '../socket'
-import {gotChallenge, changeStatus} from '../store/warReducer'
+import {gotChallenge, changeStatus, clearChallenge} from '../store/warReducer'
+import history from '../history'
 
 class Navbar extends React.Component {
   constructor() {
     super()
-    this.state = {activeItem: ''}
+    this.state = {activeItem: '', showModal: false}
     this.handleAcceptChallenge = this.handleAcceptChallenge.bind(this)
     this.handleItemClick = this.handleItemClick.bind(this)
+    this.handleDeclineChallenge = this.handleDeclineChallenge.bind(this)
+    this.closeModal = this.closeModal.bind(this)
   }
 
   handleItemClick = (e, {name}) => {
@@ -40,6 +43,15 @@ class Navbar extends React.Component {
     socket.emit('acceptChallenge', userObject)
     this.props.changeStatus(false, true, false)
     this.props.history.push(`/challenges/${this.props.challenger.question}`)
+  }
+
+  handleDeclineChallenge() {
+    this.props.resetChallenge()
+    this.closeModal()
+  }
+
+  closeModal() {
+    this.setState({showModal: false})
   }
 
   render() {
@@ -80,10 +92,16 @@ class Navbar extends React.Component {
               basic
               centered
               trigger={
-                <Button inverted color="red">
+                <Button
+                  onClick={() => this.setState({showModal: true})}
+                  inverted
+                  color="red"
+                >
                   NEW CHALLENGE!
                 </Button>
               }
+              open={this.state.showModal}
+              onClose={this.closeModal}
             >
               <Modal.Content>
                 <Grid container textAlign="center">
@@ -102,7 +120,11 @@ class Navbar extends React.Component {
                       Accept
                     </Button>
 
-                    <Button inverted color="red">
+                    <Button
+                      inverted
+                      color="red"
+                      onClick={this.handleDeclineChallenge}
+                    >
                       Decline
                     </Button>
                   </Grid.Row>
@@ -187,6 +209,9 @@ const mapDispatch = dispatch => {
     },
     changeStatus(challengeStatus, fightStatus, gameStatus) {
       dispatch(changeStatus(challengeStatus, fightStatus, gameStatus))
+    },
+    resetChallenge() {
+      dispatch(clearChallenge())
     },
     fetchAllQuestions: () => dispatch(fetchAllQuestions())
   }
