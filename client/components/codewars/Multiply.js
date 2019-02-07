@@ -80,7 +80,7 @@ class Multiply extends React.Component {
   }
 
   handleGameOver = () => {
-    setTimeout(() => this.gameOverHelper(), 5000)
+    setTimeout(() => this.gameOverHelper(), 10000)
   }
 
   handleSubmit = () => {
