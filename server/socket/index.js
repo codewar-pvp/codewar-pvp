@@ -1,15 +1,8 @@
 module.exports = io => {
   io.on('connection', socket => {
-    // console.log('all rooms', io.sockets.adapter.rooms)
     console.log(`A socket connection to the server has been made: ${socket.id}`)
 
-    // console.log(`A socket connection to the server has been made: ${socket.id}`)
-    // console.log('userId', socket.handshake.session.passport || undefined)
-    // console.log('userId', socket.handshake.session.passport || undefined)
     socket.on('disconnect', () => {
-      // console.log(`Connection ${socket.id} has left the building`)
-      // console.log('socket.handshake.session =>', socket.handshake.session)
-
       // emit leave event for all friend rooms:
       if (socket.handshake.session.user) {
         const {name, friends} = socket.handshake.session.user
@@ -45,12 +38,6 @@ module.exports = io => {
         .emit('game status', status.status)
     })
 
-    // socket.on('challengeMessage', user => {
-    //   socket.to(user.name + user.opponent.name).emit('readyToPlay', user);
-    //   // socket.to(user.opponent.name + user.name).emit('readyToPlay', user);
-
-    // })
-
     socket.on('newMessage', message => {
       if (message.user && message.user.challenger) {
         socket
@@ -64,12 +51,14 @@ module.exports = io => {
 
     socket.on('challengerCodeUpload', args => {
       const [user, newValue] = args
-      socket
-        .to(user.challenger.name + user.name)
-        .emit('challengerCodeDownload', newValue)
-      socket
-        .to(user.name + user.challenger.name)
-        .emit('challengerCodeDownload', newValue)
+      if (user && user.challenger) {
+        socket
+          .to(user.challenger.name + user.name)
+          .emit('challengerCodeDownload', newValue)
+        socket
+          .to(user.name + user.challenger.name)
+          .emit('challengerCodeDownload', newValue)
+      }
     })
 
     socket.on('login', function(user) {
