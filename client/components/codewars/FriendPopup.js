@@ -15,7 +15,7 @@ class FriendPopup extends React.Component {
     const user = this.props.user
     const question = this.props.question
     if (!user.name) {
-      return <Loader />
+      return <div />
     } else {
       return (
         <Popup
