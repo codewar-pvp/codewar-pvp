@@ -11,11 +11,48 @@ async function seed() {
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({name: 'Stuart', email: 'stuart@email.com', password: '123', imageURL: "https://www.flaticon.com/premium-icon/icons/svg/373/373549.svg"}),
-    User.create({name: 'Shan', email: 'shan@email.com', password: '123', imageURL: "https://www.flaticon.com/premium-icon/icons/svg/373/373549.svg"}),
-    User.create({name: 'Scott', email: 'scott@email.com', password: '123', imageURL: "https://www.flaticon.com/premium-icon/icons/svg/373/373549.svg"}),
-    User.create({name: 'Jason', email: 'json@email.com', password: '123', imageURL: "https://www.flaticon.com/premium-icon/icons/svg/373/373549.svg"}),
-    User.create({name: 'Murphy', email: 'murphy@email.com', password: '123', imageURL: "https://www.flaticon.com/premium-icon/icons/svg/373/373549.svg"})
+    User.create({
+      name: 'Stuart',
+      email: 'stuart@email.com',
+      password: '123',
+      imageURL: 'https://www.flaticon.com/premium-icon/icons/svg/373/373549.svg'
+    }),
+    User.create({
+      name: 'Shan',
+      email: 'shan@email.com',
+      password: '123',
+      imageURL: 'https://www.flaticon.com/premium-icon/icons/svg/373/373549.svg'
+    }),
+    User.create({
+      name: 'Scott',
+      email: 'scott@email.com',
+      password: '123',
+      imageURL: 'https://www.flaticon.com/premium-icon/icons/svg/373/373549.svg'
+    }),
+    User.create({
+      name: 'Jason',
+      email: 'json@email.com',
+      password: '123',
+      imageURL: 'https://www.flaticon.com/premium-icon/icons/svg/373/373549.svg'
+    }),
+    User.create({
+      name: 'Murphy',
+      email: 'murphy@email.com',
+      password: '123',
+      imageURL: 'https://www.flaticon.com/premium-icon/icons/svg/373/373549.svg'
+    }),
+    User.create({
+      name: 'ChunLi',
+      email: 'chun-li@streetbyter.net',
+      password: 'bikevshed',
+      imageURL: 'https://www.flaticon.com/premium-icon/icons/svg/373/373549.svg'
+    }),
+    User.create({
+      name: 'Blanka',
+      email: 'blanka@streetbyter.net',
+      password: 'bikevshed',
+      imageURL: 'https://www.flaticon.com/premium-icon/icons/svg/373/373549.svg'
+    })
   ])
 
   const friends = await Promise.all([
