@@ -73,9 +73,10 @@ div .ui.fluid.left.icon.input {
 }
 
 #blurry-text {
-  color: transparent;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  pointer-events: none;
+  color: white;
+  /* text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  pointer-events: none; */
+  /* width: 550px !important; */
 }
 
 span {

@@ -26,6 +26,7 @@ import {
 } from '../../store/'
 import QuestionHeader from './QuestionHeader'
 import socket from '../../socket'
+import PowerUp from './PowerUp'
 
 /**
  * COMPONENT
@@ -52,7 +53,21 @@ class Multiply extends React.Component {
     })
     this.gameOverHelper = this.gameOverHelper.bind(this)
     this.handleGameOver = this.handleGameOver.bind(this)
+    this.onChange = this.onChange.bind(this)
+    this.opponentEnterCode = this.opponentEnterCode.bind(this)
+    this.updateLocalState = this.updateLocalState.bind(this)
+    this.receivedPowerUp = this.receivedPowerUp.bind(this)
+    this.usePowerUp = this.usePowerUp.bind(this)
   }
+
+  componentWillUnmount() {
+    this.props.clearGameInfo()
+    this.props.resetChallenge()
+    this.props.clearErrorMsg()
+    this.props.clearChat()
+    this.props.clearResult()
+  }
+
   onChange = newValue => {
     this.setState({code: newValue})
     socket.emit('challengerCodeUpload', [this.props.challenger, newValue])
@@ -77,7 +92,7 @@ class Multiply extends React.Component {
     socket.emit('challengerUsePowerUp', powerUp)
     this.setState(state => ({
       ...state,
-      powerUps: state.powerUps.filter(pUp => pUp !== powerUp)
+      powerUps: state.powerUps.filter((pUp, idx) => pUp !== powerUp && idx)
     }))
   }
   gameOverHelper = () => {
@@ -186,9 +201,12 @@ class Multiply extends React.Component {
         )}
 
         <QuestionHeader question={question} />
-        <Grid columns={2}>
+        <Grid columns={3}>
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column width={2}>
+              <PowerUp />
+            </Grid.Column>
+            <Grid.Column width={9}>
               <AceEditor
                 mode="javascript"
                 theme="monokai"
@@ -217,16 +235,7 @@ class Multiply extends React.Component {
                   >
                     Run
                   </Button>
-                  <Button
-                    onClick={this.usePowerUp}
-                    positive
-                    style={{width: '100px', margin: '10px 0 10px 0'}}
-                    disabled={
-                      !this.state.powerUps.length || this.state.disablePowerUps
-                    }
-                  >
-                    {this.state.powerUps[0] || 'Power Up'}
-                  </Button>
+
                   <Button
                     onClick={() => history.push('/questions')}
                     negative
@@ -242,7 +251,7 @@ class Multiply extends React.Component {
                 </Grid.Column>
               </Grid.Row>
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column width={5}>
               <Grid>
                 <Grid.Row>
                   <TextArea
@@ -255,7 +264,7 @@ class Multiply extends React.Component {
                       backgroundColor: 'gray',
                       marginLeft: '10%',
                       fontSize: 10,
-                      width: '78%',
+                      width: '450px',
                       height: '250px',
                       pointerEvents: 'none',
                       userSelect: 'none'
