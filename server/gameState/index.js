@@ -38,19 +38,37 @@ const powerUps = {
     return [userCode, opponentCode]
   },
   // removeLine(userSocket, opponentSocket) {},
-  // newLeaf(userSocket, opponentSocket) {
-  //   return {code: ''}
-  // }
-  swap(userSocket, opponentSocket, userCode, opponentCode) {
-    // return {
-    //   isFrozen: true,
-    //   blinkerText: require('blinkerMessages').frozen
-    // }
-    // const restoredCode = opponentCode
+  newLeaf(userSocket, opponentSocket, userCode, opponentCode, funcHeader) {
     let blinkBool = true
+    const blinkerText = require('./blinkerMessages').newLeaf
+    const splicedBlinkText = '\n\n' + blinkerText
 
+    const newLeafId = setInterval(() => {
+      blinkBool = !blinkBool
+      opponentSocket.emit('updateLocalState', {
+        code: blinkBool ? splicedBlinkText.toString() : '',
+        editorDisabled: true,
+        disablePowerUps: true
+      })
+      userSocket.emit(
+        'challengerCodeDownload',
+        blinkBool ? splicedBlinkText.toString() : ''
+      )
+    }, 500)
+    setTimeout(() => {
+      clearInterval(newLeafId)
+      opponentSocket.emit('updateLocalState', {
+        code: funcHeader,
+        editorDisabled: false,
+        disablePowerUps: false
+      })
+      userSocket.emit('challengerCodeDownload', hashCode(funcHeader))
+    }, 3000)
+    return [userCode, opponentCode]
+  },
+  swap(userSocket, opponentSocket, userCode, opponentCode) {
+    let blinkBool = true
     const blinkerText = require('./blinkerMessages').swap
-
     const splicedBlinkText = '\n\n' + blinkerText
 
     const swapId = setInterval(() => {
@@ -115,6 +133,9 @@ function getRandomPlayer(a, b) {
   // const newRoom = slug.split('-').slice()
   // const removed = newRoom.splice(chosenPlayerIdx, 1)[0]
 }
+// store previously computed results to save computation time
+const hashStore = {}
+// hash user code before sending to opponent:
 function hashCode(code) {
   return code
     ? code
@@ -123,11 +144,18 @@ function hashCode(code) {
           return val
             .split('')
             .map(char => {
-              const binStr = char.charCodeAt(0).toString(2)
-              const idx = binStr.length - 1
-              return ' /\\{}[]()$!123456789;+-=|&%`<>"\''.includes(char)
-                ? char
-                : binStr[idx]
+              if (hashStore[char]) return hashStore[char]
+              else {
+                const binStr = char.charCodeAt(0).toString(2)
+                const idx = binStr.length - 1
+                const hashedChar = ' /\\{}[]()$!123456789;+-=|&%`<>"\''.includes(
+                  char
+                )
+                  ? char
+                  : binStr[idx]
+                hashStore[char] = hashedChar
+                return hashedChar
+              }
             })
             .join('')
         })
@@ -172,7 +200,8 @@ module.exports = {
           socket,
           this[this[name].opponentName].socket,
           this[name].code,
-          this[this[name].opponentName].code
+          this[this[name].opponentName].code,
+          this.funcHeader
         )
         this[name].code = callerCode
         this[this[name].opponentName].code = opponentCode
