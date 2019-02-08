@@ -36,40 +36,50 @@ class Multiply extends React.Component {
     this.state = {
       code: '',
       isButtonDisabled: false,
+      editorDisabled: false,
+      powerUps: [],
+      disablePowerUps: false,
       opponentsCode: ''
     }
     socket.on('challengerCodeDownload', newValue => {
       this.opponentEnterCode(newValue)
+    })
+    socket.on('grantPowerUp', powerUp => {
+      this.receivedPowerUp(powerUp)
+    })
+    socket.on('updateLocalState', newState => {
+      this.updateLocalState(newState)
     })
     this.gameOverHelper = this.gameOverHelper.bind(this)
     this.handleGameOver = this.handleGameOver.bind(this)
   }
   onChange = newValue => {
     this.setState({code: newValue})
-    socket.emit('challengerCodeUpload', [
-      this.props.challenger,
-      this.hashCode(newValue)
-    ])
-  }
-  hashCode = newValue => {
-    return newValue
-      .split('\n')
-      .map(val => {
-        return val
-          .split('')
-          .map(char => {
-            return ' /\\{}[]()$!123456789;+-=|&%`<>"\''.includes(char)
-              ? char
-              : '0'
-          })
-          .join('')
-      })
-      .join('\n')
+    socket.emit('challengerCodeUpload', [this.props.challenger, newValue])
   }
   opponentEnterCode = newValue => {
     this.setState({opponentsCode: newValue})
   }
-
+  updateLocalState = newState => {
+    console.log(this.state)
+    this.setState(newState)
+  }
+  receivedPowerUp = powerUp => {
+    console.log('received powerUp!', powerUp)
+    this.setState(state => ({
+      ...state,
+      powerUps: [powerUp, ...state.powerUps]
+    }))
+  }
+  usePowerUp = powerUp => {
+    powerUp = this.state.powerUps[0]
+    console.log('used powerUp!', powerUp)
+    socket.emit('challengerUsePowerUp', powerUp)
+    this.setState(state => ({
+      ...state,
+      powerUps: state.powerUps.filter(pUp => pUp !== powerUp)
+    }))
+  }
   gameOverHelper = () => {
     this.props.clearGameInfo()
     this.props.resetChallenge()
@@ -94,7 +104,25 @@ class Multiply extends React.Component {
     // for now set it to 3 seconds
     setTimeout(() => this.setState({isButtonDisabled: false}), 3000)
   }
-
+  hashCode(code) {
+    return code
+      ? code
+          .split('\n')
+          .map(val => {
+            return val
+              .split('')
+              .map(char => {
+                const binStr = char.charCodeAt(0).toString(2)
+                const idx = binStr.length - 1
+                return ' /\\{}[]()$!123456789;+-=|&%`<>"\''.includes(char)
+                  ? char
+                  : binStr[idx]
+              })
+              .join('')
+          })
+          .join('\n')
+      : ''
+  }
   componentDidMount() {
     if (this.props.question && this.props.question.funcHeader) {
       this.setState({
@@ -103,7 +131,6 @@ class Multiply extends React.Component {
       })
     }
   }
-
   componentDidUpdate(prevProps) {
     if (prevProps.question !== this.props.question) {
       this.setState({code: this.props.question.funcHeader})
@@ -168,6 +195,7 @@ class Multiply extends React.Component {
                 showPrintMargin={false}
                 showGutter={true}
                 highlightActiveLine={true}
+                readOnly={this.state.editorDisabled}
                 onChange={this.onChange}
                 name="multiCodeEditor"
                 value={this.state.code}
@@ -188,6 +216,16 @@ class Multiply extends React.Component {
                     disabled={this.state.isButtonDisabled}
                   >
                     Run
+                  </Button>
+                  <Button
+                    onClick={this.usePowerUp}
+                    positive
+                    style={{width: '100px', margin: '10px 0 10px 0'}}
+                    disabled={
+                      !this.state.powerUps.length || this.state.disablePowerUps
+                    }
+                  >
+                    {this.state.powerUps[0] || 'Power Up'}
                   </Button>
                   <Button
                     onClick={() => history.push('/questions')}
@@ -213,6 +251,7 @@ class Multiply extends React.Component {
                     value={this.state.opponentsCode}
                     onChange={this.opponentEnterCode}
                     style={{
+                      fontFamily: 'monospace',
                       backgroundColor: 'gray',
                       marginLeft: '10%',
                       fontSize: 10,

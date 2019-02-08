@@ -1,3 +1,10 @@
+const {
+  getGameStateKey,
+  newGameState,
+  gameStateStore,
+  hashCode
+} = require('../gameState')
+
 module.exports = io => {
   io.on('connection', socket => {
     console.log(`A socket connection to the server has been made: ${socket.id}`)
@@ -27,6 +34,36 @@ module.exports = io => {
       socket.join(user.challenger.name + user.name)
       socket.to(user.challenger.name + user.name).emit('gameStarted')
       socket.to(user.challenger.name + user.name).emit('readyToPlay', user)
+
+      // map opponent to user socket and user to opponent socket:
+      // all connected sockets to room:
+      const connectedSocks = Object.keys(
+        io.sockets.adapter.rooms[user.challenger.name + user.name].sockets
+      )
+      // console.log('callersocketid', socket.id)
+      // console.log('connectedSocks', connectedSocks)
+      const opponentSocketId = connectedSocks.filter(
+        connectedSock => socket.id !== connectedSock.id
+      )[0]
+      const opponentSocket = io.sockets.connected[opponentSocketId]
+      // console.log('opponentSocketId', opponentSocketId)
+      socket.name = user.name
+      socket.opponentName = user.challenger.name
+      opponentSocket.name = user.challenger.name
+      opponentSocket.opponentName = user.name
+      const {funcHeader} = user
+
+      const stateKey = getGameStateKey(socket.name, socket.opponentName)
+      gameStateStore[stateKey] = newGameState(
+        socket.name,
+        socket.opponentName,
+        socket.id,
+        opponentSocket.id,
+        socket,
+        opponentSocket,
+        funcHeader
+      )
+      gameStateStore[stateKey].kickOff()
     })
 
     socket.on('game status', status => {
@@ -54,10 +91,25 @@ module.exports = io => {
       if (user && user.challenger) {
         socket
           .to(user.challenger.name + user.name)
-          .emit('challengerCodeDownload', newValue)
+          .emit('challengerCodeDownload', hashCode(newValue))
         socket
           .to(user.name + user.challenger.name)
-          .emit('challengerCodeDownload', newValue)
+          .emit('challengerCodeDownload', hashCode(newValue))
+
+        const stateKey = getGameStateKey(socket.name, socket.opponentName)
+        gameStateStore[stateKey][socket.name].code = newValue
+      }
+    })
+
+    socket.on('challengerUsePowerUp', powerUp => {
+      if (socket.name) {
+        const stateKey = getGameStateKey(socket.name, socket.opponentName)
+        if (
+          gameStateStore[stateKey] &&
+          gameStateStore[stateKey][socket.name].powerUps.includes(powerUp)
+        ) {
+          gameStateStore[stateKey].usePowerUp(powerUp, socket.name)
+        }
       }
     })
 

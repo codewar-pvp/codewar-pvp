@@ -46,6 +46,8 @@ class Navbar extends React.Component {
     // attach name of challenger to user object to refer to room
     const userObject = this.props.user
     userObject.challenger = this.props.challenger
+    const questionId = this.props.challenger.question
+    userObject.funcHeader = this.props.questions[questionId].funcHeader
     socket.emit('acceptChallenge', userObject)
     this.props.changeStatus(false, true, false)
     this.props.history.push(`/challenges/${this.props.challenger.question}`)
@@ -77,23 +79,23 @@ class Navbar extends React.Component {
               this.props.clearChat()
             }}
           >
-
-          <Grid.Row verticalAlign="middle" textAlign="center">
-            <Image
-              src='./star.png'
-              size="mini"
-              spaced="right"
-              verticalAlign="middle"
-            />
-            <NavLink to="/questions"><span>StreetByter</span></NavLink>
-            <Image
-              src='./star.png'
-              size="mini"
-              spaced="right"
-              verticalAlign="middle"
-            />
+            <Grid.Row verticalAlign="middle" textAlign="center">
+              <Image
+                src="./star.png"
+                size="mini"
+                spaced="right"
+                verticalAlign="middle"
+              />
+              <NavLink to="/questions">
+                <span>StreetByter</span>
+              </NavLink>
+              <Image
+                src="./star.png"
+                size="mini"
+                spaced="right"
+                verticalAlign="middle"
+              />
             </Grid.Row>
-
           </h4>
 
           {/* <Menu.Item
@@ -163,14 +165,13 @@ class Navbar extends React.Component {
                 verticalAlign="middle"
                 avatar
                 wrapped
-                style={{marginTop: "10px"}}
+                style={{marginTop: '10px'}}
               />
               <Menu.Item
                 as="h4"
                 content={this.props.user.name}
                 onClick={this.handleItemClick}
                 name="user"
-
               />
               <Menu.Item
                 as={NavLink}
@@ -220,7 +221,8 @@ const mapState = state => {
     email: state.userReducer.user.email,
     challenger: state.warReducer.challenge,
     user: state.userReducer.user,
-    challengeStatus: state.warReducer.challengeStatus
+    challengeStatus: state.warReducer.challengeStatus,
+    questions: state.questionReducer.questions
   }
 }
 
