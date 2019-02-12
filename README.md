@@ -6,9 +6,9 @@ That's why we created StreetByter, a web application where users can compete aga
 
 ![](/media/questions.png)
 
-Users of StreetByter race to be the first to solve all test specs for the selected problem, either through some old-fashioned dexterous coding skills or by playing dirty through the application of various "power-ups" (these include [freezing your opponent's editor](https://github.com/codewar-pvp/codewar-pvp#freeze), [swapping code with your opponent](https://github.com/codewar-pvp/codewar-pvp#swap), and more!).
+Users of StreetByter race to be the first to solve all test specs for the selected problem, either through some old-fashioned dexterous coding skills or by playing dirty through the application of various "power-ups" (these include [freezing your opponent's editor](#freeze), [swapping code with your opponent](#swap), and more!).
 
-These power-ups add another dimension of strategy to StreetByter - since users are able to see an [obfuscated version of their opponent's code](https://github.com/codewar-pvp/codewar-pvp#obfuscated_code) while playing, power-ups can be leveraged at key points throughout the battle to aid (or impede!) either user.
+These power-ups add another dimension of strategy to StreetByter - since users are able to see an [obfuscated version of their opponent's code](#obfuscated_code) while playing, power-ups can be leveraged at key points throughout the battle to aid (or impede!) either user.
 <!---
   
   update link to reflect accurate video id when the edit is finished and video is live
