@@ -2,7 +2,7 @@
 
 Practicing algorithms can be difficult, especially when you are going it on your own.
 
-That's why we created StreetByter, a web application where users can compete against friends in real-time to solve coding problems.
+That's why we created [StreetByter](https://youtu.be/SrdHRIPqd3U), a web application where users can compete against friends in real-time to solve coding problems.
 
 ![](/media/questions.png)
 
