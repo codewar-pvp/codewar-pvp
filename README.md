@@ -16,19 +16,19 @@ These power-ups add another dimension of strategy to StreetByter - since users a
 -->
 Users can also practice on their own in classic mode if they so choose - be sure to check out the GIFS below or [our presentation video](https://www.youtube.com/channel/UCjFO5t0MLyQaidKGpGoRewg) for examples of real-time play!
 
-### Obfuscated Code:
+### :one: :two: Obfuscated Code:
 ![](/media/obfuscated_code.gif)
 
-### Swap:
+### :arrows_counterclockwise: Swap:
 ![](/media/swap.gif)
 
-### Freeze:
+### :snowflake: Freeze:
 ![](/media/freeze.gif)
 
-### Code Submission / Running Tests:
+### :white_check_mark: Code Submission / Running Tests:
 ![](/media/run_test.gif)
 
-### Win / Lose:
+### :checkered_flag: Win / Lose:
 ![](/media/win_lose.gif)
 
 Developed using the following technologies:
