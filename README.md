@@ -7,19 +7,19 @@ That's why we created StreetByter, a web application where users can compete aga
 ![](/media/questions.png)
 
 Users of StreetByter race to be the first to solve all test specs for the selected problem, either through some old-fashioned dexterous coding skills or by playing dirty through the application of various "power-ups" (these include: clearing your opponent's code, freezing your opponent's editor, swapping code with your opponent, and more!).
+<!--- update link to reflect accurate video id when the edit is finished and video is live-->
+Users can also practice on their own in classic mode if they so choose - be sure to check out the GIFS below or [our presentation video](https://www.youtube.com/channel/UCjFO5t0MLyQaidKGpGoRewg) for examples of real-time play!
 
-Users can also practice on their own in classic mode if they so choose - be sure to check out the GIFS below or [our presentation video](https://youtube.com/) for examples of real-time play!
-
-- "Swap":
+### Swap:
 ![](/media/swap.gif)
 
-- "Freeze":
+### Freeze:
 ![](/media/freeze.gif)
 
-- "Running Tests"
-![](/media/tests.gif)
+### Code Submission / Running Tests
+![](/media/run_test.gif)
 
-- "Win/Lose"
+### Win / Lose
 ![](/media/win_lose.gif)
 
 Developed using the following technologies:
