@@ -16,10 +16,10 @@ Users can also practice on their own in classic mode if they so choose - be sure
 ### Freeze:
 ![](/media/freeze.gif)
 
-### Code Submission / Running Tests
+### Code Submission / Running Tests:
 ![](/media/run_test.gif)
 
-### Win / Lose
+### Win / Lose:
 ![](/media/win_lose.gif)
 
 Developed using the following technologies:
