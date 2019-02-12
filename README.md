@@ -14,7 +14,7 @@ These power-ups add another dimension of strategy to StreetByter - since users a
   update link to reflect accurate video id when the edit is finished and video is live
 
 -->
-Users can also practice on their own in classic mode if they so choose - be sure to check out the GIFS below or [our presentation video](https://www.youtube.com/channel/UCjFO5t0MLyQaidKGpGoRewg) for examples of real-time play!
+Users can also practice on their own in classic mode if they so choose - be sure to check out the GIFS below or [our presentation video](https://youtu.be/SrdHRIPqd3U) for examples of real-time play!
 
 ### :zero::one: Obfuscated Code:
 ![](/media/obfuscated_code.gif)
