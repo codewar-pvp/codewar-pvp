@@ -12,6 +12,8 @@ These power-ups add another dimension of strategy to StreetByter - since users a
 
 Users can also practice on their own in classic mode if they so choose - be sure to check out the GIFS below or [our presentation video](https://youtu.be/SrdHRIPqd3U) for examples of real-time play!
 
+## Features
+
 ### :zero::one: Obfuscated Code:
 ![](/media/obfuscated_code.gif)
 
@@ -27,13 +29,15 @@ Users can also practice on their own in classic mode if they so choose - be sure
 ### :checkered_flag: Win / Lose:
 ![](/media/win_lose.gif)
 
+## Stack
+
 Developed using the following technologies:
-- Heroku
-- Socket.io
-- AWS / EC2
-- Chai / Mocha
-- React / Redux
-- Node.js / Express
 - PostgreSQL / Sequelize
+- Node.js / Express
+- React / Redux
+- Chai / Mocha
+- AWS / EC2
+- Socket.io
+- Heroku
 
 Made with :heart: in NYC using the [Boilerplate code scaffold](https://github.com/FullstackAcademy/boilermaker) from [Fullstack Academy](https://github.com/FullstackAcademy).
