@@ -29,6 +29,8 @@ Users can also practice on their own in classic mode if they so choose - be sure
 ### :checkered_flag: Win / Lose:
 ![](/media/win_lose.gif)
 
+## Stack
+
 Developed using the following technologies:
 - PostgreSQL / Sequelize
 - Node.js / Express
